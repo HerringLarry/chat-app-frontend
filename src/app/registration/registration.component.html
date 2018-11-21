@@ -1,0 +1,7 @@
+<app-panel
+  [displaySmall]="false"
+  [title]="'Registration'"
+>
+    <app-registration-form [formGroup]="registrationFormGroup" (submitEmitter)="onSubmit()">
+    </app-registration-form>
+</app-panel>

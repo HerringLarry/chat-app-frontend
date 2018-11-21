@@ -1,0 +1,31 @@
+<div class="example-container">
+  <form [formGroup]="formGroup">
+  <mat-form-field>
+    <mat-label>username</mat-label>
+    <input matInput placeholder="" formControlName="username">
+  </mat-form-field>
+  <mat-form-field>
+      <mat-label>password</mat-label>
+      <input matInput placeholder="" type="password" formControlName="password">
+  </mat-form-field><br>
+  <mat-form-field>
+    <mat-label>First Name</mat-label>
+    <input matInput placeholder="" formControlName="firstName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Last Name</mat-label>
+    <input matInput placeholder="" formControlName="lastName">
+  </mat-form-field><br>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="" type="email" formControlName="email">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Mobile</mat-label>
+    <input matInput placeholder="" type="tel" formControlName="mobile">
+  </mat-form-field><br>
+    <div class="next-button">
+      <button  type="button" mat-flat-button color="primary" (click)="onSubmit()"> Submit </button>
+    </div>
+  </form>
+</div>
