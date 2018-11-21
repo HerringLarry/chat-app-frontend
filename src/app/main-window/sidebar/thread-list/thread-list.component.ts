@@ -10,7 +10,7 @@ import { DataRequestorService } from 'src/app/common/services/data-requestor.ser
 export class ThreadListComponent implements OnInit {
 
   @Input() threads: any;
-  @Output() threadClick: EventEmitter<string> = new EventEmitter();
+  @Output() threadClick: EventEmitter<void> = new EventEmitter();
 
   constructor( private _dataRequestor: DataRequestorService ) { }
 

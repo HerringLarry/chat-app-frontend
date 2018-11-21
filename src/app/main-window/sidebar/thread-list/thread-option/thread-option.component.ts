@@ -8,8 +8,8 @@ import { ThreadService } from 'src/app/common/services/thread-service.service';
 })
 export class ThreadOptionComponent implements OnInit {
 
-  @Input() thread: string;
-  @Output() threadClick: EventEmitter<string> = new EventEmitter();
+  @Input() thread: any;
+  @Output() threadClick: EventEmitter<void> = new EventEmitter();
 
   constructor() { }
 
@@ -17,7 +17,8 @@ export class ThreadOptionComponent implements OnInit {
   }
 
   selectThread(): void {
-    this.threadClick.emit(this.thread);
+    ThreadService.thread = this.thread.name;
+    this.threadClick.emit();
   }
 
 }

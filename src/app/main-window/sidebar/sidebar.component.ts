@@ -7,7 +7,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  @Output() threadClick: EventEmitter<string> = new EventEmitter();
+  @Output() threadClick: EventEmitter<void> = new EventEmitter();
   @Input() threads: any;
 
   constructor() { }
