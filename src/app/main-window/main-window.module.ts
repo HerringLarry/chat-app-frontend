@@ -1,3 +1,4 @@
+import { MainWindowRoutingModule } from './main-window-routing.module';
 import { SharedModule } from './../common/shared.module';
 import { ChatModule } from './chat/chat.module';
 import { NgModule } from '@angular/core';
@@ -16,6 +17,9 @@ import { SideBarModule } from './sidebar/side-bar.module';
     SideBarModule,
     ChatModule,
     SharedModule,
+    MainWindowRoutingModule,
+    SideBarModule,
+    ChatModule,
   ],
   declarations: [
     MainWindowComponent,

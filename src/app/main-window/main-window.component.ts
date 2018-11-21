@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataRequestorService } from '../common/services/data-requestor.service';
+import { ThreadService } from '../common/services/thread-service.service';
 
 @Component({
   selector: 'app-main-window',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainWindowComponent implements OnInit {
 
-  constructor() { }
+  threads: any;
+  selectedThread: string;
+
+  constructor( private _dataRequestor: DataRequestorService) { }
 
   ngOnInit() {
+    this._dataRequestor.getRequest('thread/g').subscribe( result => {
+      this.threads = result;
+    });
+  }
+
+  onThreadClick(event: any): void {
+    this._dataRequestor.getRequest('message/g/' + ThreadService.thread).subscribe( result => {
+      console.log(result);
+    });
   }
 
 }

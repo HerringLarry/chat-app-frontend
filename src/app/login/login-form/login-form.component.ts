@@ -39,6 +39,7 @@ export class LoginFormComponent implements OnInit {
     if ( result ) {
       SessionService.sessionToken = result.token;
       UsernameService.username = username;
+      console.log('in');
       this._router.navigate(['mainwindow']);
     }
   }

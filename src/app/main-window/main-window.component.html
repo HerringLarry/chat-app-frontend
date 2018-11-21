@@ -8,15 +8,9 @@
     <mat-sidenav-content>
     </mat-sidenav-content>
   </mat-sidenav-container> -->
-<app-panel
-  [displaySmall]="false"
-  [title]="'Registration'"
->
+
 <mat-drawer-container class="example-container">
-      <mat-drawer mode="side" opened>
-          <a mat-list-item routerLink='/first'>First Component</a> <br>
-          <a mat-list-item routerLink='/second'>Second Component</a> <br>
-      </mat-drawer>
-      <mat-drawer-content>Main content</mat-drawer-content>
+    <app-sidebar [threads]="threads" (threadClick)="onThreadClick($event)"></app-sidebar>
+    <app-chat class="chat"></app-chat>
   </mat-drawer-container>
-  </app-panel>
+

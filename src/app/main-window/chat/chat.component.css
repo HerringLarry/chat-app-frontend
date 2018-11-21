@@ -1,0 +1,17 @@
+mat-drawer-content{
+    margin-left: 225px;
+}
+
+.msg-display{
+    width: 975px;
+    height: 90%;
+    border: 1px dotted;
+    overflow: hidden;
+}
+
+.msg-writer{
+    width: 975px;
+    height: 10%;
+    border: 1px dotted;
+    overflow: hidden;
+}
