@@ -1,3 +1,4 @@
-<p>
-  sidebar works!
-</p>
+<mat-drawer class="sidenav" #sideNav mode="side" opened="true" position="start">
+    <app-thread-list [threads]=threads (threadClick)="onThreadClick($event)"></app-thread-list>
+
+  </mat-drawer>
