@@ -1,13 +1,18 @@
+import { DataRequestorService } from 'src/app/common/services/data-requestor.service';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ThreadService {
 
-    static get thread(): string | '' {
-        return window.localStorage.getItem('thread');
+    constructor( private _dataRequestor: DataRequestorService) { }
+
+    private _thread: string;
+
+    get thread(): string {
+        return this._thread;
     }
 
-    static set thread( thread: string ) {
-        window.localStorage.setItem( 'thread', thread );
+    set thread( thread: string ) {
+        this._thread = thread;
     }
 }
