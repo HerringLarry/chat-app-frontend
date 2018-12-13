@@ -1,8 +1,8 @@
 <mat-drawer-content>
   <div class="msg-display">
-    <app-message-display></app-message-display>
+    <app-message-display [messages]="messages"></app-message-display>
   </div>
   <div class="msg-writer">
-    <app-message-writer></app-message-writer>
+    <app-message-writer (messageSubmitted)="onMessageSubmitted($event)"></app-message-writer>
   </div>
   </mat-drawer-content>

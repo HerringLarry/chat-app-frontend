@@ -12,3 +12,12 @@
   border-color: white;
   margin: 2%;
 }
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.grp{
+  font-weight: 400;
+  margin: 30%;
+}

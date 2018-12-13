@@ -18,6 +18,10 @@ const routes: Routes = [
     {
         path: 'mainwindow',
         loadChildren: '../app/main-window/main-window.module#MainWindowModule',
+    },
+    {
+        path: 'groupselectionwindow',
+        loadChildren: '../app/group-selection-window/group-selection-window.module#GroupSelectionWindowModule',
     }
 ];
 

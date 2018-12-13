@@ -4,14 +4,16 @@ mat-drawer-content{
 
 .msg-display{
     width: 975px;
+    word-wrap: break-word;
     height: 90%;
     border: 1px dotted;
-    overflow: hidden;
+    overflow: scroll;
+    border: 1px solid black;
 }
 
 .msg-writer{
     width: 975px;
     height: 10%;
-    border: 1px dotted;
+    border: 1px solid black;;
     overflow: hidden;
 }

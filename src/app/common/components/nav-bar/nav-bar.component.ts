@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UsernameService } from '../../services/username.service';
 import { LogoutService } from '../../services/logout.service';
 import { Router } from '@angular/router';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { CreationModalComponent } from '../creation-modal/creation-modal.component';
+import { GroupService } from '../../services/group-service.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor( private _router: Router) { }
+  constructor( private _router: Router, private dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -28,15 +31,19 @@ export class NavBarComponent implements OnInit {
     return 0;
   }
 
-  goToSettings() {
-    this._router.navigate(['uploads']);
+  goToListOfGroups() {
+    this._router.navigate(['groupselectionwindow']);
   }
 
-  addPiece() {
-    this._router.navigate(['profile/creation']);
+  goToMainWindow() {
+    this._router.navigate(['mainwindow']);
   }
 
   goToLogin() {
     this._router.navigate(['login']);
+  }
+
+  getGroup() {
+    return GroupService.group;
   }
 }

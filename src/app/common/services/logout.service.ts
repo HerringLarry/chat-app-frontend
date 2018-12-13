@@ -17,7 +17,6 @@ export class LogoutService {
   static logout() {
     UsernameService.username = '';
     SessionService.sessionToken = '';
-    MessagesService.messages = [];
     GroupService.group = '';
   }
 }

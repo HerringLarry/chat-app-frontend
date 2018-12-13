@@ -12,6 +12,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SessionService } from './common/services/session.service';
 import { LogoutService } from './common/services/logout.service';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import { MatDialogModule, MatFormFieldModule } from '@angular/material';
+import { CurrentThreadService } from './common/services/current-threads-service.service';
+import { ThreadService } from './common/services/thread-service.service';
+import { MessagesService } from './common/services/messages-service.service';
+import { SocketService } from './common/services/web-socket.service';
 
 
 
@@ -22,13 +27,17 @@ import {FlexLayoutModule} from '@angular/flex-layout';
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, SharedModule, AppRoutingModule,
-    ReactiveFormsModule, FormsModule, HttpClientModule,
+    ReactiveFormsModule, FormsModule, HttpClientModule, MatDialogModule, MatFormFieldModule,
   ],
   providers: [
     DataRequestorService,
     SessionService,
     UsernameService,
     LogoutService,
+    ThreadService,
+    CurrentThreadService,
+    MessagesService,
+    SocketService,
   ],
   bootstrap: [AppComponent]
 })

@@ -2,3 +2,8 @@ input{
     width: 800px;
     margin: 10px;
 }
+
+.msg-btn{
+    background-color: rgb(92, 47, 78);
+    color: white;
+}

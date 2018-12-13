@@ -1,54 +1,59 @@
-import { UsernameService } from './username.service';
-import { Injectable } from '@angular/core';
-import * as io from 'socket.io-client';
-import { Observable } from 'rxjs';
-import { APP_CONFIG } from 'src/config';
+import { UsernameService } from 'src/app/common/services/username.service';
+import { APP_CONFIG } from './config';
 
+import { Injectable } from '@angular/core';
+
+import * as socketIo from 'socket.io-client';
+import { Observable } from 'rxjs';
+import { Message } from '../model/message.dto';
+
+const SERVER_URL = 'http://localhost:3000';
 
 @Injectable()
-export class WebsocketService {
-  // Our socket connection
-  socket;
-  constructor() {
-  }
+export class SocketService {
+    private socket;
+    private roomId: string;
 
-  /**
-   * Connects to the WS server
-   */
-  connect() {
-    this.socket = io(APP_CONFIG.ws);
-  }
-
-  /**
-   * Listens to the WS server according to the event name
-   * param eventName The name of the WS event to connect
-   * returns An observable with the right data
-   */
-  on(eventName: string): Observable<any> {
-    return new Observable(obs => {
-      this.socket.on(eventName, data => {
-        console.log('Received message from Websocket Server');
-        obs.next(data);
-      });
-      // return () => {
-      //   this.socket.disconnect();
-      // };
+    public initSocket(): void {
+        console.log('trying to cnnect');
+        this.socket = socketIo(APP_CONFIG.ws, { query: {
+            username: UsernameService.username
+        }
     });
-  }
+        this.socket.on('connect', () => {
+          console.log('connect');
+          });
+    }
 
-  /**
-   * Sends data to WS server
-   * param eventName The name of the WS event to send
-   * param data The data to send to the WS server
-   */
-  emit(eventName: string, data: any, callback?) {
-    this.socket.emit(eventName, data, callback);
-  }
+    public send(message: Message): void {
+        this.socket.emit('message', message);
+    }
 
-  /**
-   * Disconnects from the WS server
-   */
-  disconnect() {
-    this.socket.disconnect();
-  }
+    public emit(eventName: string, roomId: string): void {
+        this.socket.emit('join', roomId);
+    }
+
+    on(eventName: string): Observable<any> {
+        return new Observable(obs => {
+          this.socket.on(eventName, data => {
+            console.log('Received message from Websocket Server');
+            obs.next(data);
+          });
+        });
+      }
+
+
+    public onMessage(): Observable<Message> {
+      console.log('received');
+        return new Observable<Message>(observer => {
+            this.socket.on('message', (data: Message) => observer.next(data));
+        });
+    }
+
+    public onEvent(event: Event): Observable<any> {
+      console.log('received');
+        return new Observable<Event>(observer => {
+            this.socket.on(event, () => observer.next());
+        });
+    }
 }

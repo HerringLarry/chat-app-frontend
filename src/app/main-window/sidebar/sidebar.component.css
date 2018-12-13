@@ -1,5 +1,15 @@
 .sidenav {
     width: 225px;
-    background-color: #a7f1e9;
+    background-color: #19242F;
     font-weight: 550;
+    height: 100%;
+    border: 1px solid black;
   }
+
+app-thread-list {
+  width: 225px;
+  height:  90%;
+  overflow: scroll;
+  position: absolute;
+  top: 0;
+}

@@ -1,4 +1,4 @@
 <mat-drawer class="sidenav" #sideNav mode="side" opened="true" position="start">
-    <app-thread-list [threads]=threads (threadClick)="onThreadClick($event)"></app-thread-list>
-
+    <app-thread-list [threads]="threads" ></app-thread-list>
+    <app-add-thread></app-add-thread>
   </mat-drawer>

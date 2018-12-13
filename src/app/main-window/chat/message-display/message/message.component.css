@@ -1,0 +1,72 @@
+/* .speech-bubble {
+	position: relative;
+	background: #bb0180;
+	border-radius: .4em;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-top-color: #bb0180;
+	border-bottom: 0;
+	border-left: 0;
+	margin-left: -10px;
+	margin-bottom: -20px;
+}
+
+.speech-bubble-wrapper {
+    overflow: auto;
+    margin: 10px;
+}
+
+.speech-bubble-current-wrapper{
+    margin: 10px;
+    margin-left: 500px;
+    overflow: auto;
+}
+
+.speech-bubble-current {
+	position: relative;
+	background: #01bbb2;
+	border-radius: .4em;
+}
+
+.speech-bubble-current:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-top-color: #01bbb2;
+	border-bottom: 0;
+	border-right: 0;
+	margin-left: 0px;
+	margin-bottom: -20px;
+}
+
+.text{
+    margin:10px;
+    color: black;
+} */
+
+.username{
+	font-weight: 550;
+	color: rgb(92, 47, 78);
+}
+
+.wrapper{
+    width: 900px;
+    margin: auto;
+
+}
+
+p{
+    width: 900px;
+}

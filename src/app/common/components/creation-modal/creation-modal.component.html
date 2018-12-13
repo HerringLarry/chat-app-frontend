@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>{{header}}</h2>
+
+<mat-dialog-content>
+  
+        <input matInput
+                placeholder="{{placeHolder}}"
+               formControlName="description"
+               [value]="name" (input)="name = $event.target.value"
+               >
+ 
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button"(click)="close()">Close</button>
+    <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+</mat-dialog-actions>

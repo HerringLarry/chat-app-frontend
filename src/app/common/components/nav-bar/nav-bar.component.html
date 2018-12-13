@@ -1,10 +1,11 @@
 <mat-toolbar class="toolbar" color="primary">
   <div *ngIf="checkIfUsernameExists()">
-    <button mat-menu-item class="menu-button" type="button" mat-flat-button color="primary" (click)="addPiece()"> + </button>
     <button mat-menu-item class="menu-button" type="button" mat-flat-button color="primary" (click)="goToProfile()"> Profile </button>
-    <button mat-menu-item class="menu-button" type="button" mat-flat-button color="primary" (click)="goToSettings()"> Settings </button>
+    <button mat-menu-item class="menu-button" type="button" mat-flat-button color="primary" (click)="goToMainWindow()"> Chat </button>
     <button mat-menu-item class="menu-button" type="button" mat-flat-button color="primary" (click)="goToListOfGroups()"> Groups</button>
     <button mat-menu-item class="menu-button" type="button" mat-flat-button color="primary" (click)="logout()"> Logout </button>
+    <span class="example-spacer"></span>
+    <span class="grp"> Current Group: {{getGroup()}}</span>
   </div>
   <div *ngIf="!checkIfUsernameExists()">
     <button mat-menu-item class="menu-button" type="button" mat-flat-button color="primary" (click)="goToLogin()"> Login </button>

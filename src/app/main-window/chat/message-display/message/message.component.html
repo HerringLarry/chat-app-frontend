@@ -1,0 +1,26 @@
+<!-- <div *ngIf="!isCurrent()" class="speech-bubble-wrapper">
+  <div>{{message.username}}</div>
+<div  class="speech-bubble">
+  <div class="text">
+  {{message.text}}
+  </div>
+</div>
+</div>
+
+<div *ngIf="isCurrent()" class="speech-bubble-current-wrapper">
+  <div class="speech-bubble-current">
+    <div class="text">
+        {{message.text}}
+    </div>
+  </div>
+</div> -->
+
+<div class="wrapper">
+    <!-- <h3 mat-line class="cursor-pointer"> {{message.username}} </h3> -->
+    <p>
+      <span class="username">
+          {{message.username}} - 
+      </span>
+        {{message.text}}
+    </p>
+  </div>

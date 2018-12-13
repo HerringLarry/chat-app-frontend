@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ThreadService } from 'src/app/common/services/thread-service.service';
+import { MessagesService } from 'src/app/common/services/messages-service.service';
+import { GroupService } from 'src/app/common/services/group-service.service';
 
 @Component({
   selector: 'app-thread-option',
@@ -9,16 +11,15 @@ import { ThreadService } from 'src/app/common/services/thread-service.service';
 export class ThreadOptionComponent implements OnInit {
 
   @Input() thread: any;
-  @Output() threadClick: EventEmitter<void> = new EventEmitter();
 
-  constructor() { }
+  constructor(private _threadService: ThreadService, private _messageService: MessagesService) { }
 
   ngOnInit() {
   }
 
   selectThread(): void {
-    ThreadService.thread = this.thread.name;
-    this.threadClick.emit();
+    this._messageService.leaveRoom(this._threadService.thread, GroupService.group);
+    this._threadService.thread = this.thread.name;
+    this._messageService.joinRoom( this.thread.name, GroupService.group);
   }
-
 }

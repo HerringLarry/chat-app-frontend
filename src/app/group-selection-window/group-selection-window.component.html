@@ -1,0 +1,9 @@
+<app-panel
+  [displaySmall]="true"
+  [title]="'Select Group'"
+>
+<mat-action-list *ngFor="let group of groups">
+    <button mat-list-item class="list-btn" (click)="setGroupNameAndGoToMain(group.name)"> {{group.name}} </button>
+</mat-action-list>
+    <button mat-list-item class="add-btn" (click)="openCreationModal()"> Add Group</button>
+</app-panel>
