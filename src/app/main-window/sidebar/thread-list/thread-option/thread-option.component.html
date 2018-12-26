@@ -1,2 +1,3 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<div (click)="selectThread()" class="w3-bar-item w3-button">{{thread.name}}</div>
+<div *ngIf="!isCurrentThread()" (click)="selectThread()" class="w3-bar-item w3-button">{{thread.name}}</div>
+<div *ngIf="isCurrentThread()" (click)="selectThread()" class="w3-bar-item w3-button is-active">{{thread.name}}</div>

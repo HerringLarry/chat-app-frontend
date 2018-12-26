@@ -1,0 +1,3 @@
+<div class="thread-list" *ngFor="let thread of _currentThreadService.directThreads | async">
+  <app-direct-thread-option [thread]="thread"></app-direct-thread-option>
+</div>

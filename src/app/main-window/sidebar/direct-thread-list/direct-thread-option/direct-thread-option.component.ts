@@ -6,30 +6,39 @@ import { DirectThreadService } from 'src/app/common/services/direct-thread-servi
 import { DirectMessagesService } from 'src/app/common/services/direct-messages-service.service';
 
 @Component({
-  selector: 'app-thread-option',
-  templateUrl: './thread-option.component.html',
-  styleUrls: ['./thread-option.component.css']
+  selector: 'app-direct-thread-option',
+  templateUrl: './direct-thread-option.component.html',
+  styleUrls: ['./direct-thread-option.component.css']
 })
-export class ThreadOptionComponent implements OnInit {
+export class DirectThreadOptionComponent implements OnInit {
 
   @Input() thread: any;
 
+  splitThreadName: string;
+
   constructor(private _threadService: ThreadService,
-              private _directThreadService: DirectThreadService,
-              private _messageService: MessagesService,
-              private _directMesssageService: DirectMessagesService) { }
+    private _directThreadService: DirectThreadService,
+    private _messageService: MessagesService,
+    private _directMesssageService: DirectMessagesService) { }
 
   ngOnInit() {
+    this.splitThreadName = this.parseThreadName();
+  }
+
+  parseThreadName(): string {
+    const split: string[] = this.thread.name.split('|');
+
+    return split.join(', ');
   }
 
   selectThread(): void {
     this.leaveAllCurrentRooms();
-    this._threadService.thread = this.thread.name;
-    this._messageService.joinRoom( this.thread.name, GroupService.group);
+    this._directThreadService.thread = this.thread.name;
+    this._directMesssageService.joinRoom( this.thread.name, GroupService.group);
   }
 
   isCurrentThread(): boolean {
-    return this._threadService.thread === this.thread.name;
+    return this._directThreadService.thread === this.thread.name;
   }
 
   leaveAllCurrentRooms(): void {
@@ -42,4 +51,5 @@ export class ThreadOptionComponent implements OnInit {
       this._directThreadService.thread = null;
     }
   }
+
 }
