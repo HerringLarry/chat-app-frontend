@@ -1,0 +1,13 @@
+<app-panel
+  [displaySmall]="false"
+  [title]="'Invites'"
+  class="panel"
+>
+<div *ngIf="!areThereInvites()">
+  <app-invite [invite] = "invite" (deleteInvite)="deleteInvite($event)" *ngFor="let invite of invites"></app-invite>
+</div>
+<div *ngIf="areThereInvites()">
+  <div class="no-invites"> NO INVITES </div>
+</div>
+</app-panel>
+
