@@ -16,7 +16,7 @@ export class InviteWindowComponent implements OnInit {
 
   ngOnInit() {
     const request: string = 'invites/' + UsernameService.username;
-    this._dataRequestorService.getRequest(request).subscribe( res => {
+    this._dataRequestorService.getRequest(request).subscribe( (res: Invite[]) => {
       this.invites = res;
     });
 
