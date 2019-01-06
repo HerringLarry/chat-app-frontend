@@ -4,6 +4,7 @@ import { DataRequestorService } from 'src/app/common/services/data-requestor.ser
 import { UsernameService } from 'src/app/common/services/username.service';
 import { GroupService } from 'src/app/common/services/group-service.service';
 import { InviteDto } from '../dto/invite.dto';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-send-invite',
@@ -15,7 +16,9 @@ export class SendInviteComponent implements OnInit {
   @Input() user: User;
   @Output() removeUser = new EventEmitter<User>();
 
-  constructor( private _dataRequestorService: DataRequestorService) { }
+  constructor( private _dataRequestorService: DataRequestorService,
+                private snackbar: MatSnackBar,
+    ) { }
 
   ngOnInit() {
   }
@@ -27,6 +30,9 @@ export class SendInviteComponent implements OnInit {
     const groupName: string = GroupService.group;
     const inviteDto: InviteDto = new InviteDto( fromUser, toUser, groupName );
     this._dataRequestorService.postRequest( request, inviteDto ).subscribe( res => {
+      this.snackbar.open('User Invited', 'Notification', {
+        duration: 500,
+      });
       this.removeUser.emit( this.user );
     });
   }

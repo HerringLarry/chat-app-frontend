@@ -13,7 +13,7 @@ import { User } from '../common/components/direct-thread-creation-modal/model/us
   styleUrls: ['./send-invite-window.component.css']
 })
 export class SendInviteWindowComponent implements OnInit {
-  options: User[];
+  options: User[] = [];
 
   constructor(private _dataRequestorService: DataRequestorService,
       private _currentDirectThreadService: CurrentDirectThreadsService,
@@ -35,5 +35,9 @@ export class SendInviteWindowComponent implements OnInit {
     }));
 
     this.options.splice( index, 1);
+  }
+
+  noUsers(): boolean {
+    return this.options.length === 0;
   }
 }

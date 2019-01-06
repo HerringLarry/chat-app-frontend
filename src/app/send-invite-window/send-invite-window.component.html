@@ -4,6 +4,7 @@
   class="panel"
 >
 <div>
+  <p *ngIf="noUsers()"> No Users To Invite</p>
   <app-send-invite *ngFor="let option of options" [user]="option" (removeUser)="removeUser($event)"></app-send-invite>
 </div>
 </app-panel>

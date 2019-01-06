@@ -4,11 +4,11 @@ import { SendInviteComponent } from './send-invite/send-invite.component';
 import { SendInviteWindowComponent } from './send-invite-window.component';
 import { SendInviteWindowRoutingModule } from './send-invite-window-routing.module';
 import { SharedModule } from '../common/shared.module';
-import { MatListModule, MatIconModule, MatButtonModule } from '@angular/material';
+import { MatListModule, MatIconModule, MatButtonModule, MatSnackBarModule } from '@angular/material';
 
 @NgModule({
   imports: [
-    CommonModule, SendInviteWindowRoutingModule, SharedModule, MatListModule, MatIconModule, MatButtonModule,
+    CommonModule, SendInviteWindowRoutingModule, SharedModule, MatListModule, MatIconModule, MatButtonModule, MatSnackBarModule
   ],
   declarations: [
     SendInviteComponent, SendInviteWindowComponent
