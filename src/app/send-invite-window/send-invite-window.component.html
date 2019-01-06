@@ -1,0 +1,9 @@
+<app-panel
+  [displaySmall]="false"
+  [title]="'Invite Users!'"
+  class="panel"
+>
+<div>
+  <app-send-invite *ngFor="let option of options" [user]="option" (removeUser)="removeUser($event)"></app-send-invite>
+</div>
+</app-panel>
