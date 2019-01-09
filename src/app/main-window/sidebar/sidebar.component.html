@@ -1,7 +1,7 @@
 <mat-drawer class="sidenav" #sideNav mode="side" opened="true" position="start">
   <div id="thread-container">
     <div class="button-and-header">
-      <h1>Threads</h1> <button (click)="openCreationModal()">+</button>
+      <h1>Threads</h1> <button class="create-button" (click)="openCreationModal()">+</button>
     </div>
 
       <div class="thread-list-div">
@@ -10,7 +10,7 @@
   </div>
       <div id="direct-container">
       <div class="button-and-header">
-        <h1>Direct</h1> <button>+</button>
+        <h1 class="direct">Direct</h1> <button class="create-button" (click)="openDirectThreadCreationModal()">+</button>
       </div>
       <div class="thread-list-div">
         <app-direct-thread-list [threads]="threads"></app-direct-thread-list>

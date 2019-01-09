@@ -15,8 +15,16 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import { MatDialogModule, MatFormFieldModule } from '@angular/material';
 import { CurrentThreadService } from './common/services/current-threads-service.service';
 import { ThreadService } from './common/services/thread-service.service';
-import { MessagesService } from './common/services/messages-service.service';
 import { SocketService } from './common/services/web-socket.service';
+import { MessagesService } from './common/services/messages-service.service';
+import { DirectMessagesService } from './common/services/direct-messages-service.service';
+import { DirectThreadService } from './common/services/direct-thread-service.service';
+import { DirectSocketService } from './common/services/web-socket-direct.service';
+import { CurrentDirectThreadsService } from './common/services/current-direct-threads.service';
+import { InviteWindowComponent } from './invite-window/invite-window.component';
+import { SendInviteWindowComponent } from './send-invite-window/send-invite-window.component';
+import { GroupSelectionService } from './common/services/group-selection.service';
+import { HeaderInterceptor } from 'src/assets/header-interceptor.service';
 
 
 
@@ -24,6 +32,7 @@ import { SocketService } from './common/services/web-socket.service';
 @NgModule({
   declarations: [
     AppComponent,
+
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, SharedModule, AppRoutingModule,
@@ -36,8 +45,18 @@ import { SocketService } from './common/services/web-socket.service';
     LogoutService,
     ThreadService,
     CurrentThreadService,
+    CurrentDirectThreadsService,
     MessagesService,
     SocketService,
+    DirectMessagesService,
+    DirectThreadService,
+    DirectSocketService,
+    GroupSelectionService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HeaderInterceptor,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })

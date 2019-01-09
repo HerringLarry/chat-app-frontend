@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Invite } from '../models/invite';
 import { DataRequestorService } from 'src/app/common/services/data-requestor.service';
 import { ResponseDto } from './dto/response.dto';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-invite',
@@ -13,7 +14,7 @@ export class InviteComponent implements OnInit {
   @Input() invite: Invite;
   @Output() deleteInvite = new EventEmitter<Invite>();
 
-  constructor( private _dataRequestor: DataRequestorService ) { }
+  constructor( private _dataRequestor: DataRequestorService, private snackbar: MatSnackBar ) { }
 
   ngOnInit() {
     console.log(this.invite);
@@ -24,6 +25,9 @@ export class InviteComponent implements OnInit {
     const responseDto: ResponseDto = new ResponseDto(true, this.invite);
     this._dataRequestor.postRequest(request, responseDto ).subscribe( res => {
       this.deleteInvite.emit(this.invite);
+      this.snackbar.open('Accepted Invitation', 'Notification', {
+        duration: 500,
+      });
     });
   }
 
@@ -32,6 +36,9 @@ export class InviteComponent implements OnInit {
     const responseDto: ResponseDto = new ResponseDto(false, this.invite);
     this._dataRequestor.postRequest(request, responseDto ).subscribe( res => {
       this.deleteInvite.emit(this.invite);
+      this.snackbar.open('Declined Invitation', 'Notification', {
+        duration: 500,
+      });
     });
   }
 

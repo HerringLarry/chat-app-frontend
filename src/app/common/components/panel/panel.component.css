@@ -1,5 +1,6 @@
 .content-panel {
-  background-color: white;
+  color: white;
+  background-color: black;
   -webkit-box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.26);
   -moz-box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.26);
   box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.26);
@@ -11,11 +12,15 @@
   border-style: solid;
   border-width: 1px;
   border-color: black;
+  justify-content: center;
+  vertical-align: center;
+  margin-top: 30%;
 }
 
 .content-panel.panel-small{
   max-width:100%;
   margin-left: 0;
+  
 }
 
 .header {
@@ -26,9 +31,10 @@
 
 .header h2 {
   margin:0;
-  color:#6834BA;
+  color:white;
+  text-align: center;
   font-size:24px;
-  font-style: roboto;
+  font-family: 'Roboto', sans-serif;
   letter-spacing: 1.5px;
 }
 

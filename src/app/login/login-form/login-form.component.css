@@ -2,3 +2,16 @@
   justify-content: space-between;
   display: flex;
 }
+
+.submit-button{
+  background-color: #D9A04C;
+  color: white;
+}
+
+mat-label{
+  color: white;
+}
+.register-button{
+  background-color: #4C2D00;
+  color: white;
+}

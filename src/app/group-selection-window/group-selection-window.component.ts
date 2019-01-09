@@ -5,6 +5,7 @@ import { GroupService } from '../common/services/group-service.service';
 import { DataRequestorService } from '../common/services/data-requestor.service';
 import { CreationModalComponent } from '../common/components/creation-modal/creation-modal.component';
 import { MatDialogConfig, MatDialog } from '@angular/material';
+import { GroupSelectionService } from '../common/services/group-selection.service';
 
 @Component({
   selector: 'app-group-selection-window',
@@ -14,17 +15,10 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
 export class GroupSelectionWindowComponent implements OnInit {
   groups: any[];
 
-  constructor(private _router: Router, private _dataRequestor: DataRequestorService, private dialog: MatDialog) { }
+  constructor(private _router: Router, private _dataRequestor: DataRequestorService, private dialog: MatDialog,
+    private _groupSelectionService: GroupSelectionService) { }
 
   ngOnInit() {
-    this.getGroups();
-  }
-
-  getGroups() {
-    this._dataRequestor.getRequest('groups/getUserGroups/' + UsernameService.username).subscribe( (res: any[]) => {
-      console.log(res);
-      this.groups = res;
-    });
   }
 
   setGroupNameAndGoToMain(name: string) {

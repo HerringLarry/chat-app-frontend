@@ -1,4 +1,4 @@
-import { MessageDto } from './../../main-window/chat/message-writer/dto/message.dto';
+import { MessageDto } from '../../main-window/chat/message-writer/dto/message.dto';
 import { GroupService } from './group-service.service';
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -22,20 +22,20 @@ export class MessagesService implements OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.leaveRoom(this._threadService.thread, GroupService.group);
+        this.leaveRoom(this._threadService.threadId, GroupService.group);
     }
 
     get messages() {
         return asObservable(this._messages);
     }
 
-    public joinRoom(threadName: string, groupName: string): void {
-        this.roomId = threadName + '/' + groupName;
+    public joinRoom(threadId: number, groupName: string): void {
+        this.roomId = threadId + '/' + groupName;
         this._socketService.emit('message', this.roomId);
     }
 
-    public leaveRoom(threadName: string, groupName: string): void {
-        this.roomId = threadName + '/' + groupName;
+    public leaveRoom(threadId: number, groupName: string): void {
+        this.roomId = threadId + '/' + groupName;
         this._socketService.emit('leave', this.roomId);
 
     }
@@ -43,8 +43,6 @@ export class MessagesService implements OnDestroy {
 
     loadInitialData() {
         this._socketService.initSocket();
-        this._socketService.send(new Message('1', '2', '3', '4'));
-
     }
 
     send( msg: MessageDto ) {
@@ -53,6 +51,6 @@ export class MessagesService implements OnDestroy {
 
     onMessage(): Observable<any> {
         return this._socketService.on('message');
-      }
+    }
 
 }

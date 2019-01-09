@@ -22,34 +22,53 @@ export class DirectThreadOptionComponent implements OnInit {
     private _directMesssageService: DirectMessagesService) { }
 
   ngOnInit() {
+    // this.splitThreadName = this.parseThreadName();
+    console.log(this.thread);
     this.splitThreadName = this.parseThreadName();
   }
 
   parseThreadName(): string {
-    const split: string[] = this.thread.name.split('|');
+    const split: string = this.createNameFromUsernames();
 
-    return split.join(', ');
+    return split;
+  }
+
+  createNameFromUsernames(): string {
+    let split = '';
+    for ( const username of this.thread.usernames) {
+      if ( split !== '' ) {
+        split = split + ', ' + username;
+      } else {
+        split = username;
+      }
+    }
+
+    return split;
   }
 
   selectThread(): void {
     this.leaveAllCurrentRooms();
-    this._directThreadService.thread = this.thread.name;
-    this._directMesssageService.joinRoom( this.thread.name, GroupService.group);
+    this._directThreadService.threadId = this.thread.id;
+    this._directThreadService.selected = true;
+    this._directMesssageService.joinRoom( this._directThreadService.threadId, GroupService.group);
   }
 
   isCurrentThread(): boolean {
-    return this._directThreadService.thread === this.thread.name;
+    return this._directThreadService.threadId === this.thread.id && this._directThreadService.selected;
   }
 
   leaveAllCurrentRooms(): void {
-    if ( this._threadService.thread ) {
-      this._messageService.leaveRoom(this._threadService.thread, GroupService.group);
-      this._threadService.thread = null;
+    if ( this._threadService.threadId ) {
+      this._messageService.leaveRoom(this._threadService.threadId, GroupService.group);
     }
-    if ( this._directThreadService.thread ) {
-      this._directMesssageService.leaveRoom(this._directThreadService.thread, GroupService.group);
-      this._directThreadService.thread = null;
+    this._threadService.threadId = null;
+    this._threadService.selected = false;
+
+    if ( this._directThreadService.threadId ) {
+      this._directMesssageService.leaveRoom(this._directThreadService.threadId, GroupService.group);
     }
+    this._directThreadService.threadId = null;
+    this._directThreadService.selected = false;
   }
 
 }

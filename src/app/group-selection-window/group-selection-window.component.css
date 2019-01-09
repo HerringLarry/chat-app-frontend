@@ -1,16 +1,41 @@
 .list-btn{
-    background-color: #19242F;
+    background-color: grey;
     color: white;
-    border: 2px solid black;
+    font-weight: 400;
+    border: 1px solid black;
+    font: roboto;
+
 }
 
+.list-btn:hover{
+    background-color: lightgrey;
+}
+
+
+
 .add-btn{
-    background-color: rgb(92, 47, 78);
+    background-color: #7795AD;
     color: white;
-    border: 2px solid black;
     width: 100%;
     height: 50px;
     margin-top: 30px;
     font-weight: 500;
-    text-align: center;
+    font-size: 14pt;
+    position: relative;
+    vertical-align: middle;
+}
+
+.add-btn:hover{
+    background-color: rgb(128, 192, 245);
+}
+
+mat-icon{
+    position: relative;
+    vertical-align: middle;
+}
+
+.list{
+    width: 100%;
+    height: 300px;
+    overflow: scroll;
 }

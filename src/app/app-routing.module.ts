@@ -22,6 +22,14 @@ const routes: Routes = [
     {
         path: 'groupselectionwindow',
         loadChildren: '../app/group-selection-window/group-selection-window.module#GroupSelectionWindowModule',
+    },
+    {
+        path: 'invitewindow',
+        loadChildren: '../app/invite-window/invite-window.module#InviteWindowModule'
+    },
+    {
+        path: 'sendinvitewindow',
+        loadChildren: '../app/send-invite-window/send-invite-window.module#SendInviteWindowModule'
     }
 ];
 

@@ -14,7 +14,11 @@
   top:0;
   background-repeat: no-repeat;
   background-position: center;
-  background-size:cover;
-  background-image: url('waitingforsomethingtoupload_2.JPG');
+  background-size: cover;
+  background-image: url('ko.jpeg');
   z-index: -1;
+}
+
+html *{
+  font-family: 'Roboto', sans-serif;
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { CreationModalComponent } from 'src/app/common/components/creation-modal/creation-modal.component';
+import { DirectThreadCreationModalComponent } from 'src/app/common/components/direct-thread-creation-modal/direct-thread-creation-modal.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -33,5 +34,18 @@ export class SidebarComponent implements OnInit {
     };
 
     this.dialog.open(CreationModalComponent, dialogConfig);
+  }
+
+  openDirectThreadCreationModal() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      id: 1,
+    };
+
+    this.dialog.open( DirectThreadCreationModalComponent, dialogConfig );
   }
 }

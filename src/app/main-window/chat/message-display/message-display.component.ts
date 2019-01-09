@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-message-display',
@@ -7,11 +7,15 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class MessageDisplayComponent implements OnInit {
 
+
   @Input() messages: any;
+  processedMessages: any;
 
   constructor() { }
 
   ngOnInit() {
+    console.log(this.messages);
   }
+
 
 }

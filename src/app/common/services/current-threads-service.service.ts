@@ -1,7 +1,8 @@
+import { UsernameService } from 'src/app/common/services/username.service';
 import { GroupService } from './group-service.service';
-import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
-import { DataRequestorService } from "./data-requestor.service";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { DataRequestorService } from './data-requestor.service';
 import { asObservable } from '../as-observable';
 
 @Injectable()
@@ -18,7 +19,8 @@ export class CurrentThreadService {
     }
 
     loadInitialData() {
-        this._dataRequestor.getRequest('thread/' + GroupService.group)
+        console.log('loading');
+        this._dataRequestor.getRequest('thread/getThreads/' + GroupService.group + '/' + UsernameService.username)
             .subscribe(
                 (res: any) => {
                     this._threads.next(res);

@@ -15,12 +15,25 @@
   </div>
 </div> -->
 
-<div class="wrapper">
+<div *ngIf="!message.isTimeDivider" class="wrapper">
     <!-- <h3 mat-line class="cursor-pointer"> {{message.username}} </h3> -->
     <p>
       <span class="username">
-          {{message.username}} - 
+          {{message.username}} 
       </span>
+      <span class="msg-text">
         {{message.text}}
+      </span>
+      <span class="time">
+        {{outputTime()}}
+      </span>
     </p>
   </div>
+
+<div *ngIf="message.isTimeDivider" class="time-wrapper">
+  <p>
+    <span class="date-text">
+      {{outputDate()}}
+    </span>
+  </p>
+</div>

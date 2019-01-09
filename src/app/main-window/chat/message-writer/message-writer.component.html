@@ -1,4 +1,8 @@
-<div>
-  <input mat-input [value]="text" (input)="text = $event.target.value" (keyup.enter)="sendMessage()" >
-  <button class="msg-btn" (click)="sendMessage()" mat-button>send</button>
+<div class = "msg-writer">
+  <div class="input-holder">
+  <mat-form-field>
+    <input matInput #message class="msg-input" [value]="text" (input)="text = $event.target.value" (keyup.enter)="sendMessage()" > 
+  </mat-form-field>
+  <button class="msg-btn" (click)="sendMessage()" mat-button><mat-icon>send</mat-icon> send</button>
+</div>
 </div>

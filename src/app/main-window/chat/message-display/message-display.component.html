@@ -1,7 +1,6 @@
-<div>
-  <mat-list>
-    <mat-list-item *ngFor="let message of messages">
+<div #container>
+    <div class="message-wrapper" *ngFor="let message of messages">
       <app-message [message]="message"></app-message>
-    </mat-list-item>
-  </mat-list>
+      </div>
+
 </div>

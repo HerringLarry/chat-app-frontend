@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { GroupSelectionWindowComponent } from './group-selection-window.component';
 import { GroupSelectionWindowRoutingModule } from './group-selection-window-routing.module';
 import { SharedModule } from '../common/shared.module';
-import { MatListModule } from '@angular/material';
+import { MatListModule, MatIconModule } from '@angular/material';
 
 @NgModule({
   imports: [
-    CommonModule, GroupSelectionWindowRoutingModule, SharedModule, MatListModule,
+    CommonModule, GroupSelectionWindowRoutingModule, SharedModule, MatListModule, MatIconModule,
   ],
   declarations: [
     GroupSelectionWindowComponent,

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { CreationModalComponent } from '../creation-modal/creation-modal.component';
 import { GroupService } from '../../services/group-service.service';
+import { InviteToGroupModalComponent } from '../invite-to-group-modal/invite-to-group-modal.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -45,5 +46,17 @@ export class NavBarComponent implements OnInit {
 
   getGroup() {
     return GroupService.group;
+  }
+
+  ifGroupSelected() {
+    return GroupService.group !== '';
+  }
+
+  goToInvite() {
+    this._router.navigate(['invitewindow']);
+  }
+
+  openAddToGroupModal() {
+    this._router.navigate(['sendinvitewindow']);
   }
 }

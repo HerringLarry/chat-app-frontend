@@ -1,9 +1,40 @@
-input{
+mat-form-field{
     width: 800px;
     margin: 10px;
+
+}
+
+input{
+    width: 800px;
+    color: white;
 }
 
 .msg-btn{
-    background-color: rgb(92, 47, 78);
+    background-color: #7795AD;
     color: white;
 }
+
+.msg-btn:hover{
+    background-color: rgb(128, 192, 245);
+}
+
+.msg-writer{
+    background-color: white;
+    height: 100%;
+    border-top: 4px solid black;
+
+}
+
+
+.input-holder{
+    margin-top: 3%;
+    color: black;
+    margin-left: 4%
+}
+
+input{
+    color: black;
+}
+
+
+

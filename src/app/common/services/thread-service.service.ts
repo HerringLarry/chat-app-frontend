@@ -6,13 +6,22 @@ export class ThreadService {
 
     constructor( private _dataRequestor: DataRequestorService) { }
 
-    private _thread: string;
+    private _threadId: number;
+    private _selected: boolean = false;
 
-    get thread(): string {
-        return this._thread;
+    get threadId(): number {
+        return this._threadId;
     }
 
-    set thread( thread: string ) {
-        this._thread = thread;
+    set threadId( threadId: number ) {
+        this._threadId = threadId;
+    }
+
+    get selected(): boolean {
+        return this._selected;
+    }
+
+    set selected( selected: boolean ) {
+        this._selected = selected;
     }
 }

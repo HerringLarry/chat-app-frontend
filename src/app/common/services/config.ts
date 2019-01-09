@@ -4,3 +4,8 @@ export const APP_CONFIG = {
   api: `${host}/api`,
   ws: 'ws://localhost:9995',
 };
+
+export const APP_CONFIG_DIRECT = {
+  api: `${host}/api`,
+  ws: 'ws://localhost:9999'
+};

@@ -1,8 +1,6 @@
 import { ThreadService } from 'src/app/common/services/thread-service.service';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import {ThemePalette} from '@angular/material/core';
-import { DataRequestorService } from 'src/app/common/services/data-requestor.service';
-import { CurrentThreadService } from 'src/app/common/services/current-threads-service.service';
+import { CurrentDirectThreadsService } from 'src/app/common/services/current-direct-threads.service';
 
 @Component({
   selector: 'app-direct-thread-list',
@@ -14,10 +12,10 @@ export class DirectThreadListComponent implements OnInit {
   @Input() threads: any;
   @Output() threadClick: EventEmitter<void> = new EventEmitter();
 
-  constructor( private _currentThreadService: CurrentThreadService, private _threadService: ThreadService ) { }
+  constructor( private _currentDirectThreadService: CurrentDirectThreadsService, private _threadService: ThreadService ) { }
 
   ngOnInit() {
-    this._currentThreadService.loadInitialData();
+    this._currentDirectThreadService.loadInitialData();
   }
 
   onThreadClick(event: any): void {

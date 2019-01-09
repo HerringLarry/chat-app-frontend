@@ -3,17 +3,14 @@ mat-drawer-content{
 }
 
 .msg-display{
-    width: 975px;
-    word-wrap: break-word;
-    height: 90%;
-    border: 1px dotted;
+    width: 970px;
+    height: 85%;
     overflow: scroll;
-    border: 1px solid black;
 }
 
 .msg-writer{
-    width: 975px;
-    height: 10%;
-    border: 1px solid black;;
+    width: 100%;
+    height: 15%;
     overflow: hidden;
+
 }

@@ -1,0 +1,20 @@
+.mat-save-button{
+    background-color: grey;
+    color: white;
+    margin-top: 15px;
+}
+
+.mat-close-button{
+    background-color: black;
+    color: white;
+    margin-right: 10px;
+    margin-top: 15px;
+}
+
+input{
+    font: Roboto;
+}
+
+h1{
+    font: Roboto;
+}

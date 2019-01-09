@@ -34,6 +34,7 @@ export class SocketService {
     }
 
     on(eventName: string): Observable<any> {
+        console.log('received');
         return new Observable(obs => {
           this.socket.on(eventName, data => {
             console.log('Received message from Websocket Server');
@@ -55,5 +56,10 @@ export class SocketService {
         return new Observable<Event>(observer => {
             this.socket.on(event, () => observer.next());
         });
+    }
+
+
+    public disconnect() {
+        this.socket.disconnect();
     }
 }

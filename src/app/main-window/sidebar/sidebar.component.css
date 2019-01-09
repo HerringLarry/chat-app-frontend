@@ -1,9 +1,9 @@
 .sidenav {
     width: 225px;
-    background-color: #19242F;
+    /* background-color: #4F4E69; */
+    background-color: black;
     font-weight: 550;
     height: 100%;
-    border: 1px solid black;
   }
 
 .button-and-header{
@@ -20,6 +20,11 @@ h1 {
   margin-left: 30px;
   margin-top: 5px;
   z-index: 10;
+  font: roboto;
+}
+
+.direct{
+  margin-left: 60px;
 }
 button {
   float: right;
@@ -39,4 +44,8 @@ button {
   width: 225px;
   height: 300px;
   overflow: scroll;
+}
+
+.create-button:hover{
+  background-color: lightgray;
 }

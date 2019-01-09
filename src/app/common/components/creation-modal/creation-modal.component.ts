@@ -7,6 +7,7 @@ import { DataRequestorService } from '../../services/data-requestor.service';
 import { CurrentThreadService } from '../../services/current-threads-service.service';
 import { GroupService } from '../../services/group-service.service';
 import { ThreadCreationDto } from './dto/thread-creation.dto';
+import { GroupSelectionService } from '../../services/group-selection.service';
 
 @Component({
     selector: 'app-creation-modal',
@@ -26,10 +27,10 @@ export class CreationModalComponent implements OnInit {
       private _dataRequestor: DataRequestorService,
       private dialogRef: MatDialogRef<CreationModalComponent>,
       private _currentThreadService: CurrentThreadService,
+      private _groupSelectionService: GroupSelectionService,
       @Inject(MAT_DIALOG_DATA) data) {
-      console.log(data);
-      this.type = data.type;
-      this.setHeaderAndPlaceHolder();
+        this.type = data.type;
+        this.setHeaderAndPlaceHolder();
     }
 
     ngOnInit() { }
@@ -59,13 +60,14 @@ export class CreationModalComponent implements OnInit {
       const groupCreationDto: GroupCreationDto = new GroupCreationDto( this.name, UsernameService.username);
       this._dataRequestor.postRequest('groups', groupCreationDto).subscribe( res => {
         this.dialogRef.close(this.name);
+        this._groupSelectionService.loadInitialData();
       });
       this.dialogRef.close(this.name);
     }
 
     saveThread() {
       console.log('threaders');
-      const threadCreationDto: ThreadCreationDto = new ThreadCreationDto( this.name, GroupService.group);
+      const threadCreationDto: ThreadCreationDto = new ThreadCreationDto( this.name, GroupService.group, UsernameService.username );
       this._dataRequestor.postRequest('thread', threadCreationDto).subscribe( res => {
         this.dialogRef.close(this.name);
         this._currentThreadService.loadInitialData();

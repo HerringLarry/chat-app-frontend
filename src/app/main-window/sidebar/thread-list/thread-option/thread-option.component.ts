@@ -24,22 +24,26 @@ export class ThreadOptionComponent implements OnInit {
 
   selectThread(): void {
     this.leaveAllCurrentRooms();
-    this._threadService.thread = this.thread.name;
-    this._messageService.joinRoom( this.thread.name, GroupService.group);
+    this._threadService.threadId = this.thread.id;
+    this._threadService.selected = true;
+    this._messageService.joinRoom( this.thread.id, GroupService.group);
   }
 
   isCurrentThread(): boolean {
-    return this._threadService.thread === this.thread.name;
+    return this._threadService.threadId === this.thread.id && this._threadService.selected;
   }
 
   leaveAllCurrentRooms(): void {
-    if ( this._threadService.thread ) {
-      this._messageService.leaveRoom(this._threadService.thread, GroupService.group);
-      this._threadService.thread = null;
+    if ( this._threadService.threadId ) {
+      this._messageService.leaveRoom(this._threadService.threadId, GroupService.group);
     }
-    if ( this._directThreadService.thread ) {
-      this._directMesssageService.leaveRoom(this._directThreadService.thread, GroupService.group);
-      this._directThreadService.thread = null;
+    this._threadService.threadId = null;
+    this._threadService.selected = false;
+
+    if ( this._directThreadService.threadId ) {
+      this._directMesssageService.leaveRoom(this._directThreadService.threadId, GroupService.group);
     }
+    this._directThreadService.threadId = null;
+    this._directThreadService.selected = false;
   }
 }

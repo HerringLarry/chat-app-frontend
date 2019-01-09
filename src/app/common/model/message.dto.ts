@@ -1,13 +1,13 @@
-export class Message{
+export class Message {
     username: string;
     groupName: string;
-    threadName: string;
+    threadId: number;
     text: string;
 
-    constructor( username: string, groupName: string, threadName: string, text: string) {
+    constructor( username: string, groupName: string, threadId: number, text: string) {
         this.username = username;
         this.groupName = groupName;
-        this.threadName = threadName;
+        this.threadId = threadId;
         this.text = text;
     }
 }

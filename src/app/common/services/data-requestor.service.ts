@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DataRequestorService {
 
-  static API_ENDPOINT: string = 'http://localhost:3000';
+  static API_ENDPOINT = 'http://localhost:3000';
 
   constructor( private _http: HttpClient ) { }
 
