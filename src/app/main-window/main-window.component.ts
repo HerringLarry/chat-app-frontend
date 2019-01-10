@@ -12,6 +12,7 @@ import { DirectThreadService } from '../common/services/direct-thread-service.se
 import { Message } from './models/message';
 import { DirectMessage } from './models/direct-message';
 import { ProcessedMessage } from './models/processed-message';
+import { User } from '../common/components/direct-thread-creation-modal/model/user.model';
 
 @Component({
   selector: 'app-main-window',
@@ -25,12 +26,13 @@ export class MainWindowComponent implements OnInit, OnDestroy {
 
 
   selectedThread: string;
-  messages: Message[];
-  directMessages: DirectMessage[];
+  messages: ProcessedMessage[];
+  directMessages: ProcessedMessage[];
   threadsSource: Subject<any[]>;
   public threads: any[] = [];
   messagesSubscription: Subscription;
   directMessagesSubscription: Subscription;
+  users: User[];
 
   constructor( private _dataRequestor: DataRequestorService,
     private _messagesService: MessagesService,
@@ -47,14 +49,15 @@ export class MainWindowComponent implements OnInit, OnDestroy {
         });
         this.router.navigate(['groupselectionwindow']);
       }
-      this.messagesSubscription = this._messagesService.onMessage().subscribe( messages => {
+      this.messagesSubscription = this._messagesService.onMessage().subscribe( responseObject => {
         // this.scrollToBottom();
-        this.messages = this.processMessages( messages );
+        this.users = responseObject.users;
+        this.messages = this.processMessages( responseObject.messages );
       });
 
-      this.directMessagesSubscription = this._directMessagesService.onMessage().subscribe( messages => {
-        console.log(messages);
-        this.directMessages = this.processDirectMessages(messages);
+      this.directMessagesSubscription = this._directMessagesService.onMessage().subscribe( responseObject => {
+        this.users = responseObject.users;
+        this.directMessages = this.processMessages(responseObject.directMessages);
       });
 
     }
@@ -101,6 +104,7 @@ export class MainWindowComponent implements OnInit, OnDestroy {
     let previousTime: number;
     for ( const message of messages ) {
       message.createdAt = new Date(message.createdAt);
+      const user: string = this.matchMessageUserIdWithUser( message );
       if ( previousTime === undefined ) {
         const roundedDown = this.roundDown( ( message.createdAt.getTime() / 1000 ) );
         processedMessages.push( this.createTimeDivider( roundedDown ) );
@@ -109,13 +113,20 @@ export class MainWindowComponent implements OnInit, OnDestroy {
         processedMessages.push( this.createTimeDivider( roundedDown ) );
       }
       const processedMessage = new ProcessedMessage(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-      processedMessage.setValues( message );
+      processedMessage.setValues( message, user );
       processedMessages.push( processedMessage );
       previousTime = message.createdAt.getTime() / 1000;
     }
-    console.log(processedMessages);
 
     return processedMessages;
+  }
+
+  private matchMessageUserIdWithUser( message: Message ): string {
+    for ( const user of this.users ) {
+      if ( user.id === message.userId ) {
+        return user.username;
+      }
+    }
   }
 
   private isPastNextHour( previousTime: number, newTime: number ): boolean {
@@ -126,9 +137,6 @@ export class MainWindowComponent implements OnInit, OnDestroy {
   }
 
   private roundDown( newTime: number ): number {
-    console.log('----');
-    console.log(newTime);
-    console.log(newTime % (3600 * 24));
 
     return newTime - ( newTime % (3600 * 24) );
   }

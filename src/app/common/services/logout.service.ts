@@ -15,8 +15,6 @@ export class LogoutService {
   constructor( private _currentThreadService: CurrentThreadService ) { }
 
   static logout() {
-    UsernameService.username = '';
-    SessionService.sessionToken = '';
-    GroupService.group = '';
+    localStorage.clear();
   }
 }

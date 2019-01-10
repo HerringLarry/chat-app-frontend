@@ -39,7 +39,7 @@ export class LoginFormComponent implements OnInit {
     if ( result ) {
       SessionService.sessionToken = result.token;
       UsernameService.username = username;
-      console.log('in');
+      UsernameService.id = result.id;
       this._router.navigate(['groupselectionwindow']);
     }
   }
