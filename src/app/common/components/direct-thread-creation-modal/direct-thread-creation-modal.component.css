@@ -1,0 +1,17 @@
+.back{
+    background-color: black;
+}
+
+.mat-save-button{
+    background-color: grey;
+    color: white;
+    margin: 10px;
+    margin-top: 15px;
+}
+
+.mat-close-button{
+    background-color: black;
+    color: white;
+    margin: 10px;
+    margin-top: 15px;
+}
