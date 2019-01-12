@@ -8,9 +8,10 @@
 
 .menu-button{
   background-color: grey;
+  align-items: center;
   border: 1px solid black;
   margin: 2%;
-  width: 100px;
+  width: 110px;
 }
 
 .menu-button:hover{

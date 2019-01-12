@@ -3,7 +3,7 @@ import { SharedModule } from './../common/shared.module';
 import { ChatModule } from './chat/chat.module';
 import { NgModule } from '@angular/core';
 import { MainWindowComponent } from './main-window.component';
-import { MatSidenavModule,MatToolbarModule, MatMenuModule, MatButtonModule, MatIconModule, MatCardModule, MatSnackBarModule } from '@angular/material';
+import { MatSidenavModule,MatToolbarModule, MatMenuModule, MatButtonModule, MatIconModule, MatCardModule, MatSnackBarModule, MatProgressSpinnerModule } from '@angular/material';
 import { SideBarModule } from './sidebar/side-bar.module';
 
 @NgModule({
@@ -21,6 +21,7 @@ import { SideBarModule } from './sidebar/side-bar.module';
     SideBarModule,
     ChatModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     MainWindowComponent,

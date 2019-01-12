@@ -22,7 +22,7 @@ export class MessageComponent implements OnInit {
   }
 
   outputTime(): string {
-    return this.message.createdAt.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }
+    return this.message.createdAt.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
   }
 
   outputDate(): string {

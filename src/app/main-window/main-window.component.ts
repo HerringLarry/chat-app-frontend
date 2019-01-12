@@ -118,6 +118,7 @@ export class MainWindowComponent implements OnInit, OnDestroy {
       previousTime = message.createdAt.getTime() / 1000;
     }
 
+    console.log(processedMessages);
     return processedMessages;
   }
 
@@ -130,7 +131,8 @@ export class MainWindowComponent implements OnInit, OnDestroy {
   }
 
   private isPastNextHour( previousTime: number, newTime: number ): boolean {
-    const roundedPreviousTime: number = previousTime + ( 3600 * 24 - (previousTime % (3600 * 24)) );
+    // const roundedPreviousTime: number = previousTime + ( 3600 * 24 - (previousTime % (3600 * 24)) );
+    const roundedPreviousTime: number = previousTime + ( 3600 - (previousTime % 3600) );
 
     return newTime > roundedPreviousTime;
 
@@ -138,7 +140,7 @@ export class MainWindowComponent implements OnInit, OnDestroy {
 
   private roundDown( newTime: number ): number {
 
-    return newTime - ( newTime % (3600 * 24) );
+    return newTime - ( newTime % (3600) );
   }
 
   private createTimeDivider( roundedDown: number ): ProcessedMessage {

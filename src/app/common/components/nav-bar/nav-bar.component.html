@@ -1,6 +1,7 @@
 <mat-toolbar class="toolbar" color="primary" *ngIf="checkIfUsernameExists()">
   <div>
     <button mat-menu-item class="menu-button" type="button" mat-flat-button color="primary" (click)="goToProfile()"><mat-icon>account_circle</mat-icon>  Profile </button>
+    <button mat-menu-item class="menu-button" type="button" mat-flat-button color="primary" (click)="goToSettings()"><mat-icon>settings</mat-icon>  Settings </button>
     <button mat-menu-item class="menu-button" type="button" mat-flat-button color="primary" (click)="goToInvite()"><mat-icon>receipt</mat-icon>  Invites </button>
     <button mat-menu-item class="menu-button" type="button" mat-flat-button color="primary" (click)="goToMainWindow()"><mat-icon>speaker_notes</mat-icon>  Chat </button>
     <button mat-menu-item class="menu-button" type="button" mat-flat-button color="primary" (click)="goToListOfGroups()"><mat-icon>menu</mat-icon>  Groups</button>

@@ -1,0 +1,21 @@
+<app-panel
+  [displaySmall]="false"
+  [title]="'Settings'"
+  class="panel"
+>
+  <div class="setting">
+    <p class="prompt"> Display Username or Full Name in Chat?</p>
+    <div class="options">
+        <button class="options-btn" mat-button> Save</button>
+        <button class="options-btn" mat-button> Save</button>
+    </div>
+  </div>
+  <!-- <div class="setting">
+      <p class="prompt"> Display Username or Full Name in Chat?</p>
+      <mat-button-toggle-group class="options" name="fontStyle" aria-label="Font Style">
+          <mat-button-toggle class="example-margin" value="usernameSelected">Username</mat-button-toggle>
+          <mat-button-toggle class="example-margin" value="fullNameSelected">Full Name</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div> -->
+    <button class="save-btn" (click)="sendMessage()" mat-button><mat-icon>save</mat-icon> Save</button>
+</app-panel>

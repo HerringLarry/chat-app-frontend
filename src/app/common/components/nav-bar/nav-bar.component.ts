@@ -56,6 +56,10 @@ export class NavBarComponent implements OnInit {
     this._router.navigate(['invitewindow']);
   }
 
+  goToSettings() {
+    this._router.navigate(['settings']);
+  }
+
   openAddToGroupModal() {
     this._router.navigate(['sendinvitewindow']);
   }

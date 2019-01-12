@@ -30,7 +30,11 @@ const routes: Routes = [
     {
         path: 'sendinvitewindow',
         loadChildren: '../app/send-invite-window/send-invite-window.module#SendInviteWindowModule'
-    }
+    },
+    {
+        path: 'settings',
+        loadChildren: '../app/settings/settings.module#SettingsModule'
+    },
 ];
 
 @NgModule({

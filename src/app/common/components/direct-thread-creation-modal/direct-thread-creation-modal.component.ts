@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MatSnackBar } from '@angular/material';
 import {map, startWith} from 'rxjs/operators';
 import { DataRequestorService } from '../../services/data-requestor.service';
 import { UsernameService } from '../../services/username.service';
@@ -9,6 +9,7 @@ import { GroupService } from '../../services/group-service.service';
 import { User } from './model/user.model';
 import { DirectMessageThreadDto as DirectThreadDto } from './dto/direct-message-thread.dto';
 import { CurrentDirectThreadsService } from '../../services/current-direct-threads.service';
+import { CreationResponseDto } from './dto/creation-response.dto';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class DirectThreadCreationModalComponent implements OnInit {
 
   constructor( private dialogRef: MatDialogRef<DirectThreadCreationModalComponent>, private _dataRequestorService: DataRequestorService,
       private _currentDirectThreadService: CurrentDirectThreadsService,
+      private snackBar: MatSnackBar,
     ) {
   }
 
@@ -61,7 +63,6 @@ export class DirectThreadCreationModalComponent implements OnInit {
         console.log('deleted' + this.selectedUsers.splice( index, 1 ) );
       }
     }
-    console.log(this.selectedUsers);
   }
 
 
@@ -74,20 +75,22 @@ export class DirectThreadCreationModalComponent implements OnInit {
     const request = 'directmessagethread';
     const userId: number = UsernameService.id;
     const DMTDto: DirectThreadDto = new DirectThreadDto( this.selectedUsers, userId, GroupService.group);
-    this._dataRequestorService.postRequest(request, DMTDto).subscribe( res => {
-      console.log('success');
-      this._currentDirectThreadService.loadInitialData();
+    this._dataRequestorService.postRequest(request, DMTDto).subscribe( ( creationResponseDto: CreationResponseDto ) => {
+      if ( creationResponseDto.alreadyCreated ) {
+        this._currentDirectThreadService.setThreadToSelectedAndJoinThreadRoom( creationResponseDto.threadId );
+        this.emitMessage('Thread Of Same Name Already Created!');
+
+      } else {
+          this._currentDirectThreadService.loadInitialDataAndSelectThread( creationResponseDto.threadId );
+      }
       this.dialogRef.close();
     });
   }
 
-  private getRidOfWhiteSpace( str: string[]): string[] {
-    const cleanedStrings: string[] = [];
-    for (const s of str) {
-      cleanedStrings.push(s.trim());
-    }
-
-    return cleanedStrings;
+  private emitMessage( msg: string ): void {
+    this.snackBar.open(msg, 'Notification', {
+      duration: 500,
+    });
   }
 
 }
