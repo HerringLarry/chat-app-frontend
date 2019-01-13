@@ -31,10 +31,8 @@ export class DirectMessagesService implements OnDestroy {
     }
 
     public joinRoom(threadId: number, groupName: string): void {
-        console.log(threadId);
         this.roomId = threadId + '/' + groupName;
         this._socketService.emit('message', this.roomId);
-        console.log('hello');
     }
 
     public leaveRoom(threadId: number, groupName: string): void {

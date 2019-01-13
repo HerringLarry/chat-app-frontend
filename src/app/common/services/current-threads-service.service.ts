@@ -29,7 +29,6 @@ export class CurrentThreadService {
     }
 
     loadInitialData() {
-        console.log('loading');
         this._dataRequestor.getRequest('thread/getThreads/' + GroupService.group + '/' + UsernameService.username)
             .subscribe(
                 (res: any) => {
