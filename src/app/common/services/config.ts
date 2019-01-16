@@ -9,3 +9,8 @@ export const APP_CONFIG_DIRECT = {
   api: `${host}/api`,
   ws: 'ws://localhost:9999'
 };
+
+export const APP_CONFIG_NOTIFICATIONS = {
+  api: `${host}/api`,
+  ws: 'ws://localhost:9997'
+};

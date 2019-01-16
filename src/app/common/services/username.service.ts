@@ -12,10 +12,10 @@ export class UsernameService {
     }
 
     static get id(): number | -1 {
-        return Number(window.localStorage.getItem('id'));
+        return Number(window.localStorage.getItem('userId'));
     }
 
     static set id( id: number) {
-        window.localStorage.setItem( 'id', String(id) );
+        window.localStorage.setItem( 'userId', String(id) );
     }
 }

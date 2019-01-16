@@ -1,5 +1,5 @@
 import { UsernameService } from 'src/app/common/services/username.service';
-import { APP_CONFIG } from './config';
+import { APP_CONFIG_NOTIFICATIONS } from './config';
 
 import { Injectable } from '@angular/core';
 
@@ -10,14 +10,14 @@ import { Message } from '../model/message.dto';
 const SERVER_URL = 'http://localhost:3000';
 
 @Injectable()
-export class SocketService {
+export class NotificationsSocketService {
     private socket;
     private roomId: string;
 
     public initSocket(): void {
         console.log('trying to cnnect');
-        this.socket = socketIo(APP_CONFIG.ws, { query: {
-            username: UsernameService.username
+        this.socket = socketIo(APP_CONFIG_NOTIFICATIONS.ws, { query: {
+            userId: UsernameService.id,
         }
     });
         this.socket.on('connect', () => {

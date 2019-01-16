@@ -18,24 +18,23 @@ export class MessagesService implements OnDestroy {
                 private _threadService: ThreadService,
                 private _socketService: SocketService
                 ) {
-        this.loadInitialData();
     }
 
     ngOnDestroy(): void {
-        this.leaveRoom(this._threadService.threadId, GroupService.group);
+        this.leaveRoom(this._threadService.threadId, GroupService.id);
     }
 
     get messages() {
         return asObservable(this._messages);
     }
 
-    public joinRoom(threadId: number, groupName: string): void {
-        this.roomId = threadId + '/' + groupName;
-        this._socketService.emit('message', this.roomId);
+    public joinRoom(threadId: number, groupId: number): void {
+        this.roomId = threadId + '/' + groupId;
+        this._socketService.emit('join', this.roomId);
     }
 
-    public leaveRoom(threadId: number, groupName: string): void {
-        this.roomId = threadId + '/' + groupName;
+    public leaveRoom(threadId: number, groupId: number): void {
+        this.roomId = threadId + '/' + groupId;
         this._socketService.emit('leave', this.roomId);
 
     }
@@ -51,6 +50,10 @@ export class MessagesService implements OnDestroy {
 
     onMessage(): Observable<any> {
         return this._socketService.on('message');
+    }
+
+    disconnect() {
+        this._socketService.disconnect();
     }
 
 }
