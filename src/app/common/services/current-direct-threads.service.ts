@@ -62,7 +62,7 @@ export class CurrentDirectThreadsService {
 
   leaveAllCurrentRooms(): void {
     if ( this._threadService.threadId ) {
-      this._messageService.leaveRoom(this._threadService.threadId, GroupService.group);
+      this._messageService.leaveRoom(this._threadService.threadId, GroupService.id);
     }
     this._threadService.threadId = null;
     this._threadService.selected = false;

@@ -11,11 +11,11 @@ export class GroupService {
         window.localStorage.setItem( 'group', group );
     }
 
-    static get id(): any {
-        return window.localStorage.getItem('groupId');
+    static get id(): number {
+        return Number(window.localStorage.getItem('groupId'));
     }
 
-    static set id( id: any ) {
+    static set id( id: number ) {
         window.localStorage.setItem( 'groupId', String( id ));
     }
 }

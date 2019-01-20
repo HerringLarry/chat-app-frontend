@@ -29,6 +29,10 @@ export class NotificationsSocketService {
         this.socket.emit('message', message);
     }
 
+    public read(groupId: number, userId: number) {
+        this.socket.emit('markAsRead', groupId + '/' + userId);
+    }
+
     public emit(eventName: string, roomId: string): void {
         this.socket.emit(eventName, roomId);
     }
@@ -48,6 +52,13 @@ export class NotificationsSocketService {
       console.log('received');
         return new Observable<Message>(observer => {
             this.socket.on('message', (data: Message) => observer.next(data));
+        });
+    }
+
+    public onRead(): Observable<any> {
+
+        return new Observable<any>(observer => {
+            this.socket.on('markAsRead', (data: any) => observer.next(data));
         });
     }
 

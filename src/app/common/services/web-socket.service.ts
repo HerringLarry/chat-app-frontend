@@ -17,7 +17,8 @@ export class SocketService {
     public initSocket(): void {
         console.log('trying to cnnect');
         this.socket = socketIo(APP_CONFIG.ws, { query: {
-            username: UsernameService.username
+            username: UsernameService.username,
+            userId: UsernameService.id,
         }
     });
         this.socket.on('connect', () => {
@@ -27,6 +28,10 @@ export class SocketService {
 
     public send(message: Message): void {
         this.socket.emit('message', message);
+    }
+
+    public markAsRead( groupId: number, threadId: number ) {
+        this.socket.emit('markAsRead', groupId + '/' + threadId);
     }
 
     public emit(eventName: string, roomId: string): void {

@@ -40,11 +40,20 @@ export class NotificationsService implements OnDestroy {
     }
 
     send( msg: any ) {
+        console.log(msg);
         this._socketService.send(msg);
+    }
+
+    read( groupId: number, threadId: number ) {
+        this._socketService.read(groupId, threadId);
     }
 
     onMessage(): Observable<any> {
         return this._socketService.on('message');
+    }
+
+    onRead(): Observable<any> {
+        return this._socketService.on('markAsRead');
     }
 
 }

@@ -11,7 +11,7 @@ import { Message } from '../model/message.dto';
 @Injectable()
 export class MessagesService implements OnDestroy {
 
-    private _messages: BehaviorSubject<any[]> = new BehaviorSubject([]);
+    private _messages: BehaviorSubject<Message[]> = new BehaviorSubject([]);
     private roomId: string;
 
     constructor(private _dataRequestor: DataRequestorService,
@@ -46,6 +46,10 @@ export class MessagesService implements OnDestroy {
 
     send( msg: MessageDto ) {
         this._socketService.send(msg);
+    }
+
+    markAsRead( groupId: number, threadId: number ) {
+        this._socketService.markAsRead(groupId, threadId);
     }
 
     onMessage(): Observable<any> {

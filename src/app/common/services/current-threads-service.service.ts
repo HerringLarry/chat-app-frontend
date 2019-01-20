@@ -66,7 +66,7 @@ export class CurrentThreadService {
         this._threadService.selected = false;
 
         if ( this._directThreadService.threadId ) {
-          this._directMessageService.leaveRoom(this._directThreadService.threadId, GroupService.id);
+          this._directMessageService.leaveRoom(this._directThreadService.threadId, GroupService.name);
         }
         this._directThreadService.threadId = null;
         this._directThreadService.selected = false;
