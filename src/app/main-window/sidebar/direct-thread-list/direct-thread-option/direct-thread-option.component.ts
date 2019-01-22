@@ -4,6 +4,10 @@ import { MessagesService } from 'src/app/common/services/messages-service.servic
 import { GroupService } from 'src/app/common/services/group-service.service';
 import { DirectThreadService } from 'src/app/common/services/direct-thread-service.service';
 import { DirectMessagesService } from 'src/app/common/services/direct-messages-service.service';
+import { SettingsService } from 'src/app/common/services/settings.service';
+import { NotificationsService } from 'src/app/common/services/notifications-service.service';
+import { UsernameService } from 'src/app/common/services/username.service';
+import { ProcessedNotification } from 'src/app/main-window/models/processed-notification';
 
 @Component({
   selector: 'app-direct-thread-option',
@@ -13,44 +17,67 @@ import { DirectMessagesService } from 'src/app/common/services/direct-messages-s
 export class DirectThreadOptionComponent implements OnInit {
 
   @Input() thread: any;
+  @Input() notifications: any[];
 
   splitThreadName: string;
 
   constructor(private _threadService: ThreadService,
     private _directThreadService: DirectThreadService,
     private _messageService: MessagesService,
-    private _directMesssageService: DirectMessagesService) { }
+    private _directMesssageService: DirectMessagesService,
+    private _notificationsService: NotificationsService,
+    ) { }
 
   ngOnInit() {
     // this.splitThreadName = this.parseThreadName();
-    console.log(this.thread);
     this.splitThreadName = this.parseThreadName();
   }
 
   parseThreadName(): string {
-    const split: string = this.createNameFromUsernames();
+    let split = '';
+    if ( SettingsService.showUsername ) {
+      split = this.createNameFromUsernames();
+    } else {
+      split = this.createNameFromFullNames();
+    }
 
     return split;
   }
 
-  createNameFromUsernames(): string {
+  createNameFromFullNames(): string {
     let split = '';
-    for ( const username of this.thread.usernames) {
+    for ( const user of this.thread.users) {
       if ( split !== '' ) {
-        split = split + ', ' + username;
+        split = split + ', ' + user.firstName + ' ' + user.lastName;
       } else {
-        split = username;
+        split = user.firstName + ' '  + user.lastName;
       }
     }
 
     return split;
   }
 
+  createNameFromUsernames(): string {
+    let split = '';
+    for ( const user of this.thread.users) {
+      if ( split !== '' ) {
+        split = split + ', ' + user.username;
+      } else {
+        split = user.username;
+      }
+    }
+
+    return split;
+  }
+
+
   selectThread(): void {
     this.leaveAllCurrentRooms();
+   //  this.setNotificationCountToZero();
     this._directThreadService.threadId = this.thread.id;
     this._directThreadService.selected = true;
     this._directMesssageService.joinRoom( this._directThreadService.threadId, GroupService.group);
+    this._notificationsService.readDirect( GroupService.id, this._directThreadService.threadId );
   }
 
   isCurrentThread(): boolean {
@@ -59,7 +86,7 @@ export class DirectThreadOptionComponent implements OnInit {
 
   leaveAllCurrentRooms(): void {
     if ( this._threadService.threadId ) {
-      this._messageService.leaveRoom(this._threadService.threadId, GroupService.group);
+      this._messageService.leaveRoom(this._threadService.threadId, GroupService.id);
     }
     this._threadService.threadId = null;
     this._threadService.selected = false;
@@ -70,5 +97,36 @@ export class DirectThreadOptionComponent implements OnInit {
     this._directThreadService.threadId = null;
     this._directThreadService.selected = false;
   }
+
+  get notificationCount(): number | undefined {
+    const notification: ProcessedNotification = this.getNotification();
+    if ( notification ) {
+      if ( notification.notificationCount === 0 ) {
+        return undefined;
+      } else {
+        console.log('not', notification.notificationCount);
+        return notification.notificationCount;
+      }
+    }
+  }
+
+  setNotificationCountToZero(): void {
+    const notification: ProcessedNotification = this.getNotification();
+    if ( notification ) {
+      notification.notificationCount = 0;
+    }
+  }
+
+  getNotification(): ProcessedNotification {
+    if ( this.notifications ) {
+      for ( const notification of this.notifications ) {
+        if ( notification.threadId === this.thread.id) {
+          return notification;
+        }
+      }
+    }
+    return undefined;
+  }
+
 
 }

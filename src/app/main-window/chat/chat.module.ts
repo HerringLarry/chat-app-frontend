@@ -9,12 +9,9 @@ import { MessageComponent } from './message-display/message/message.component';
 @NgModule({
   imports: [
     CommonModule,
-    MatMenuModule,
     MatButtonModule,
     MatIconModule,
-    MatCardModule,
     MatSidenavModule,
-    MatToolbarModule,
     MatButtonModule,
     MatListModule,
     MatFormFieldModule,

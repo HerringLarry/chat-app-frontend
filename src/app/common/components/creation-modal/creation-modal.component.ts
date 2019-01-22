@@ -58,7 +58,6 @@ export class CreationModalComponent implements OnInit {
     }
 
     saveGroup() {
-      console.log('tg');
       const groupCreationDto: GroupCreationDto = new GroupCreationDto( this.name, UsernameService.username);
       this._dataRequestor.postRequest('groups', groupCreationDto).subscribe( res => {
         this.dialogRef.close(this.name);
@@ -68,7 +67,6 @@ export class CreationModalComponent implements OnInit {
     }
 
     saveThread() {
-      console.log('threaders');
       const threadCreationDto: ThreadCreationDto = new ThreadCreationDto( this.name, GroupService.group, UsernameService.username );
       this._dataRequestor.postRequest('thread', threadCreationDto).subscribe( (creationResponseDto: CreationResponseDto ) => {
         this.dialogRef.close(this.name);

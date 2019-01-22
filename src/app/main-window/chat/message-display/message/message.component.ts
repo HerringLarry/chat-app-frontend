@@ -1,15 +1,18 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { UsernameService } from 'src/app/common/services/username.service';
 import { Message } from 'src/app/main-window/models/message';
+import { SettingsService } from 'src/app/common/services/settings.service';
+import { ProcessedMessage } from 'src/app/main-window/models/processed-message';
 
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
-  styleUrls: ['./message.component.css']
+  styleUrls: ['./message.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MessageComponent implements OnInit {
 
-  @Input() message: Message;
+  @Input() message: ProcessedMessage;
 
   constructor() { }
 
@@ -17,7 +20,6 @@ export class MessageComponent implements OnInit {
   }
 
   isCurrent(): boolean {
-    console.log(this.message);
     return this.message.username === UsernameService.username;
   }
 
@@ -29,6 +31,14 @@ export class MessageComponent implements OnInit {
 
     // tslint:disable-next-line:max-line-length
     return this.message.createdAt.toDateString();
+  }
+
+  getCorrectLabel(): string {
+    if ( SettingsService.showUsername ) {
+      return this.message.username;
+    } else {
+      return this.message.firstName + ' ' +  this.message.lastName;
+    }
   }
 
 }

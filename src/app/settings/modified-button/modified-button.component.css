@@ -1,0 +1,23 @@
+.unselected-btn{
+    background-color: #7795AD;
+    vertical-align: center;
+    margin-top: 15px;
+    margin-left: 10px;
+
+}
+
+.unselected-btn:hover{
+    background-color: lightgray;
+}
+
+
+
+.selected-btn{
+    background-color: rgb(128, 192, 245);
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+.selected-btn:hover{
+    background-color: lightgray;
+}

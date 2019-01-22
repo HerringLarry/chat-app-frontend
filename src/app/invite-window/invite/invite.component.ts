@@ -17,7 +17,6 @@ export class InviteComponent implements OnInit {
   constructor( private _dataRequestor: DataRequestorService, private snackbar: MatSnackBar ) { }
 
   ngOnInit() {
-    console.log(this.invite);
   }
 
   accept() {

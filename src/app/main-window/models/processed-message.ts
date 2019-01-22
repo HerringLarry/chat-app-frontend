@@ -1,10 +1,13 @@
 import { Message } from "./message";
+import { User } from "./user";
 
 export class ProcessedMessage {
     id: number;
     groupId: number;
     threadId: number;
     username: string;
+    firstName: string;
+    lastName: string;
     userId: number;
     text: string;
     createdAt: Date;
@@ -22,11 +25,13 @@ export class ProcessedMessage {
         this.isTimeDivider = isTimeDivider;
     }
 
-    setValues( m: Message, username: string ) {
+    setValues( m: Message, user: User ) {
         this.id = m.id;
         this.groupId = m.groupId;
         this.threadId = m.threadId;
-        this.username = username;
+        this.username = user.username;
+        this.firstName = user.firstName;
+        this.lastName = user.lastName;
         this.userId = m.userId;
         this.text = m.text;
         this.createdAt = m.createdAt;

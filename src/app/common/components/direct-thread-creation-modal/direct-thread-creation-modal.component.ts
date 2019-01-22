@@ -59,9 +59,6 @@ export class DirectThreadCreationModalComponent implements OnInit {
       const index: number = this.selectedUsers.findIndex( user => {
         return user.username ===  e.option._element.nativeElement.textContent.trim();
        });
-      if ( index > -1 ) {
-        console.log('deleted' + this.selectedUsers.splice( index, 1 ) );
-      }
     }
   }
 

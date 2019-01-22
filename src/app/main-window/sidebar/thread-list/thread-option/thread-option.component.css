@@ -1,8 +1,12 @@
 div{
-    width: 225px;
+    width: 300px;
     color: white;
     font: roboto;
-    
+    text-align: left;
+}
+
+span{
+    float: right;
 }
 
 .is-active {

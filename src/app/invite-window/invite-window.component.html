@@ -3,10 +3,10 @@
   [title]="'Invites'"
   class="panel"
 >
-<div *ngIf="!areThereInvites()">
+<div *ngIf="invites">
   <app-invite [invite] = "invite" (deleteInvite)="deleteInvite($event)" *ngFor="let invite of invites"></app-invite>
 </div>
-<div *ngIf="areThereInvites()">
+<div *ngIf="invites.length === 0">
   <div class="no-invites"> NO INVITES </div>
 </div>
 </app-panel>

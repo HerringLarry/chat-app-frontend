@@ -6,4 +6,5 @@ export interface Message {
     userId: number;
     text: string;
     createdAt: Date;
+    userIds: number[]; // Message has been read by these userss
 }

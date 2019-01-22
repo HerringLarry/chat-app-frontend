@@ -25,6 +25,8 @@ import { InviteWindowComponent } from './invite-window/invite-window.component';
 import { SendInviteWindowComponent } from './send-invite-window/send-invite-window.component';
 import { GroupSelectionService } from './common/services/group-selection.service';
 import { HeaderInterceptor } from 'src/assets/header-interceptor.service';
+import { NotificationsSocketService } from './common/services/web-socket-notifications.service';
+import { NotificationsService } from './common/services/notifications-service.service';
 
 
 
@@ -36,7 +38,7 @@ import { HeaderInterceptor } from 'src/assets/header-interceptor.service';
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, SharedModule, AppRoutingModule,
-    ReactiveFormsModule, FormsModule, HttpClientModule, MatDialogModule, MatFormFieldModule,
+    HttpClientModule, MatDialogModule,
   ],
   providers: [
     DataRequestorService,
@@ -52,6 +54,8 @@ import { HeaderInterceptor } from 'src/assets/header-interceptor.service';
     DirectThreadService,
     DirectSocketService,
     GroupSelectionService,
+    NotificationsSocketService,
+    NotificationsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInterceptor,

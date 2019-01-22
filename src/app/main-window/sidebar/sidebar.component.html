@@ -1,19 +1,19 @@
 <mat-drawer class="sidenav" #sideNav mode="side" opened="true" position="start">
-  <div id="thread-container">
+  <div class="thread-list-container">
     <div class="button-and-header">
       <h1>Threads</h1> <button class="create-button" (click)="openCreationModal()">+</button>
     </div>
 
       <div class="thread-list-div">
-        <app-thread-list [threads]="threads" ></app-thread-list>
+        <app-thread-list [threads]="threads" [notifications]="notifications" ></app-thread-list>
       </div>
   </div>
-      <div id="direct-container">
-      <div class="button-and-header">
-        <h1 class="direct">Direct</h1> <button class="create-button" (click)="openDirectThreadCreationModal()">+</button>
-      </div>
-      <div class="thread-list-div">
-        <app-direct-thread-list [threads]="threads"></app-direct-thread-list>
-      </div>
+      <div class="thread-list-container">
+        <div class="button-and-header">
+          <h1 class="direct">Direct</h1> <button class="create-button" (click)="openDirectThreadCreationModal()">+</button>
+        </div>
+        <div class="thread-list-div">
+          <app-direct-thread-list [threads]="threads" [directNotifications]="directNotifications"></app-direct-thread-list>
+        </div>
     </div>
   </mat-drawer>

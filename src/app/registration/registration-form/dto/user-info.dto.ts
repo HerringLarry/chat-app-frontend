@@ -6,7 +6,7 @@ export class UserInfoDto {
     lastName: string;
     mobile: string;
     email: string;
-    courses: any[];
+
 
     constructor( formGroup: FormGroup) {
         this.username = formGroup.value.username;
@@ -15,6 +15,5 @@ export class UserInfoDto {
         this.lastName = formGroup.value.lastName;
         this.mobile = formGroup.value.mobile;
         this.email = formGroup.value.email;
-        this.courses = [];
     }
 }

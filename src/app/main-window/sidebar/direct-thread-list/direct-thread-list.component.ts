@@ -10,6 +10,7 @@ import { CurrentDirectThreadsService } from 'src/app/common/services/current-dir
 export class DirectThreadListComponent implements OnInit {
 
   @Input() threads: any;
+  @Input() directNotifications: any[];
   @Output() threadClick: EventEmitter<void> = new EventEmitter();
 
   constructor( private _currentDirectThreadService: CurrentDirectThreadsService, private _threadService: ThreadService ) { }
@@ -19,7 +20,6 @@ export class DirectThreadListComponent implements OnInit {
   }
 
   onThreadClick(event: any): void {
-    console.log(event);
     // this._threadService.thread = event.thread.name;
   }
 }

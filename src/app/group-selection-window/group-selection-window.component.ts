@@ -6,6 +6,7 @@ import { DataRequestorService } from '../common/services/data-requestor.service'
 import { CreationModalComponent } from '../common/components/creation-modal/creation-modal.component';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { GroupSelectionService } from '../common/services/group-selection.service';
+import { Group } from './models/group.interface';
 
 @Component({
   selector: 'app-group-selection-window',
@@ -13,7 +14,7 @@ import { GroupSelectionService } from '../common/services/group-selection.servic
   styleUrls: ['./group-selection-window.component.css']
 })
 export class GroupSelectionWindowComponent implements OnInit {
-  groups: any[];
+  groups: Group[];
 
   constructor(private _router: Router, private _dataRequestor: DataRequestorService, private dialog: MatDialog,
     private _groupSelectionService: GroupSelectionService) { }
@@ -21,8 +22,9 @@ export class GroupSelectionWindowComponent implements OnInit {
   ngOnInit() {
   }
 
-  setGroupNameAndGoToMain(name: string) {
-    GroupService.group = name;
+  setGroupNameAndGoToMain( group: any ) {
+    GroupService.group = group.name;
+    GroupService.id = group.id;
     this._router.navigate(['mainwindow']);
   }
 

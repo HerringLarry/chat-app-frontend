@@ -8,10 +8,8 @@ import { SideBarModule } from './sidebar/side-bar.module';
 
 @NgModule({
   imports: [
-    MatMenuModule,
     MatButtonModule,
     MatIconModule,
-    MatCardModule,
     MatSidenavModule,
     MatToolbarModule,
     SideBarModule,

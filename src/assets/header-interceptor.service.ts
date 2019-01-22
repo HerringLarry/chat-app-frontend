@@ -13,7 +13,6 @@ export class HeaderInterceptor implements HttpInterceptor {
     constructor( private _router: Router ) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log('token: ' + SessionService.sessionToken);
         return next.handle(
             SessionService.sessionToken ?
                 req.clone({

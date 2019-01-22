@@ -1,3 +1,9 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<div *ngIf="!isCurrentThread()" (click)="selectThread()" class="w3-bar-item w3-button">{{splitThreadName}}</div>
-<div *ngIf="isCurrentThread()" (click)="selectThread()" class="w3-bar-item w3-button is-active">{{splitThreadName}}</div>
+<div *ngIf="!isCurrentThread()" (click)="selectThread()" class="w3-bar-item w3-button container">
+        <span class="square">{{thread.users.length}}</span>
+        <div class="thread-name">{{splitThreadName}} </div> 
+        <span class="w3-badge w3-red notification">{{notificationCount}}</span></div>
+<div *ngIf="isCurrentThread()"  (click)="selectThread()" class="w3-bar-item w3-button is-active container">
+    <span class="square">{{thread.users.length}}</span>
+    <span class="thread-name">{{splitThreadName}} </span> 
+</div>

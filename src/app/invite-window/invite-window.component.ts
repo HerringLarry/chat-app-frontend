@@ -10,7 +10,7 @@ import { UsernameService } from '../common/services/username.service';
 })
 export class InviteWindowComponent implements OnInit {
 
-  invites: Invite[];
+  invites: Invite[] = [];
 
   constructor( private _dataRequestorService: DataRequestorService ) { }
 
@@ -29,7 +29,4 @@ export class InviteWindowComponent implements OnInit {
     this.invites.splice(index, 1);
   }
 
-  areThereInvites(): boolean {
-    return this.invites.length === 0;
-  }
 }

@@ -24,7 +24,7 @@ export class RegistrationComponent implements OnInit {
   onSubmit(): void {
     if (this.registrationFormGroup.valid) {
       const registrationFormDto: RegistrationFormDto = new RegistrationFormDto( this.registrationFormGroup);
-      this._dataRequestor.postRequest('users', registrationFormDto ).subscribe( result => {
+      this._dataRequestor.postRequest('auth', registrationFormDto ).subscribe( result => {
         this._router.navigate(['login']);
       });
     }

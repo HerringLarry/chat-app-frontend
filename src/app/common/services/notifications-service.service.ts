@@ -40,12 +40,19 @@ export class NotificationsService implements OnDestroy {
     }
 
     send( msg: any ) {
-        console.log(msg);
         this._socketService.send(msg);
+    }
+
+    sendDirect(msg: any ) {
+        this._socketService.sendDirect( msg );
     }
 
     read( groupId: number, threadId: number ) {
         this._socketService.read(groupId, threadId);
+    }
+
+    readDirect(groupId: number, threadId: number ) {
+        this._socketService.readDirect(groupId, threadId);
     }
 
     onMessage(): Observable<any> {

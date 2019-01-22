@@ -10,7 +10,7 @@
   </mat-sidenav-container> -->
 
 <mat-drawer-container class="example-container">
-    <app-sidebar [threads]="threads"></app-sidebar>
+    <app-sidebar [threads]="threads" [notifications]="notifications" [directNotifications]="directNotifications"></app-sidebar>
     <app-chat class="chat" [messages]="getMessages()" (messageSubmitted)="onMessageSubmitted($event)" #container></app-chat>
   </mat-drawer-container>
 

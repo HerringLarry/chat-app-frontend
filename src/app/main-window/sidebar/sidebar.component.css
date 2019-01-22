@@ -1,5 +1,5 @@
 .sidenav {
-    width: 225px;
+    width: 300px;
     /* background-color: #4F4E69; */
     background-color: black;
     font-weight: 550;
@@ -7,9 +7,15 @@
   }
 
 .button-and-header{
+  top: 0;
   position: sticky;
-  width: 225px;
+  width: 300px;
 
+}
+
+.thread-list-container{
+  width: 300px;
+  height: 50%;
 }
 
 h1 {
@@ -41,11 +47,12 @@ button {
 }
 
 .thread-list-div{
-  width: 225px;
-  height: 300px;
+  width: 300px;
+  height: 85%;
   overflow: scroll;
 }
 
 .create-button:hover{
   background-color: lightgray;
 }
+

@@ -29,8 +29,16 @@ export class NotificationsSocketService {
         this.socket.emit('message', message);
     }
 
-    public read(groupId: number, userId: number) {
-        this.socket.emit('markAsRead', groupId + '/' + userId);
+    public sendDirect( msg: any ): void {
+        this.socket.emit('directMessage', msg);
+    }
+
+    public read(groupId: number, threadId: number) {
+        this.socket.emit('markAsRead', groupId + '/' + threadId);
+    }
+
+    public readDirect( groupId: number, threadId: number ) {
+        this.socket.emit('directMarkAsRead', groupId + '/' + threadId);
     }
 
     public emit(eventName: string, roomId: string): void {

@@ -6,4 +6,5 @@ export interface DirectMessage {
     userId: number;
     text: string;
     createdAt: Date;
+    userIds: number[];
 }

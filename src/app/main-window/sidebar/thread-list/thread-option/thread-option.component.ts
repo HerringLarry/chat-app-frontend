@@ -4,6 +4,9 @@ import { MessagesService } from 'src/app/common/services/messages-service.servic
 import { GroupService } from 'src/app/common/services/group-service.service';
 import { DirectThreadService } from 'src/app/common/services/direct-thread-service.service';
 import { DirectMessagesService } from 'src/app/common/services/direct-messages-service.service';
+import { NotificationsService } from 'src/app/common/services/notifications-service.service';
+import { UsernameService } from 'src/app/common/services/username.service';
+import { ProcessedNotification } from 'src/app/main-window/models/processed-notification';
 
 @Component({
   selector: 'app-thread-option',
@@ -13,20 +16,24 @@ import { DirectMessagesService } from 'src/app/common/services/direct-messages-s
 export class ThreadOptionComponent implements OnInit {
 
   @Input() thread: any;
+  @Input() notifications: ProcessedNotification[];
 
   constructor(private _threadService: ThreadService,
               private _directThreadService: DirectThreadService,
               private _messageService: MessagesService,
-              private _directMesssageService: DirectMessagesService) { }
+              private _directMesssageService: DirectMessagesService,
+              private _notificationsService: NotificationsService) { }
 
   ngOnInit() {
   }
 
   selectThread(): void {
     this.leaveAllCurrentRooms();
+    this.setNotificationCountToZero();
     this._threadService.threadId = this.thread.id;
     this._threadService.selected = true;
-    this._messageService.joinRoom( this.thread.id, GroupService.group);
+    this._messageService.joinRoom( this.thread.id, GroupService.id);
+    this._notificationsService.read( GroupService.id, this._threadService.threadId );
   }
 
   isCurrentThread(): boolean {
@@ -35,7 +42,7 @@ export class ThreadOptionComponent implements OnInit {
 
   leaveAllCurrentRooms(): void {
     if ( this._threadService.threadId ) {
-      this._messageService.leaveRoom(this._threadService.threadId, GroupService.group);
+      this._messageService.leaveRoom(this._threadService.threadId, GroupService.id);
     }
     this._threadService.threadId = null;
     this._threadService.selected = false;
@@ -46,4 +53,34 @@ export class ThreadOptionComponent implements OnInit {
     this._directThreadService.threadId = null;
     this._directThreadService.selected = false;
   }
+
+  get notificationCount(): number | undefined {
+    const notification: ProcessedNotification = this.getNotification();
+    if ( notification ) {
+      if ( notification.notificationCount === 0 ) {
+        return undefined;
+      } else {
+        return notification.notificationCount;
+      }
+    }
+  }
+
+  setNotificationCountToZero(): void {
+    const notification: ProcessedNotification = this.getNotification();
+    if ( notification ) {
+      notification.notificationCount = 0;
+    }
+  }
+
+  getNotification(): ProcessedNotification {
+    if ( this.notifications ) {
+      for ( const notification of this.notifications ) {
+        if ( notification.threadId === this.thread.id) {
+          return notification;
+        }
+      }
+    }
+    return undefined;
+  }
+
 }

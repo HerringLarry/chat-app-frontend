@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SessionService } from '../../common/services/session.service';
+import { SettingsDto } from 'src/app/settings/dto/settings.dto';
+import { SettingsService } from 'src/app/common/services/settings.service';
 
 @Component({
   selector: 'app-login-form',
@@ -25,11 +27,9 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('submit');
     if ( this.loginFormGroup.valid) {
       const request: string = 'auth/' + this.loginFormGroup.value.username + '/' + this.loginFormGroup.value.password;
       this._dataRequestorService.getRequest(request).subscribe( result => {
-        console.log(result);
         this.handleLoginResponse( result, this.loginFormGroup.value.username );
       });
     }
@@ -40,7 +40,11 @@ export class LoginFormComponent implements OnInit {
       SessionService.sessionToken = result.token;
       UsernameService.username = username;
       UsernameService.id = result.id;
-      this._router.navigate(['groupselectionwindow']);
+      const request = 'settings/' + UsernameService.id;
+      this._dataRequestorService.getRequest( request ).subscribe( ( settings: SettingsDto ) => {
+        SettingsService.showUsername = settings.showUsername;
+        this._router.navigate(['groupselectionwindow']);
+      });
     }
   }
 

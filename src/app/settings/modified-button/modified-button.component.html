@@ -1,0 +1,2 @@
+<button *ngIf="!isSelected" class="unselected-btn" (click)="modifyIsSelected()" mat-button> {{text}} </button>
+<button *ngIf="isSelected" class="selected-btn" (click)="modifyIsSelected()" mat-button> {{text}} </button>

@@ -5,7 +5,7 @@
 >
 <div class="list">
 <mat-action-list *ngFor="let group of _groupSelectionService.groups | async">
-    <button mat-list-item class="list-btn" (click)="setGroupNameAndGoToMain(group.name)"> {{group.name}} </button>
+    <button mat-list-item class="list-btn" (click)="setGroupNameAndGoToMain(group)"> {{group.name}} </button>
 </mat-action-list>
 </div>
 
