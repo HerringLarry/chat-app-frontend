@@ -7,9 +7,9 @@
 }
 
 .menu-button{
-  background-color: grey;
+  background-color: black;
   align-items: center;
-  border: 1px solid black;
+  border: 1px solid white;
   margin: 2%;
   width: 110px;
 }

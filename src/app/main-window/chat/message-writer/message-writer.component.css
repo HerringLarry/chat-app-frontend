@@ -10,8 +10,9 @@ input{
 }
 
 .msg-btn{
-    background-color: #7795AD;
-    color: white;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
 }
 
 .msg-btn:hover{

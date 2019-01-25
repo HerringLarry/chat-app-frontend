@@ -4,14 +4,30 @@
 }
 
 .submit-button{
-  background-color: #D9A04C;
-  color: white;
+  background-color: white;
+  border: 1px solid black;
+  color: black;
 }
 
 mat-label{
   color: white;
 }
 .register-button{
-  background-color: #4C2D00;
+  background-color: black;
   color: white;
+  border: 1px solid white;
+}
+
+button{
+  width: 100px;
+}
+
+form{
+  width: 100%;
+}
+
+button:hover{
+  background-color: grey;
+  border: 1px solid grey;
+  width: 100px;
 }

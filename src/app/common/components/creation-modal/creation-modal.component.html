@@ -2,8 +2,10 @@
         <button class="mat-close-button"(click)="close()"><mat-icon class="close-icon">close</mat-icon></button>
       </div>
       <mat-dialog-content>
-        <h1 #matheader> Create Thread </h1>
-        <input matInput class="search" [value]="name" (input)="name = $event.target.value">        
+        <h1 #matheader> {{header}}</h1>
+        <mat-form-field class="search-form">
+            <input matInput class="search" [value]="name" (input)="name = $event.target.value" placeholder="Enter Name...">   
+        </mat-form-field>     
       
       </mat-dialog-content>
     

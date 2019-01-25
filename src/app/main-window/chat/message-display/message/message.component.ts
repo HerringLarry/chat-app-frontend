@@ -24,7 +24,11 @@ export class MessageComponent implements OnInit {
   }
 
   outputTime(): string {
-    return this.message.createdAt.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+    if ( SettingsService.showTime) {
+      return this.message.createdAt.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+    } else {
+      return '';
+    }
   }
 
   outputDate(): string {

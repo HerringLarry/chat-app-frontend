@@ -37,6 +37,8 @@ h1 {
 }
 button {
   float: right;
+  background-color: black;
+  color: white;
   border:1px solid white;
   width:30px;
   height:30px;

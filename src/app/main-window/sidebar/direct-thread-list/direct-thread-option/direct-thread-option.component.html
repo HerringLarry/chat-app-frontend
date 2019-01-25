@@ -2,7 +2,7 @@
 <div *ngIf="!isCurrentThread()" (click)="selectThread()" class="w3-bar-item w3-button container">
         <span class="square">{{thread.users.length - 1}}</span>
         <div class="thread-name">{{splitThreadName}} </div> 
-        <span *ngIf="showNotifications()" class="w3-badge w3-light-blue notification">{{notificationCount}}</span></div>
+        <span *ngIf="showNotifications()" class="w3-badge w3-white notification">{{notificationCount}}</span></div>
 <div *ngIf="isCurrentThread()"  (click)="selectThread()" class="w3-bar-item w3-button is-active container">
     <span class="square">{{thread.users.length - 1}}</span>
     <span class="thread-name">{{splitThreadName}} </span> 

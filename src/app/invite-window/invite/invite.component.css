@@ -1,13 +1,21 @@
 .acc-btn{
-    background-color: grey;
-    color: white;
+    background-color: white;
+    color: black;
+    border: 1px solid white;
     margin: 10px;
 }
 
 .dec-btn{
-    background-color: #7795AD;
+    background-color: black;
     color: white;
+    border: 1px solid white;
     margin: 10px;
+}
+
+button:hover{
+    background-color: grey;
+    border: 1px solid grey;
+    border: none;
 }
 
 .buttons{

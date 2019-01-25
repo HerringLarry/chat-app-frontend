@@ -73,7 +73,10 @@
 
 .username{
     font-weight: 500;
-    width: 20%;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-wrap: none;
 }
 
 .user-selection{

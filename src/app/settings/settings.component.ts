@@ -35,11 +35,16 @@ export class SettingsComponent implements OnInit {
     this.settings.showNotifications = event;
   }
 
+  modifyShowTime(event: any) {
+    this.settings.showTime = event;
+  }
+
   save() {
     const request = 'settings';
     this._dataRequestorService.putRequest( request, this.settings ).subscribe( res => {
       SettingsService.showUsername = this.settings.showUsername;
       SettingsService.showNotifications = this.settings.showNotifications;
+      SettingsService.showTime = this.settings.showTime;
       this.snackbar.open('Settings Saved', 'Notification', {
         duration: 500,
       });

@@ -57,9 +57,9 @@
 } */
 
 .username{
-	font-weight: 550;
+	font-weight: 650;
 	font-size: 15pt;
-	color: rgb(92, 47, 78);
+	color: black;
 	width: 15%;
 }
 
@@ -81,7 +81,7 @@ p{
 
 .time-wrapper{
 	margin-left: auto;
-	border-top: 1px dashed black;
+	border-top: 2px solid black;
 	margin-top: 5px;
 	margin-bottom: 5px;
 	font-size: 15pt;

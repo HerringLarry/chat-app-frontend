@@ -16,23 +16,12 @@
     font-weight: 400;
 }
 
-.options-btn{
-    background-color: lightgray;
-}
-
-.options-btn:hover{
-    background-color: white;
-}
-
-.options-btn:focus{
-    background-color: blue;
-}
-
 .save-btn{
     margin-left: 91%;
     margin-bottom: -10%;
     width: 100px;
-    background-color: #7795AD;
+    background-color: white;
+    color: black;
 }
 
 

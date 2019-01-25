@@ -12,7 +12,8 @@ span{
 }
 
 .is-active {
-    background-color: rgb(99, 118, 136);
+    background-color: white;
+    color: black;
   
 }
 

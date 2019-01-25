@@ -1,5 +1,6 @@
 .unselected-btn{
-    background-color: #7795AD;
+    background-color: black;
+    border: 1px solid white;
     vertical-align: center;
     width: 100px;
     margin-top: 15px;
@@ -14,7 +15,8 @@
 
 
 .selected-btn{
-    background-color: rgb(128, 192, 245);
+    background-color: white;
+    color: black;
     margin-top: 15px;
     margin-left: 10px;
     width: 100px;

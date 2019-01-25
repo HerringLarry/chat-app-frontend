@@ -56,14 +56,15 @@
     margin-top: 50px;
     margin-bottom: 50px;
 }
+.search-form{
+    width: 100%;
+    margin-top:10%;
+}
 
 .search{
     margin-left: 12%;
     width: 76%;
     color: black;
-    border: none; /* <-- This thing here */
-    border:solid 1px #ccc;
-    border-radius: 10px;
 }
 
 .search:focus{

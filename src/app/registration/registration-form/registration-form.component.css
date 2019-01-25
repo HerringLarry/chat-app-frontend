@@ -4,32 +4,39 @@ mat-form-field{
 }
 
 button{
-    margin: 10px;
+    width: 100px;
 }
 
 mat-label{
     color: white;
   }
 
-/** Overrides underline color **/
-.my-form-field.mat-form-field-appearance-legacy .mat-form-field-underline,
-.my-form-field.mat-form-field-appearance-legacy .mat-form-field-ripple,
-.my-form-field.mat-form-field-appearance-legacy.mat-focused
-    .mat-form-field-underline,
-.my-form-field.mat-form-field-appearance-legacy.mat-focused
-    .mat-form-field-ripple {
+.example-container{
+    width: 400px;
+    height: 325px;
+}
+
+.next-button{
+    width: 80%;
+    height: 20%;
+    margin-bottom: -30px;
+}
+
+.submit-button{
     background-color: white;
+    color: black;
+    border: 1px solid white;
+    float: left;
 }
 
-/** Overrides label color **/
-.my-form-field.mat-form-field-appearance-legacy .mat-form-field-label,
-.my-form-field.mat-form-field-appearance-legacy.mat-focused
-    .mat-form-field-label {
+.back-button{
+    background-color: black;
     color: white;
+    border: 1px solid white;
+    float: right;
 }
 
-/** Overrides caret & text color **/
-.my-form-field.mat-form-field-appearance-legacy .mat-input-element {
-    caret-color: white;
-  color: white;
+button:hover{
+    background-color: grey;
+    color: white;
 }

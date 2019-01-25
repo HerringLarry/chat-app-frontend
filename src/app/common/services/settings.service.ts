@@ -24,4 +24,13 @@ export class SettingsService {
   static set showNotifications( showNotifications: boolean ) {
     window.localStorage.setItem( 'showNotifications', String(showNotifications));
   }
+
+  static get showTime(): boolean {
+    const _showTime = window.localStorage.getItem('showTime');
+    return _showTime === 'true';
+  }
+
+  static set showTime( showTime: boolean ) {
+    window.localStorage.setItem( 'showTime', String(showTime));
+  }
 }
