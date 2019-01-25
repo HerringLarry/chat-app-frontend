@@ -22,6 +22,7 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
     const request = 'settings/' + String(UsernameService.id);
     this._dataRequestorService.getRequest( request ).subscribe( (settings: SettingsDto) => {
+      console.log(settings);
       this.settings = settings;
     });
   }
@@ -30,10 +31,15 @@ export class SettingsComponent implements OnInit {
     this.settings.showUsername = event;
   }
 
+  modifyShowNotifications(event: any) {
+    this.settings.showNotifications = event;
+  }
+
   save() {
     const request = 'settings';
     this._dataRequestorService.putRequest( request, this.settings ).subscribe( res => {
       SettingsService.showUsername = this.settings.showUsername;
+      SettingsService.showNotifications = this.settings.showNotifications;
       this.snackbar.open('Settings Saved', 'Notification', {
         duration: 500,
       });

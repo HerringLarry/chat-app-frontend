@@ -5,13 +5,85 @@
 .mat-save-button{
     background-color: grey;
     color: white;
-    margin: 10px;
-    margin-top: 15px;
 }
 
 .mat-close-button{
     background-color: black;
     color: white;
-    margin: 10px;
-    margin-top: 15px;
+}
+
+.action-buttons{
+    margin-left: 55%;
+    margin-top: 20%;
+}
+
+.filler{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.search{
+    margin-left: 12%;
+    width: 76%;
+    border-color: lightgray;
+    color: gray;
+}
+
+.username{
+    font-weight: 500;
+    width: 20%;
+}
+
+.user-selection{
+    width: 80%;
+    border-bottom: solid black 1px;
+}
+
+.user-selection-container{
+    margin-left: 10%;
+    width: 80%;
+    margin-right: 10%;
+    align-content: center;
+}
+
+.add-button{
+    background-color: #7795AD;
+    margin-left: 65%;
+    border-radius:100%;
+    border: 1px solid white;
+    color: white;
+    width:30px;
+    height:30px;
+    align-items: center;
+    text-align: center;
+    vertical-align: center;
+}
+
+.add-button:hover{
+    background-color: lightgray;
+}
+
+.selected-container{
+    border-bottom: solid 4px black;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    align-content: center;
+}
+
+.selected-user{
+    align-content: center;
+    text-align: center;
+}
+
+.selected-username{ 
+    font-weight: 600;
+}
+
+.selected-user-icon{
+    margin-right: 5%;
+}
+
+h1{
+    float: top;
 }

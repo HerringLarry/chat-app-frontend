@@ -32,6 +32,7 @@
 mat-icon{
     position: relative;
     vertical-align: middle;
+    margin: 5px;
 }
 
 .list{

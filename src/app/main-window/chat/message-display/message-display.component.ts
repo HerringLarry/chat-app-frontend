@@ -1,5 +1,8 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { SettingsService } from 'src/app/common/services/settings.service';
+import { LoadingService } from 'src/app/common/services/loading.service';
+import { ThreadService } from 'src/app/common/services/thread-service.service';
+import { DirectThreadService } from 'src/app/common/services/direct-thread-service.service';
 
 @Component({
   selector: 'app-message-display',
@@ -10,11 +13,22 @@ import { SettingsService } from 'src/app/common/services/settings.service';
 export class MessageDisplayComponent implements OnInit {
 
 
-  @Input() messages: any;
+  @Input() messages: any[];
   processedMessages: any;
 
-  constructor() { }
+  constructor( private _loadingService: LoadingService,
+    private _threadService: ThreadService,
+    private _directThreadService: DirectThreadService,
+    ) { }
 
   ngOnInit() {
+  }
+
+  isLoading(): boolean {
+    return this._loadingService.isLoading;
+  }
+
+  isEmptyAndThreadSelected(): boolean {
+    return this.messages.length === 0 && ( this._threadService.selected || this._directThreadService.selected );
   }
 }

@@ -8,6 +8,7 @@ import { SettingsService } from 'src/app/common/services/settings.service';
 import { NotificationsService } from 'src/app/common/services/notifications-service.service';
 import { UsernameService } from 'src/app/common/services/username.service';
 import { ProcessedNotification } from 'src/app/main-window/models/processed-notification';
+import { LoadingService } from 'src/app/common/services/loading.service';
 
 @Component({
   selector: 'app-direct-thread-option',
@@ -26,6 +27,7 @@ export class DirectThreadOptionComponent implements OnInit {
     private _messageService: MessagesService,
     private _directMesssageService: DirectMessagesService,
     private _notificationsService: NotificationsService,
+    private _loadingService: LoadingService,
     ) { }
 
   ngOnInit() {
@@ -44,13 +46,19 @@ export class DirectThreadOptionComponent implements OnInit {
     return split;
   }
 
+  showNotifications(): boolean {
+    return SettingsService.showNotifications;
+  }
+
   createNameFromFullNames(): string {
     let split = '';
     for ( const user of this.thread.users) {
-      if ( split !== '' ) {
-        split = split + ', ' + user.firstName + ' ' + user.lastName;
-      } else {
-        split = user.firstName + ' '  + user.lastName;
+      if ( user.username !== UsernameService.username ) {
+        if ( split !== '' ) {
+          split = split + ', ' + user.firstName + ' ' + user.lastName;
+        } else {
+          split = user.firstName + ' '  + user.lastName;
+        }
       }
     }
 
@@ -60,10 +68,12 @@ export class DirectThreadOptionComponent implements OnInit {
   createNameFromUsernames(): string {
     let split = '';
     for ( const user of this.thread.users) {
-      if ( split !== '' ) {
-        split = split + ', ' + user.username;
-      } else {
-        split = user.username;
+      if ( user.username !== UsernameService.username ) {
+        if ( split !== '' ) {
+          split = split + ', ' + user.username;
+        } else {
+          split = user.username;
+        }
       }
     }
 
@@ -74,10 +84,13 @@ export class DirectThreadOptionComponent implements OnInit {
   selectThread(): void {
     this.leaveAllCurrentRooms();
    //  this.setNotificationCountToZero();
-    this._directThreadService.threadId = this.thread.id;
-    this._directThreadService.selected = true;
-    this._directMesssageService.joinRoom( this._directThreadService.threadId, GroupService.group);
-    this._notificationsService.readDirect( GroupService.id, this._directThreadService.threadId );
+    this._loadingService.isLoading = true;
+    setTimeout( () => {
+      this._directThreadService.threadId = this.thread.id;
+      this._directThreadService.selected = true;
+      this._directMesssageService.joinRoom( this._directThreadService.threadId, GroupService.group);
+      this._notificationsService.readDirect( GroupService.id, this._directThreadService.threadId );
+    }, 500);
   }
 
   isCurrentThread(): boolean {

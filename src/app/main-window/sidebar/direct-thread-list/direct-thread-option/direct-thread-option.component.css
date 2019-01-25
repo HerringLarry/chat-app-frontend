@@ -6,7 +6,7 @@
 }
 
 .thread-name{
-    width: 190px;
+    width: 180px;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: left;
@@ -14,7 +14,11 @@
     margin-right: 0px;
     padding-right: 0px;
     border: 0px;
+}
 
+.thread-name:hover{
+    display: block;
+    visibility: visible;
 }
 
 .is-active {
@@ -28,15 +32,15 @@
 
 .notification{
     float: right;
-    padding-left: 5px;
-    padding-right: 5px;
+ 
 }
 
 .square{
-    background-color: rgba(56, 56, 56, 0.6);
-    color: white;
+    background-color: white;
+    color: rgba(56, 56, 56, 0.6);
     float: left;
     padding-left: 5px;
     padding-right: 5px;
+    margin-right: 5px;
 
 }

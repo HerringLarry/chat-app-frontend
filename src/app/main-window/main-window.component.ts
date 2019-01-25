@@ -18,6 +18,7 @@ import { User } from './models/user';
 import { NotificationsService } from '/Users/williamnewman/chat-app/chat-app-frontend/src/app/common/services/notifications-service.service';
 import { UsernameService } from '../common/services/username.service';
 import { RawNotification as RawNotificationDto, ThreadNotification } from './dto/raw-notification.dto';
+import { LoadingService } from '../common/services/loading.service';
 
 @Component({
   selector: 'app-main-window',
@@ -52,6 +53,7 @@ export class MainWindowComponent implements OnInit, OnDestroy, DoCheck {
     private _directThreadService: DirectThreadService,
     private _notificationsService: NotificationsService,
     private snackbar: MatSnackBar,
+    private _loadingService: LoadingService,
     ) {
       this.initializeThreads();
       this._messagesService.loadInitialData();
@@ -74,7 +76,9 @@ export class MainWindowComponent implements OnInit, OnDestroy, DoCheck {
 
   initializeThreads() {
     this._threadService.threadId = null;
+    this._threadService.selected = false;
     this._directThreadService.threadId = null;
+    this._directThreadService.selected = false;
   }
 
   initializeSubscriptions() {
@@ -83,6 +87,9 @@ export class MainWindowComponent implements OnInit, OnDestroy, DoCheck {
       this.users = responseObject.users;
       this.messages = this.processMessages( responseObject.messages );
       this._notificationsService.read( GroupService.id, this._threadService.threadId ); // mark message as read
+
+      this._loadingService.isLoading = false;
+
     });
     this.subscriptions.push(this.messagesSubscription);
 
@@ -90,6 +97,7 @@ export class MainWindowComponent implements OnInit, OnDestroy, DoCheck {
       this.users = responseObject.users;
       this.directMessages = this.processMessages(responseObject.directMessages);
       this._notificationsService.readDirect( GroupService.id, this._directThreadService.threadId );
+      this._loadingService.isLoading = false;
 
     });
     this.subscriptions.push(this.directMessagesSubscription);
@@ -100,7 +108,6 @@ export class MainWindowComponent implements OnInit, OnDestroy, DoCheck {
       }
       if ( res.directThreadNotifications ) {
         this.directNotifications = this.processNotifications( res.directThreadNotifications);
-        console.log(this.directNotifications);
       }
     });
     this.subscriptions.push(this.notificationSubscription);
@@ -114,15 +121,10 @@ export class MainWindowComponent implements OnInit, OnDestroy, DoCheck {
 
   ngOnDestroy() {
     this.leaveAllRooms();
-    this._threadService.threadId = null;
-    this._directThreadService.threadId = null;
+    this.initializeThreads();
     this.subscriptions.forEach( sub => sub.unsubscribe());
-    this._messagesService.disconnect();
-  }
-
-  refresh() {
-    this.subscriptions.forEach( sub => sub.unsubscribe());
-    this.initializeSubscriptions();
+    // this._messagesService.disconnect();
+    this._messagesService.loadInitialData();
   }
 
   leaveAllRooms() {
@@ -132,6 +134,16 @@ export class MainWindowComponent implements OnInit, OnDestroy, DoCheck {
       this._directMessagesService.leaveRoom( this._directThreadService.threadId, GroupService.group );
     }
     this._notificationsService.leaveRoom( GroupService.id );
+  }
+
+  refresh() {
+    this._loadingService.isLoading = true;
+    setTimeout(() => {
+      this.leaveAllRooms();
+      this.subscriptions.forEach( sub => sub.unsubscribe());
+      this.initializeSubscriptions();
+      this._loadingService.isLoading = false;
+    }, 500);
   }
 
   scrollToBottom() {

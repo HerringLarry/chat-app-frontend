@@ -43,6 +43,7 @@ export class LoginFormComponent implements OnInit {
       const request = 'settings/' + UsernameService.id;
       this._dataRequestorService.getRequest( request ).subscribe( ( settings: SettingsDto ) => {
         SettingsService.showUsername = settings.showUsername;
+        SettingsService.showNotifications = settings.showNotifications;
         this._router.navigate(['groupselectionwindow']);
       });
     }

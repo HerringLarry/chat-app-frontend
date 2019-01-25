@@ -1,6 +1,16 @@
 <div #container>
-    <div class="message-wrapper" *ngFor="let message of messages">
-      <app-message [message]="message"></app-message>
+  <div *ngIf="!isLoading()">
+    <div *ngIf="!isEmptyAndThreadSelected()">
+      <div class="message-wrapper" *ngFor="let message of messages">
+        <app-message [message]="message"></app-message>
+        </div>
+    </div>
+    <div *ngIf="isEmptyAndThreadSelected()">
+      <div class="message-wrapper">
+          <div class="default-message">Start the conversation...</div>
       </div>
+    </div>
+  </div>
+    <div *ngIf="isLoading()" class=loader></div>
 
 </div>

@@ -1,6 +1,7 @@
 .unselected-btn{
     background-color: #7795AD;
     vertical-align: center;
+    width: 100px;
     margin-top: 15px;
     margin-left: 10px;
 
@@ -16,6 +17,8 @@
     background-color: rgb(128, 192, 245);
     margin-top: 15px;
     margin-left: 10px;
+    width: 100px;
+
 }
 
 .selected-btn:hover{

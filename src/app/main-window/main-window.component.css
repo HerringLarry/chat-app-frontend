@@ -20,3 +20,18 @@
   border-width: 1px;
   border-color: black;
   }
+
+  .refresh-button{
+    z-index: 2;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    vertical-align:middle;
+  }
+
+  .refresh-button:hover{
+    background-color: lightgray;
+  }

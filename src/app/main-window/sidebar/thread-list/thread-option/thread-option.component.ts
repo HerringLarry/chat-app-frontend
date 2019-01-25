@@ -7,6 +7,8 @@ import { DirectMessagesService } from 'src/app/common/services/direct-messages-s
 import { NotificationsService } from 'src/app/common/services/notifications-service.service';
 import { UsernameService } from 'src/app/common/services/username.service';
 import { ProcessedNotification } from 'src/app/main-window/models/processed-notification';
+import { SettingsService } from 'src/app/common/services/settings.service';
+import { LoadingService } from 'src/app/common/services/loading.service';
 
 @Component({
   selector: 'app-thread-option',
@@ -22,18 +24,23 @@ export class ThreadOptionComponent implements OnInit {
               private _directThreadService: DirectThreadService,
               private _messageService: MessagesService,
               private _directMesssageService: DirectMessagesService,
-              private _notificationsService: NotificationsService) { }
+              private _notificationsService: NotificationsService,
+              private _loadingService: LoadingService) { }
 
   ngOnInit() {
   }
 
   selectThread(): void {
     this.leaveAllCurrentRooms();
-    this.setNotificationCountToZero();
-    this._threadService.threadId = this.thread.id;
-    this._threadService.selected = true;
-    this._messageService.joinRoom( this.thread.id, GroupService.id);
-    this._notificationsService.read( GroupService.id, this._threadService.threadId );
+    this._loadingService.isLoading = true;
+    console.log(this._loadingService.isLoading);
+    setTimeout( () => {
+      this.setNotificationCountToZero();
+      this._threadService.threadId = this.thread.id;
+      this._threadService.selected = true;
+      this._messageService.joinRoom( this.thread.id, GroupService.id);
+      this._notificationsService.read( GroupService.id, this._threadService.threadId );
+    }, 500);
   }
 
   isCurrentThread(): boolean {
@@ -52,6 +59,10 @@ export class ThreadOptionComponent implements OnInit {
     }
     this._directThreadService.threadId = null;
     this._directThreadService.selected = false;
+  }
+
+  showNotifications(): boolean {
+    return SettingsService.showNotifications;
   }
 
   get notificationCount(): number | undefined {

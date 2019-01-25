@@ -2,16 +2,36 @@
   <h2 mat-dialog-title>{{header}}</h2>
 
   <mat-dialog-content>
-    <h1 #matheader> Select Users </h1>
-    <mat-selection-list #usernames (selectionChange)="onSelection($event, usernames.selectedOptions.selected)" >
-      <mat-list-option *ngFor="let user of options">
-        {{user.username}}
-      </mat-list-option>
-    </mat-selection-list>
+    <h1 #matheader> Search For and Add Users </h1>
+    <input class="search" (input)="term$.next($event.target.value)" mat-input>
+    <div *ngIf="this.selectedUsers.length!==0" class="selected-container">
+        <mat-list>
+            <mat-list-item class="selected-user" *ngFor="let user of selectedUsers">
+              <mat-icon class="selected-user-icon">done</mat-icon>
+              <span class="selected-username">
+                {{user.username}}
+              </span>
+            </mat-list-item>
+          </mat-list>
+    </div>
+    <div *ngIf="options.length===0" class=filler></div>
+    <div class="user-selection-container">
+      <mat-list *ngIf="options.length!==0">
+        <mat-list-item class="user-selection" *ngFor="let user of options">
+          <span class="username">
+            {{user.username}}
+          </span>
+          <button class="add-button" (click)="addUser(user)">+</button>
+        </mat-list-item>
+        
+      </mat-list>
+  </div>
   
   </mat-dialog-content>
 
   <mat-dialog-actions>
+    <div class="action-buttons">
       <button mat-button class="mat-close-button"(click)="close()">Close</button>
       <button mat-button class="mat-save-button"(click)="save()">Create</button>
+    </div>
   </mat-dialog-actions>

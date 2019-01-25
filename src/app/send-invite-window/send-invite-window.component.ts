@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { InviteToGroupModalComponent } from '../common/components/invite-to-group-modal/invite-to-group-modal.component';
 import { DataRequestorService } from '../common/services/data-requestor.service';
 import { CurrentDirectThreadsService } from '../common/services/current-direct-threads.service';
 import { GroupService } from '../common/services/group-service.service';

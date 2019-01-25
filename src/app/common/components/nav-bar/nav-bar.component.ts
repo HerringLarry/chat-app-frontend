@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { CreationModalComponent } from '../creation-modal/creation-modal.component';
 import { GroupService } from '../../services/group-service.service';
-import { InviteToGroupModalComponent } from '../invite-to-group-modal/invite-to-group-modal.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -49,7 +48,7 @@ export class NavBarComponent implements OnInit {
   }
 
   ifGroupSelected() {
-    return GroupService.group !== '';
+    return GroupService.group !== null;
   }
 
   goToInvite() {

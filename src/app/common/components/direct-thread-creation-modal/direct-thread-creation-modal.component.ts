@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { MatDialogRef, MatSnackBar } from '@angular/material';
 import {map, startWith} from 'rxjs/operators';
 import { DataRequestorService } from '../../services/data-requestor.service';
@@ -19,7 +19,8 @@ import { CreationResponseDto } from './dto/creation-response.dto';
 })
 export class DirectThreadCreationModalComponent implements OnInit {
   myControl = new FormControl();
-  options: User[];
+  options: User[] = [];
+  term$ = new Subject<string>();
   filteredOptions: Observable<string[]>;
   selectedUsers: User[] = [];
 
@@ -30,39 +31,55 @@ export class DirectThreadCreationModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    const requestString = 'groups/' + UsernameService.username + '/' + GroupService.group;
-    const unprocessedOption = this._dataRequestorService.getRequest(requestString).subscribe( (res: User[]) => {
-      this.options = this.removeCurrentUser(res);
-    });
-
+    this.term$.subscribe(term => this.search(term) );
   }
 
-  removeCurrentUser( users: User[] ): User[] {
-    const index = users.findIndex( (user: User ) => {
-      return user.id === UsernameService.id;
+  search( term: string ) {
+    if ( term.length !== 0 ) {
+    const requestString = 'member/' + term + '/' + GroupService.id;
+    this._dataRequestorService.getRequest(requestString).subscribe( (res: User[]) => {
+      this.options = this.removeCurrentUserAndSelectedUsers(res);
     });
-
-    users.splice(index, 1);
-
-    return users;
-  }
-
-  onSelection(e, v) {
-    if (e.option._selected) {
-      const index: number = this.options.findIndex( user => {
-        return user.username ===  e.option._element.nativeElement.textContent.trim();
-       });
-      if (index > -1 ) {
-        this.selectedUsers.push(this.options[index]);
-      }
     } else {
-      const index: number = this.selectedUsers.findIndex( user => {
-        return user.username ===  e.option._element.nativeElement.textContent.trim();
-       });
+      this.options = [];
     }
   }
 
+  removeCurrentUserAndSelectedUsers( users: User[] ): User[] {
+    const alteredUsers = [];
+    users.forEach( user => {
+      console.log(this.notInSelectedUsers( user) );
+      if ( user.id !== UsernameService.id && this.notInSelectedUsers( user ) ) {
+        alteredUsers.push(user);
+      }
+    });
 
+    return alteredUsers;
+  }
+
+  addUser( user: User ) {
+    this.selectedUsers.push( user );
+    this.removeUserFromOptions( user );
+  }
+
+  removeUserFromOptions( user: User ) {
+    const index = this.options.findIndex( optionUser => {
+      return optionUser.id === user.id ? true : false;
+    });
+    if ( index !== -1 ) {
+      this.options.splice(index, 1);
+    }
+  }
+
+  notInSelectedUsers( user: User ): boolean {
+    for ( const selectedUser of this.selectedUsers ) {
+      if ( selectedUser.id === user.id ) {
+        return false;
+      }
+    }
+
+    return true;
+  }
 
   public close(): void {
     this.dialogRef.close();

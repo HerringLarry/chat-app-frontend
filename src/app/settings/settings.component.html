@@ -10,12 +10,12 @@
         <app-modified-button [text]="'Full Name'" [emitValue]="false" [isSelected]="!settings.showUsername" (alterIsSelected)="modifyShowUsername($event)"></app-modified-button>
     </div>
   </div>
-  <!-- <div class="setting">
-      <p class="prompt"> Show Notifications</p>
+  <div *ngIf="settings" class="setting">
+      <p class="prompt"> Show Notifications?</p>
       <div class="options">
-          <app-modified-button [text]="'Yes'" [emitValue]="true" [isSelected]="settings.showNotifications" (alterIsSelected)="modifyShowUsername($event)"></app-modified-button>
-          <app-modified-button [text]="'No'" [emitValue]="false" [isSelected]="!settings.showNotifications" (alterIsSelected)="modifyShowUsername($event)"></app-modified-button>
-      </div> -->
-      
+          <app-modified-button [text]="'Yes'" [emitValue]="true" [isSelected]="settings.showNotifications" (alterIsSelected)="modifyShowNotifications($event)"></app-modified-button>
+          <app-modified-button [text]="'No'" [emitValue]="false" [isSelected]="!settings.showNotifications" (alterIsSelected)="modifyShowNotifications($event)"></app-modified-button>
+      </div>
+    </div>
     <button class="save-btn" (click)="save()" mat-button><mat-icon>save</mat-icon> Save</button>
 </app-panel>
