@@ -3,7 +3,7 @@
 
   <mat-dialog-content>
     <h1 #matheader> Search For and Add Users </h1>
-    <input class="search" (input)="term$.next($event.target.value)" mat-input>
+      <input class="search" (input)="term$.next($event.target.value)" placeholder="Search.." mat-input>
     <div *ngIf="this.selectedUsers.length!==0" class="selected-container">
         <mat-list>
             <mat-list-item class="selected-user" *ngFor="let user of selectedUsers">
