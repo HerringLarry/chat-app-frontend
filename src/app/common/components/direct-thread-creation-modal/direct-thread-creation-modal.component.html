@@ -1,9 +1,12 @@
 
-  <h2 mat-dialog-title>{{header}}</h2>
-
+<div class="close-button-line">
+    <button class="mat-close-button"(click)="close()"><mat-icon class="close-icon">close</mat-icon></button>
+  </div>
   <mat-dialog-content>
-    <h1 #matheader> Search For and Add Users </h1>
-      <input class="search" (input)="term$.next($event.target.value)" placeholder="Search.." mat-input>
+    <h1 #matheader> Create Direct Thread </h1>
+    <mat-form-field class="search-form">
+      <input matInput #search class="search" (input)="term$.next($event.target.value)" placeholder="Search.." autocomplete="off" >
+    </mat-form-field>
     <div *ngIf="this.selectedUsers.length!==0" class="selected-container">
         <mat-list>
             <mat-list-item class="selected-user" *ngFor="let user of selectedUsers">
@@ -31,7 +34,6 @@
 
   <mat-dialog-actions>
     <div class="action-buttons">
-      <button mat-button class="mat-close-button"(click)="close()">Close</button>
       <button mat-button class="mat-save-button"(click)="save()">Create</button>
     </div>
   </mat-dialog-actions>

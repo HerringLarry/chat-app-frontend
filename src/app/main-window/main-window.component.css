@@ -30,8 +30,13 @@
     justify-content: center;
     align-items: center;
     vertical-align:middle;
+    border-radius: 20%;
   }
 
   .refresh-button:hover{
     background-color: lightgray;
+  }
+
+  .refresh-button:focus{
+    outline: none;
   }

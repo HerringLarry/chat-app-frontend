@@ -22,3 +22,7 @@
 html *{
   font-family: 'Roboto', sans-serif;
 }
+
+*:focus {
+  outline: none;
+}

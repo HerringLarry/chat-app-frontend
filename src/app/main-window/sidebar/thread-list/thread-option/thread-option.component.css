@@ -3,6 +3,8 @@ div{
     color: white;
     font: roboto;
     text-align: left;
+    vertical-align: center;
+    position: relative;
 }
 
 span{
@@ -12,4 +14,13 @@ span{
 .is-active {
     background-color: rgb(99, 118, 136);
   
+}
+
+.thread-name{
+    float: left;
+    text-align: left;
+}
+
+.thread-icon{
+    float: left;
 }
