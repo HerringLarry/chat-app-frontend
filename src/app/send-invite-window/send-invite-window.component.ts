@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { DataRequestorService } from '../common/services/data-requestor.service';
 import { CurrentDirectThreadsService } from '../common/services/current-direct-threads.service';
 import { GroupService } from '../common/services/group-service.service';
 import { UsernameService } from '../common/services/username.service';
 import { User } from '../common/components/direct-thread-creation-modal/model/user.model';
+import { MultiInviteDto } from './dto/multi-invite.dto';
 
 @Component({
   selector: 'app-send-invite-window',
@@ -13,6 +14,8 @@ import { User } from '../common/components/direct-thread-creation-modal/model/us
 })
 export class SendInviteWindowComponent implements OnInit {
   options: User[] = [];
+  selectedUsers: User[] = [];
+  term$ = new Subject<string>();
 
   constructor(private _dataRequestorService: DataRequestorService,
       private _currentDirectThreadService: CurrentDirectThreadsService,
@@ -20,23 +23,71 @@ export class SendInviteWindowComponent implements OnInit {
   }
 
   ngOnInit() {
-    const requestString = 'invites/' + GroupService.group + '/' + UsernameService.username;
-    const unprocessedOption = this._dataRequestorService.getRequest(requestString).subscribe( (res: User[]) => {
-      this.options = res;
+    this.term$.subscribe( term => this.search( term ));
+
+  }
+
+  search( term: string ) {
+    if ( term.length > 0 ) {
+      const requestString = 'invites/' + term + '/' + GroupService.id;
+      const unprocessedOption = this._dataRequestorService.getRequest(requestString).subscribe( (res: User[]) => {
+        this.options = res;
+      });
+    } else {
+      this.options = [];
+    }
+  }
+
+  removeCurrentUserAndSelectedUsers( users: User[] ): User[] {
+    const alteredUsers = [];
+    users.forEach( user => {
+      console.log(this.notInSelectedUsers( user) );
+      if ( user.id !== UsernameService.id && this.notInSelectedUsers( user ) ) {
+        alteredUsers.push(user);
+      }
     });
 
+    return alteredUsers;
   }
 
-  removeUser( event: any ) {
-
-    const index = this.options.findIndex( (option => {
-      return event.id === option.id;
-    }));
-
-    this.options.splice( index, 1);
+  addUser( user: User ) {
+    this.selectedUsers.push( user );
+    this.removeUserFromOptions( user );
   }
 
-  noUsers(): boolean {
-    return this.options.length === 0;
+  removeUserFromOptions( user: User ) {
+    const index = this.options.findIndex( optionUser => {
+      return optionUser.id === user.id ? true : false;
+    });
+    if ( index !== -1 ) {
+      this.options.splice(index, 1);
+    }
+  }
+
+  removeUserFromSelected( user: User ) {
+    const index = this.selectedUsers.findIndex( optionUser => {
+      return optionUser.id === user.id ? true : false;
+    });
+    if ( index !== -1 ) {
+      this.selectedUsers.splice(index, 1);
+    }
+  }
+
+  notInSelectedUsers( user: User ): boolean {
+    for ( const selectedUser of this.selectedUsers ) {
+      if ( selectedUser.id === user.id ) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  sendInvites() {
+    const multiInviteDto = new MultiInviteDto( this.selectedUsers, GroupService.id, UsernameService.id );
+    const request = 'invites/invite';
+    this._dataRequestorService.postRequest(request, multiInviteDto).subscribe( res => {
+      this.selectedUsers = [];
+    });
   }
 }

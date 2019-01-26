@@ -71,6 +71,15 @@ export class DirectThreadCreationModalComponent implements OnInit {
     }
   }
 
+  removeUserFromSelected( user: User ) {
+    const index = this.selectedUsers.findIndex( optionUser => {
+      return optionUser.id === user.id ? true : false;
+    });
+    if ( index !== -1 ) {
+      this.selectedUsers.splice(index, 1);
+    }
+  }
+
   notInSelectedUsers( user: User ): boolean {
     for ( const selectedUser of this.selectedUsers ) {
       if ( selectedUser.id === user.id ) {

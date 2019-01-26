@@ -3,15 +3,22 @@
 }
 
 .mat-save-button{
-    background-color: grey;
-    color: white;
+    background-color: white;
+    border: 1px solid black;
+    color: black;
     float: right;
-    margin-right: -13px;
+    margin-bottom: -19px;
+    margin-right: -19px;
 }
 
 .mat-save-button:hover{
     background-color: lightgray;
 }
+
+.close-icon{
+    align-self: center;
+}
+
 
 .mat-close-button{
     background-color: black;
@@ -49,6 +56,7 @@
 .action-buttons{
     width: 100%;
     margin-top: 20%;
+    margin-bottom: 10px;
 }
 
 .filler{
@@ -61,10 +69,34 @@
     margin-top:10%;
 }
 
+.remove-button{
+    background-color: black;
+    position: absolute;
+    right: 0;
+    border-radius:100%;
+    border: 1px solid white;
+    color: white;
+    width:30px;
+    height:30px;
+    align-items: center;
+    text-align: center;
+    vertical-align: center;
+}
+
+.remove-button:hover{
+    background-color: gray;
+}
+
+.remove-button:focus{
+    outline: none;
+}
+
 .search{
     margin-left: 12%;
     width: 76%;
     color: black;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14pt;
 }
 
 .search:focus{
@@ -81,7 +113,8 @@
 
 .user-selection{
     width: 100%;
-    border-bottom: solid black 1px;
+    color: black;
+    margin-left: 0;
 }
 
 .user-selection-container{
@@ -90,11 +123,12 @@
 }
 
 .add-button{
-    background-color: #7795AD;
-    margin-left: 65%;
+    background-color: white;
+    position: absolute;
+    right: 0;
     border-radius:100%;
-    border: 1px solid white;
-    color: white;
+    border: 1px solid black;
+    color: black;
     width:30px;
     height:30px;
     align-items: center;
@@ -112,16 +146,35 @@
     align-content: center;
 }
 
+.search-form{
+    width: 100%;
+    margin-top:10%;
+}
+
+.search{
+    margin-left: 12%;
+    width: 76%;
+    color: black;
+}
+
+.search:focus{
+    outline: none;
+}
+
 .selected-user{
+    color: black;
     align-content: center;
     text-align: center;
     width: 100%;
-    margin-left: -5%;
+    margin-left: 0;
 }
 
 .selected-username{ 
-    float: left;
-    font-weight: 600;
+    font-weight: 500;
+    width: 100px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-wrap: none;
 }
 
 .selected-user-icon{
@@ -132,3 +185,13 @@
 h1{
     float: top;
 }
+
+h1{
+    float: top;
+}
+
+.filler{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+

@@ -1,10 +1,38 @@
 <app-panel
-  [displaySmall]="false"
+  [displaySmall]="true"
   [title]="'Invite Users!'"
   class="panel"
 >
-<div>
-  <p *ngIf="noUsers()"> No Users To Invite</p>
-  <app-send-invite *ngFor="let option of options" [user]="option" (removeUser)="removeUser($event)"></app-send-invite>
-</div>
+  <div>
+        <div class="search-form">
+          <input type="text" class="search input-text" placeholder="Search..." (input)="term$.next($event.target.value)" autocomplete="off" >
+        </div>
+        <div *ngIf="selectedUsers.length!==0" class="selected-container">
+            <mat-list>
+                <mat-list-item class="selected-user" *ngFor="let user of selectedUsers">
+                    <mat-icon class="selected-user-icon">done</mat-icon>
+                    <span class="selected-username">
+                      {{user.username}}
+                    </span>
+                  <button class="remove-button" (click)="removeUserFromSelected(user)">X</button>
+                </mat-list-item>
+              </mat-list>
+        </div>
+        <div *ngIf="options.length===0" class=filler></div>
+        <div class="user-selection-container">
+          <mat-list *ngIf="options.length!==0">
+            <mat-list-item class="user-selection" *ngFor="let user of options">
+              <span class="username">
+                {{user.username}}
+              </span>
+              <button class="add-button" (click)="addUser(user)">+</button>
+            </mat-list-item>
+            
+          </mat-list>
+      </div>
+      <div class="action-buttons">
+        <button mat-button class="mat-save-button"(click)="sendInvites()">Invite</button>
+      </div>
+
+  </div>
 </app-panel>

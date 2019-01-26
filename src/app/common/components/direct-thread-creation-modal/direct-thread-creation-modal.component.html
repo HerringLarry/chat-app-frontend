@@ -2,7 +2,6 @@
 <div class="close-button-line">
     <button class="mat-close-button"(click)="close()"><mat-icon class="close-icon">close</mat-icon></button>
   </div>
-  <mat-dialog-content>
     <h1 #matheader> Create Direct Thread </h1>
     <mat-form-field class="search-form">
       <input matInput #search class="search" (input)="term$.next($event.target.value)" placeholder="Search.." autocomplete="off" >
@@ -14,6 +13,7 @@
               <span class="selected-username">
                 {{user.username}}
               </span>
+              <button class="remove-button" (click)="removeUserFromSelected(user)">X</button> 
             </mat-list-item>
           </mat-list>
     </div>
@@ -30,10 +30,7 @@
       </mat-list>
   </div>
   
-  </mat-dialog-content>
 
-  <mat-dialog-actions>
     <div class="action-buttons">
       <button mat-button class="mat-save-button"(click)="save()">Create</button>
     </div>
-  </mat-dialog-actions>
