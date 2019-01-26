@@ -2,7 +2,7 @@
   <div *ngIf="!isLoading()">
     <div *ngIf="!isEmptyAndThreadSelected()">
       <div class="message-wrapper" *ngFor="let message of messages">
-        <app-message [message]="message"></app-message>
+        <app-message [message]="message" [previousUsername]="previousUsername" (currentUsername)="setPreviousUsername($event)"></app-message>
         </div>
     </div>
     <div *ngIf="isEmptyAndThreadSelected()">

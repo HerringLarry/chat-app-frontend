@@ -1,30 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SettingsDto } from './dto/settings.dto';
 import { DataRequestorService } from '../common/services/data-requestor.service';
 import { UsernameService } from '../common/services/username.service';
 import { MatSnackBar } from '@angular/material';
 import { SettingsService } from '../common/services/settings.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css']
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements OnInit, OnDestroy {
 
   username = true;
   fullName = false;
   labelPosition: string;
   settings: SettingsDto;
+  subscriptions: Subscription[] = [];
 
   constructor( private _dataRequestorService: DataRequestorService, private snackbar: MatSnackBar ) { }
 
   ngOnInit() {
     const request = 'settings/' + String(UsernameService.id);
-    this._dataRequestorService.getRequest( request ).subscribe( (settings: SettingsDto) => {
+    const sub = this._dataRequestorService.getRequest( request ).subscribe( (settings: SettingsDto) => {
       console.log(settings);
       this.settings = settings;
     });
+    this.subscriptions.push( sub );
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach( sub => sub.unsubscribe() );
   }
 
   modifyShowUsername(event: any) {

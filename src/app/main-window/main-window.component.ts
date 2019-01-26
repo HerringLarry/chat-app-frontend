@@ -138,12 +138,10 @@ export class MainWindowComponent implements OnInit, OnDestroy, DoCheck {
 
   refresh() {
     this._loadingService.isLoading = true;
-    setTimeout(() => {
-      this.leaveAllRooms();
-      this.subscriptions.forEach( sub => sub.unsubscribe());
-      this.initializeSubscriptions();
-      this._loadingService.isLoading = false;
-    }, 500);
+    this.leaveAllRooms();
+    this.subscriptions.forEach( sub => sub.unsubscribe());
+    this.initializeSubscriptions();
+    this._loadingService.isLoading = false;
   }
 
   scrollToBottom() {
@@ -171,7 +169,7 @@ export class MainWindowComponent implements OnInit, OnDestroy, DoCheck {
       message.createdAt = new Date(message.createdAt);
       const user: User = this.matchMessageUserIdWithUser( message );
       if ( previousTime === undefined || this.isPastNextDay( previousTime, ( message.createdAt.getTime() / 1000 ) ) ) {
-        processedMessages.push( this.roundDownAndCreateTimeDivider( message ) );
+        processedMessages.push( this.createTimeDivider( message ) );
       }
       const processedMessage = new ProcessedMessage(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined);
       processedMessage.setValues( message, user );
@@ -182,9 +180,11 @@ export class MainWindowComponent implements OnInit, OnDestroy, DoCheck {
     return processedMessages;
   }
 
-  private roundDownAndCreateTimeDivider( message ) {
-    const roundedDown = this.roundDown( ( message.createdAt.getTime() / 1000 ) );
-    return this.createTimeDivider( roundedDown );
+  private createTimeDivider( message ) {
+    const date: Date = new Date(message.createdAt);
+    date.setHours( 0, 0, 0, 0);
+    return new ProcessedMessage(undefined, undefined, undefined, undefined, undefined, undefined, date, true );
+
   }
 
   private matchMessageUserIdWithUser( message: Message ): User {
@@ -206,12 +206,6 @@ export class MainWindowComponent implements OnInit, OnDestroy, DoCheck {
   private roundDown( newTime: number ): number {
 
     return newTime - ( newTime % (3600 * 24) );
-  }
-
-  private createTimeDivider( roundedDown: number ): ProcessedMessage {
-    const date: Date = new Date(roundedDown * 1000);
-
-    return new ProcessedMessage(undefined, undefined, undefined, undefined, undefined, undefined, date, true );
   }
 
   private processNotifications( rawNotificationDto: any ): ProcessedNotification[] {

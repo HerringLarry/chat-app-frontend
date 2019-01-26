@@ -18,9 +18,9 @@
 <div *ngIf="!message.isTimeDivider" class="wrapper">
     <!-- <h3 mat-line class="cursor-pointer"> {{message.username}} </h3> -->
     <p>
-      <span class="username">
+      <span *ngIf="!isSameAsPreviousUsername" class="username">
           <!-- {{getCorrectLabel()}}  -->
-          {{getCorrectLabel()}}
+          {{label}}
       </span>
       <span class="msg-text">
         {{message.text}}

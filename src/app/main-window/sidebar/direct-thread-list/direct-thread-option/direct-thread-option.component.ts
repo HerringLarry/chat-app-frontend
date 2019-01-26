@@ -85,12 +85,10 @@ export class DirectThreadOptionComponent implements OnInit {
     this.leaveAllCurrentRooms();
    //  this.setNotificationCountToZero();
     this._loadingService.isLoading = true;
-    setTimeout( () => {
       this._directThreadService.threadId = this.thread.id;
       this._directThreadService.selected = true;
       this._directMesssageService.joinRoom( this._directThreadService.threadId, GroupService.group);
       this._notificationsService.readDirect( GroupService.id, this._directThreadService.threadId );
-    }, 500);
   }
 
   isCurrentThread(): boolean {

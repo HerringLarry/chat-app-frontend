@@ -29,4 +29,8 @@ export class GroupSelectionService {
 
     }
 
+    initializeGroups() {
+        this._groups.next([]);
+    }
+
 }

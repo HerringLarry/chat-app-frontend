@@ -1,5 +1,5 @@
 import { ThreadService } from 'src/app/common/services/thread-service.service';
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { CurrentDirectThreadsService } from 'src/app/common/services/current-direct-threads.service';
 
 @Component({
@@ -7,11 +7,10 @@ import { CurrentDirectThreadsService } from 'src/app/common/services/current-dir
   templateUrl: './direct-thread-list.component.html',
   styleUrls: ['./direct-thread-list.component.css']
 })
-export class DirectThreadListComponent implements OnInit {
+export class DirectThreadListComponent implements OnInit, OnDestroy {
 
   @Input() threads: any;
   @Input() directNotifications: any[];
-  @Output() threadClick: EventEmitter<void> = new EventEmitter();
 
   constructor( private _currentDirectThreadService: CurrentDirectThreadsService, private _threadService: ThreadService ) { }
 
@@ -19,7 +18,9 @@ export class DirectThreadListComponent implements OnInit {
     this._currentDirectThreadService.loadInitialData();
   }
 
-  onThreadClick(event: any): void {
-    // this._threadService.thread = event.thread.name;
+  ngOnDestroy() {
+    this._currentDirectThreadService.initializeThreads();
   }
+
+
 }

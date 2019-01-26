@@ -15,6 +15,7 @@ export class MessageDisplayComponent implements OnInit {
 
   @Input() messages: any[];
   processedMessages: any;
+  previousUsername = '';
 
   constructor( private _loadingService: LoadingService,
     private _threadService: ThreadService,
@@ -31,4 +32,9 @@ export class MessageDisplayComponent implements OnInit {
   isEmptyAndThreadSelected(): boolean {
     return this.messages.length === 0 && ( this._threadService.selected || this._directThreadService.selected );
   }
+
+  setPreviousUsername( event: any ) {
+    this.previousUsername = event;
+  }
+
 }

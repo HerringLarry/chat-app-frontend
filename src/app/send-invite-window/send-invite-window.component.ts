@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { DataRequestorService } from '../common/services/data-requestor.service';
 import { CurrentDirectThreadsService } from '../common/services/current-direct-threads.service';
 import { GroupService } from '../common/services/group-service.service';
@@ -12,10 +12,11 @@ import { MultiInviteDto } from './dto/multi-invite.dto';
   templateUrl: './send-invite-window.component.html',
   styleUrls: ['./send-invite-window.component.css']
 })
-export class SendInviteWindowComponent implements OnInit {
+export class SendInviteWindowComponent implements OnInit, OnDestroy {
   options: User[] = [];
   selectedUsers: User[] = [];
   term$ = new Subject<string>();
+  subscriptions: Subscription[] = [];
 
   constructor(private _dataRequestorService: DataRequestorService,
       private _currentDirectThreadService: CurrentDirectThreadsService,
@@ -23,15 +24,20 @@ export class SendInviteWindowComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.term$.subscribe( term => this.search( term ));
+    const sub = this.term$.subscribe( term => this.search( term ));
+    this.subscriptions.push( sub );
 
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach( sub => sub.unsubscribe() );
   }
 
   search( term: string ) {
     if ( term.length > 0 ) {
       const requestString = 'invites/' + term + '/' + GroupService.id;
       const unprocessedOption = this._dataRequestorService.getRequest(requestString).subscribe( (res: User[]) => {
-        this.options = res;
+        this.options = this.removeCurrentUserAndSelectedUsers(res);
       });
     } else {
       this.options = [];

@@ -34,13 +34,11 @@ export class ThreadOptionComponent implements OnInit {
     this.leaveAllCurrentRooms();
     this._loadingService.isLoading = true;
     console.log(this._loadingService.isLoading);
-    setTimeout( () => {
       this.setNotificationCountToZero();
       this._threadService.threadId = this.thread.id;
       this._threadService.selected = true;
       this._messageService.joinRoom( this.thread.id, GroupService.id);
       this._notificationsService.read( GroupService.id, this._threadService.threadId );
-    }, 500);
   }
 
   isCurrentThread(): boolean {

@@ -1,5 +1,5 @@
 import { UsernameService } from './../common/services/username.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { GroupService } from '../common/services/group-service.service';
 import { DataRequestorService } from '../common/services/data-requestor.service';
@@ -13,13 +13,18 @@ import { Group } from './models/group.interface';
   templateUrl: './group-selection-window.component.html',
   styleUrls: ['./group-selection-window.component.css']
 })
-export class GroupSelectionWindowComponent implements OnInit {
+export class GroupSelectionWindowComponent implements OnInit, OnDestroy {
   groups: Group[];
 
   constructor(private _router: Router, private _dataRequestor: DataRequestorService, private dialog: MatDialog,
     private _groupSelectionService: GroupSelectionService) { }
 
   ngOnInit() {
+    this._groupSelectionService.loadInitialData();
+  }
+
+  ngOnDestroy() {
+    this._groupSelectionService.initializeGroups();
   }
 
   setGroupNameAndGoToMain( group: any ) {

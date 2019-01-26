@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { UsernameService } from 'src/app/common/services/username.service';
 import { Message } from 'src/app/main-window/models/message';
 import { SettingsService } from 'src/app/common/services/settings.service';
@@ -13,10 +13,17 @@ import { ProcessedMessage } from 'src/app/main-window/models/processed-message';
 export class MessageComponent implements OnInit {
 
   @Input() message: ProcessedMessage;
+  @Input() previousUsername: string;
+  @Output() currentUsername = new EventEmitter<string>();
+  label: string;
+  isSameAsPreviousUsername: boolean;
 
   constructor() { }
 
   ngOnInit() {
+    this.setLabel();
+    this.setIsSameAsPreviousUsername();
+    this.currentUsername.emit( this.message.username );
   }
 
   isCurrent(): boolean {
@@ -37,11 +44,19 @@ export class MessageComponent implements OnInit {
     return this.message.createdAt.toDateString();
   }
 
-  getCorrectLabel(): string {
-    if ( SettingsService.showUsername ) {
-      return this.message.username;
+  setLabel(): void {
+      if ( SettingsService.showUsername) {
+        this.label = this.message.username;
+      } else {
+        this.label = this.message.firstName + ' ' +  this.message.lastName;
+      }
+  }
+
+  setIsSameAsPreviousUsername() {
+    if ( this.message.username !== this.previousUsername ) {
+      this.isSameAsPreviousUsername = false;
     } else {
-      return this.message.firstName + ' ' +  this.message.lastName;
+      this.isSameAsPreviousUsername = true;
     }
   }
 

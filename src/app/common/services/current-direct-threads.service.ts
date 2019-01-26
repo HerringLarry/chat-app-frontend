@@ -50,6 +50,10 @@ export class CurrentDirectThreadsService {
         );
   }
 
+  initializeThreads() {
+    this._directThreads.next([]);
+  }
+
   setThreadToSelectedAndJoinThreadRoom( dMThreadId: number ) {
     this.leaveAllCurrentRooms();
     this._threadService.selected = false;
