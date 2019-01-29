@@ -86,7 +86,7 @@ export class MainWindowComponent implements OnInit, OnDestroy, DoCheck {
       // this.scrollToBottom();
       this.users = responseObject.users;
       this.messages = this.processMessages( responseObject.messages );
-      this._notificationsService.read( GroupService.id, this._threadService.threadId ); // mark message as read
+      this._notificationsService.read( GroupService.id, this._threadService.threadId, UsernameService.id ); // mark message as read
 
       this._loadingService.isLoading = false;
 
@@ -96,7 +96,7 @@ export class MainWindowComponent implements OnInit, OnDestroy, DoCheck {
     this.directMessagesSubscription = this._directMessagesService.onMessage().subscribe( responseObject => {
       this.users = responseObject.users;
       this.directMessages = this.processMessages(responseObject.directMessages);
-      this._notificationsService.readDirect( GroupService.id, this._directThreadService.threadId );
+      this._notificationsService.readDirect( GroupService.id, this._directThreadService.threadId, UsernameService.id );
       this._loadingService.isLoading = false;
 
     });
@@ -129,9 +129,9 @@ export class MainWindowComponent implements OnInit, OnDestroy, DoCheck {
 
   leaveAllRooms() {
     if ( this._threadService.threadId ) {
-      this._messagesService.leaveRoom(this._threadService.threadId, GroupService.id);
+      this._messagesService.leaveRoom(this._threadService.threadId, GroupService.id, UsernameService.id);
     } else if ( this._directThreadService.threadId ) {
-      this._directMessagesService.leaveRoom( this._directThreadService.threadId, GroupService.group );
+      this._directMessagesService.leaveRoom( this._directThreadService.threadId, GroupService.id, UsernameService.id );
     }
     this._notificationsService.leaveRoom( GroupService.id );
   }

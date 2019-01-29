@@ -12,7 +12,7 @@ export class NotificationsService implements OnDestroy {
     private _notifications: BehaviorSubject<any[]> = new BehaviorSubject([]);
 
     constructor(private _dataRequestor: DataRequestorService,
-                private _socketService: NotificationsSocketService
+                private _socketService: NotificationsSocketService,
                 ) {
         this.loadInitialData();
     }
@@ -47,12 +47,12 @@ export class NotificationsService implements OnDestroy {
         this._socketService.sendDirect( msg );
     }
 
-    read( groupId: number, threadId: number ) {
-        this._socketService.read(groupId, threadId);
+    read( groupId: number, threadId: number, userId: number ) {
+        this._socketService.read(groupId, threadId, userId);
     }
 
-    readDirect(groupId: number, threadId: number ) {
-        this._socketService.readDirect(groupId, threadId);
+    readDirect(groupId: number, threadId: number, userId: number ) {
+        this._socketService.readDirect(groupId, threadId, userId);
     }
 
     onMessage(): Observable<any> {

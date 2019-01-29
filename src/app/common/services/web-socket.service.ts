@@ -30,8 +30,8 @@ export class SocketService {
         this.socket.emit('message', message);
     }
 
-    public markAsRead( groupId: number, threadId: number ) {
-        this.socket.emit('markAsRead', groupId + '/' + threadId);
+    public markAsRead( groupId: number, threadId: number, userId: number ) {
+        this.socket.emit('markAsRead', groupId + '/' + threadId + '/' + userId);
     }
 
     public emit(eventName: string, roomId: string): void {

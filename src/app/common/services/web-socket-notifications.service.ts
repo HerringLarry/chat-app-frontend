@@ -33,12 +33,12 @@ export class NotificationsSocketService {
         this.socket.emit('directMessage', msg);
     }
 
-    public read(groupId: number, threadId: number) {
-        this.socket.emit('markAsRead', groupId + '/' + threadId);
+    public read(groupId: number, threadId: number, userId: number) {
+        this.socket.emit('markAsRead', groupId + '/' + threadId + '/' + userId);
     }
 
-    public readDirect( groupId: number, threadId: number ) {
-        this.socket.emit('directMarkAsRead', groupId + '/' + threadId);
+    public readDirect( groupId: number, threadId: number, userId: number ) {
+        this.socket.emit('directMarkAsRead', groupId + '/' + threadId + '/' + userId);
     }
 
     public emit(eventName: string, roomId: string): void {

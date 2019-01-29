@@ -8,6 +8,7 @@ import { ThreadService } from './thread-service.service';
 import { SocketService } from './web-socket.service';
 import { Message } from '../model/message.dto';
 import { DirectSocketService } from './web-socket-direct.service';
+import { UsernameService } from './username.service';
 
 @Injectable()
 export class DirectMessagesService implements OnDestroy {
@@ -23,20 +24,20 @@ export class DirectMessagesService implements OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.leaveRoom(this._threadService.threadId, GroupService.group);
+        this.leaveRoom(this._threadService.threadId, GroupService.id, UsernameService.id);
     }
 
     get messages() {
         return asObservable(this._messages);
     }
 
-    public joinRoom(threadId: number, groupName: string): void {
-        this.roomId = threadId + '/' + groupName;
-        this._socketService.emit('message', this.roomId);
+    public joinRoom(threadId: number, groupId: number, userId: number): void {
+        this.roomId = threadId + '/' + groupId;
+        this._socketService.emit('message', this.roomId + '/' + userId);
     }
 
-    public leaveRoom(threadId: number, groupName: string): void {
-        this.roomId = threadId + '/' + groupName;
+    public leaveRoom(threadId: number, groupId: number, userId: number): void {
+        this.roomId = threadId + '/' + groupId + '/' + userId;
         this._socketService.emit('leave', this.roomId);
 
     }

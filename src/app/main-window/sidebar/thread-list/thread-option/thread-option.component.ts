@@ -33,12 +33,11 @@ export class ThreadOptionComponent implements OnInit {
   selectThread(): void {
     this.leaveAllCurrentRooms();
     this._loadingService.isLoading = true;
-    console.log(this._loadingService.isLoading);
-      this.setNotificationCountToZero();
-      this._threadService.threadId = this.thread.id;
-      this._threadService.selected = true;
-      this._messageService.joinRoom( this.thread.id, GroupService.id);
-      this._notificationsService.read( GroupService.id, this._threadService.threadId );
+    this.setNotificationCountToZero();
+    this._threadService.threadId = this.thread.id;
+    this._threadService.selected = true;
+    this._messageService.joinRoom( this.thread.id, GroupService.id, UsernameService.id);
+    this._notificationsService.read( GroupService.id, this._threadService.threadId, UsernameService.id );
   }
 
   isCurrentThread(): boolean {
@@ -47,13 +46,13 @@ export class ThreadOptionComponent implements OnInit {
 
   leaveAllCurrentRooms(): void {
     if ( this._threadService.threadId ) {
-      this._messageService.leaveRoom(this._threadService.threadId, GroupService.id);
+      this._messageService.leaveRoom(this._threadService.threadId, GroupService.id, UsernameService.id);
     }
     this._threadService.threadId = null;
     this._threadService.selected = false;
 
     if ( this._directThreadService.threadId ) {
-      this._directMesssageService.leaveRoom(this._directThreadService.threadId, GroupService.group);
+      this._directMesssageService.leaveRoom(this._directThreadService.threadId, GroupService.id, UsernameService.id);
     }
     this._directThreadService.threadId = null;
     this._directThreadService.selected = false;

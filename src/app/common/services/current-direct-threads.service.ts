@@ -59,20 +59,20 @@ export class CurrentDirectThreadsService {
     this._threadService.selected = false;
     this._directThreadService.threadId = dMThreadId;
     this._directThreadService.selected = true;
-    this._directMessageService.joinRoom( dMThreadId, GroupService.group );
+    this._directMessageService.joinRoom( dMThreadId, GroupService.id, UsernameService.id );
 
 
   }
 
   leaveAllCurrentRooms(): void {
     if ( this._threadService.threadId ) {
-      this._messageService.leaveRoom(this._threadService.threadId, GroupService.id);
+      this._messageService.leaveRoom(this._threadService.threadId, GroupService.id, UsernameService.id);
     }
     this._threadService.threadId = null;
     this._threadService.selected = false;
 
     if ( this._directThreadService.threadId ) {
-      this._directMessageService.leaveRoom(this._directThreadService.threadId, GroupService.group);
+      this._directMessageService.leaveRoom(this._directThreadService.threadId, GroupService.id, UsernameService.id);
     }
     this._directThreadService.threadId = null;
     this._directThreadService.selected = false;

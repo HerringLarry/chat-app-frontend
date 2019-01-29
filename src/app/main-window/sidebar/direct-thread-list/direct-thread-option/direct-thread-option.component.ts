@@ -87,8 +87,8 @@ export class DirectThreadOptionComponent implements OnInit {
     this._loadingService.isLoading = true;
       this._directThreadService.threadId = this.thread.id;
       this._directThreadService.selected = true;
-      this._directMesssageService.joinRoom( this._directThreadService.threadId, GroupService.group);
-      this._notificationsService.readDirect( GroupService.id, this._directThreadService.threadId );
+      this._directMesssageService.joinRoom( this._directThreadService.threadId, GroupService.id, UsernameService.id);
+      this._notificationsService.readDirect( GroupService.id, this._directThreadService.threadId, UsernameService.id );
   }
 
   isCurrentThread(): boolean {
@@ -97,13 +97,13 @@ export class DirectThreadOptionComponent implements OnInit {
 
   leaveAllCurrentRooms(): void {
     if ( this._threadService.threadId ) {
-      this._messageService.leaveRoom(this._threadService.threadId, GroupService.id);
+      this._messageService.leaveRoom(this._threadService.threadId, GroupService.id, UsernameService.id);
     }
     this._threadService.threadId = null;
     this._threadService.selected = false;
 
     if ( this._directThreadService.threadId ) {
-      this._directMesssageService.leaveRoom(this._directThreadService.threadId, GroupService.group);
+      this._directMesssageService.leaveRoom(this._directThreadService.threadId, GroupService.id, UsernameService.id);
     }
     this._directThreadService.threadId = null;
     this._directThreadService.selected = false;
@@ -115,7 +115,6 @@ export class DirectThreadOptionComponent implements OnInit {
       if ( notification.notificationCount === 0 ) {
         return undefined;
       } else {
-        console.log('not', notification.notificationCount);
         return notification.notificationCount;
       }
     }

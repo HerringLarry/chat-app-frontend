@@ -3,8 +3,12 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class GroupService {
 
-    static get group(): string | '' {
-        return window.localStorage.getItem('group');
+    static get group(): string {
+        if ( window.localStorage.getItem('group') ) {
+            return window.localStorage.getItem('group');
+        } else {
+            return '';
+        }
     }
 
     static set group( group: string ) {

@@ -7,6 +7,7 @@ import { asObservable } from '../as-observable';
 import { ThreadService } from './thread-service.service';
 import { SocketService } from './web-socket.service';
 import { Message } from '../model/message.dto';
+import { UsernameService } from './username.service';
 
 @Injectable()
 export class MessagesService implements OnDestroy {
@@ -21,19 +22,19 @@ export class MessagesService implements OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.leaveRoom(this._threadService.threadId, GroupService.id);
+        this.leaveRoom(this._threadService.threadId, GroupService.id, UsernameService.id);
     }
 
     get messages() {
         return asObservable(this._messages);
     }
 
-    public joinRoom(threadId: number, groupId: number): void {
+    public joinRoom(threadId: number, groupId: number, userId: number): void {
         this.roomId = threadId + '/' + groupId;
-        this._socketService.emit('join', this.roomId);
+        this._socketService.emit('join', threadId + '/' + groupId + '/' + userId);
     }
 
-    public leaveRoom(threadId: number, groupId: number): void {
+    public leaveRoom(threadId: number, groupId: number, userId: number): void {
         this.roomId = threadId + '/' + groupId;
         this._socketService.emit('leave', this.roomId);
 
@@ -48,8 +49,8 @@ export class MessagesService implements OnDestroy {
         this._socketService.send(msg);
     }
 
-    markAsRead( groupId: number, threadId: number ) {
-        this._socketService.markAsRead(groupId, threadId);
+    markAsRead( groupId: number, threadId: number, userId: number ) {
+        this._socketService.markAsRead(groupId, threadId, userId);
     }
 
     onMessage(): Observable<any> {

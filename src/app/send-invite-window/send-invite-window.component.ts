@@ -6,6 +6,7 @@ import { GroupService } from '../common/services/group-service.service';
 import { UsernameService } from '../common/services/username.service';
 import { User } from '../common/components/direct-thread-creation-modal/model/user.model';
 import { MultiInviteDto } from './dto/multi-invite.dto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-send-invite-window',
@@ -20,13 +21,21 @@ export class SendInviteWindowComponent implements OnInit, OnDestroy {
 
   constructor(private _dataRequestorService: DataRequestorService,
       private _currentDirectThreadService: CurrentDirectThreadsService,
+      private _router: Router,
     ) {
   }
 
   ngOnInit() {
+    if ( this.noGroupSelected() ) {
+      this._router.navigate(['groupselectionwindow']);
+    }
     const sub = this.term$.subscribe( term => this.search( term ));
     this.subscriptions.push( sub );
 
+  }
+
+  noGroupSelected(): boolean {
+    return GroupService.group === '';
   }
 
   ngOnDestroy(): void {
