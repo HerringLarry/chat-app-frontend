@@ -1,13 +1,13 @@
 <div #container>
   <div *ngIf="!isLoading()">
     <div *ngIf="!isEmptyAndThreadSelected()">
-      <div class="message-wrapper" *ngFor="let message of messages">
-        <app-message [message]="message" [previousUsername]="previousUsername" (currentUsername)="setPreviousUsername($event)"></app-message>
+      <div  class="message-wrapper" *ngFor="let message of messages">
+        <app-message  [message]="message" [previousUsername]="previousUsername" (currentUsername)="setPreviousUsername($event)"></app-message>
         </div>
     </div>
     <div *ngIf="isEmptyAndThreadSelected()">
       <div class="message-wrapper">
-          <div class="default-message">Start the conversation...</div>
+          <div class="default-message">Start The Conversation...</div>
       </div>
     </div>
   </div>

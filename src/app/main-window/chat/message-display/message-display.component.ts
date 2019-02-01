@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, ChangeDetectionStrategy, AfterViewChecked } from '@angular/core';
 import { SettingsService } from 'src/app/common/services/settings.service';
 import { LoadingService } from 'src/app/common/services/loading.service';
 import { ThreadService } from 'src/app/common/services/thread-service.service';
@@ -10,8 +10,7 @@ import { DirectThreadService } from 'src/app/common/services/direct-thread-servi
   styleUrls: ['./message-display.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MessageDisplayComponent implements OnInit {
-
+export class MessageDisplayComponent implements OnInit, AfterViewChecked {
 
   @Input() messages: any[];
   processedMessages: any;
@@ -25,8 +24,7 @@ export class MessageDisplayComponent implements OnInit {
   ngOnInit() {
   }
 
-  isLoading(): boolean {
-    return this._loadingService.isLoading;
+  ngAfterViewChecked() {
   }
 
   isEmptyAndThreadSelected(): boolean {
@@ -37,4 +35,7 @@ export class MessageDisplayComponent implements OnInit {
     this.previousUsername = event;
   }
 
+  isLoading() {
+    return this._loadingService.isLoading;
+  }
 }

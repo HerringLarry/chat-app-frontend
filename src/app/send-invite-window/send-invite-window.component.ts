@@ -56,7 +56,6 @@ export class SendInviteWindowComponent implements OnInit, OnDestroy {
   removeCurrentUserAndSelectedUsers( users: User[] ): User[] {
     const alteredUsers = [];
     users.forEach( user => {
-      console.log(this.notInSelectedUsers( user) );
       if ( user.id !== UsernameService.id && this.notInSelectedUsers( user ) ) {
         alteredUsers.push(user);
       }

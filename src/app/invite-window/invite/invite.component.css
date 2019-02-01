@@ -1,15 +1,29 @@
 .acc-btn{
-    background-color: white;
-    color: black;
+    background-color: black;
+    border-radius:30%;
     border: 1px solid white;
-    margin: 10px;
+    color: white;
+    width:30px;
+    height:40px;
+    margin:10px;
+    align-items: center;
+    text-align: center;
+    vertical-align: center;
+
 }
 
 .dec-btn{
-    background-color: black;
-    color: white;
+    background-color: white;
+    border-radius: 30%;
     border: 1px solid white;
-    margin: 10px;
+    color: black;
+    width:30px;
+    height:40px;
+    margin:10px;
+    align-items: center;
+    text-align: center;
+    vertical-align: center;
+
 }
 
 button:hover{
@@ -31,7 +45,6 @@ button:hover{
     white-space: nowrap;
     width: 900px;
     text-align: center;
-    border-bottom: 3px solid white;
     /* background-color: rgb(56, 56, 56) */
 }
 

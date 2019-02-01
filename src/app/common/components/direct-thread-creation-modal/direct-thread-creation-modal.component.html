@@ -13,6 +13,9 @@
               <span class="selected-username">
                 {{user.username}}
               </span>
+              <span class="selected-name">
+                  {{'(' + user.firstName + ' ' + user.lastName + ')'}}
+                </span>
               <button class="remove-button" (click)="removeUserFromSelected(user)">X</button> 
             </mat-list-item>
           </mat-list>
@@ -24,6 +27,9 @@
           <span class="username">
             {{user.username}}
           </span>
+          <span class="name">
+              {{'(' + user.firstName + ' ' + user.lastName + ')'}}
+            </span>
           <button class="add-button" (click)="addUser(user)">+</button>
         </mat-list-item>
         

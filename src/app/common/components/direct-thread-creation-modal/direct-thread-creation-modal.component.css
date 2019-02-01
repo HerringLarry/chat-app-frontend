@@ -105,7 +105,15 @@
 
 .username{
     font-weight: 500;
-    width: 100%;
+    width: 25%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-wrap: none;
+}
+
+.name{
+    font-weight: 700;
+    width: 75%;
     text-overflow: ellipsis;
     overflow: hidden;
     word-wrap: none;
@@ -171,7 +179,15 @@
 
 .selected-username{ 
     font-weight: 500;
-    width: 100px;
+    width: 20%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-wrap: none;
+}
+
+.selected-name{
+    font-weight: 700;
+    width: 65%;
     text-overflow: ellipsis;
     overflow: hidden;
     word-wrap: none;

@@ -57,6 +57,10 @@ export class MessagesService implements OnDestroy {
         return this._socketService.on('message');
     }
 
+    onJoin(): Observable<any> {
+        return this._socketService.on('join');
+    }
+
     disconnect() {
         this._socketService.disconnect();
     }

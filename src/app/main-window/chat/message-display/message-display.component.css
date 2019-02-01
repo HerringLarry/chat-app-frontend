@@ -1,5 +1,6 @@
 .msg-display{
     width: 100%;
+    overflow: hidden;
 }
 
 .message-wrapper{

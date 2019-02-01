@@ -24,7 +24,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const request = 'settings/' + String(UsernameService.id);
     const sub = this._dataRequestorService.getRequest( request ).subscribe( (settings: SettingsDto) => {
-      console.log(settings);
       this.settings = settings;
     });
     this.subscriptions.push( sub );

@@ -55,4 +55,8 @@ export class DirectMessagesService implements OnDestroy {
         return this._socketService.on('message');
     }
 
+    onJoin(): Observable<any> {
+        return this._socketService.on('join');
+    }
+
 }
