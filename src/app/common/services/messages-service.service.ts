@@ -14,6 +14,8 @@ export class MessagesService implements OnDestroy {
 
     private _messages: BehaviorSubject<Message[]> = new BehaviorSubject([]);
     private roomId: string;
+    private _skipValue = 0;
+    private _count = 0;
 
     constructor(private _dataRequestor: DataRequestorService,
                 private _threadService: ThreadService,
@@ -23,6 +25,26 @@ export class MessagesService implements OnDestroy {
 
     ngOnDestroy(): void {
         this.leaveRoom(this._threadService.threadId, GroupService.id, UsernameService.id);
+    }
+
+    addToSkipValue( add: number ) {
+        this._skipValue = this._skipValue + add;
+    }
+
+    resetSkipValue() {
+        this._skipValue = 0;
+    }
+
+    getSkipValue() {
+        return this._skipValue;
+    }
+
+    get count() {
+        return this._count;
+    }
+
+    set count( count: number ) {
+        this._count = Number(count);
     }
 
     get messages() {

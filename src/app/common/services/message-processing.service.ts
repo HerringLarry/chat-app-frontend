@@ -10,6 +10,19 @@ export class MessageProcessingService {
 
   constructor() { }
 
+  processLoadedMessages( loadedMessages: Message[], firstMessage: ProcessedMessage, users: User[] ) {
+    const revertFirstMessage = new Message( firstMessage );
+    loadedMessages.push(revertFirstMessage);
+
+    return this.processMessages(loadedMessages, users);
+  }
+
+  pushLoadedMessagesToTheFront( loadedAndProcessedMessages: ProcessedMessage[], currentMessages: ProcessedMessage[] ) {
+    const finalMessages = loadedAndProcessedMessages.concat(currentMessages.slice(2));
+
+    return finalMessages;
+  }
+
   processMessages( messages: Message[], users: User[]): ProcessedMessage[] {
     const processedMessages: ProcessedMessage[] = [];
     let previousTime: number;
