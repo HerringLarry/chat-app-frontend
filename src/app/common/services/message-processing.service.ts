@@ -68,4 +68,12 @@ export class MessageProcessingService {
     return previousDate.getTime() !== newDate.getTime(); // Now if same date then milliseconds should be equal
 
   }
+
+  getRelevantFirstMessage( responseObject: any, messages: ProcessedMessage[], directMessages: ProcessedMessage[] ) {
+    if ( !responseObject.isDirect ) {
+      return messages[1];
+    } else {
+      return directMessages[1];
+    }
+  }
 }
