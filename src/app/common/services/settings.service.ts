@@ -33,4 +33,13 @@ export class SettingsService {
   static set showTime( showTime: boolean ) {
     window.localStorage.setItem( 'showTime', String(showTime));
   }
+
+  static get highlightUsername(): boolean {
+    const _showTime = window.localStorage.getItem('showTime');
+    return _showTime === 'true';
+  }
+
+  static set highlighUsername( highlightUsername: boolean ) {
+    window.localStorage.setItem( 'highlightUsername', String(highlightUsername));
+  }
 }
