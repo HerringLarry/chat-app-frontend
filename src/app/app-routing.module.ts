@@ -35,6 +35,14 @@ const routes: Routes = [
         path: 'settings',
         loadChildren: '../app/settings/settings.module#SettingsModule'
     },
+    {
+        path: 'profile-editor',
+        loadChildren: '../app/profile-editor/profile-editor.module#ProfileEditorModule'
+    },
+    {
+        path: 'profile-photo-editor',
+        loadChildren: '../app/profile-photo-editor/profile-photo-editor.module#ProfilePhotoEditorModule'
+    }
 ];
 
 @NgModule({

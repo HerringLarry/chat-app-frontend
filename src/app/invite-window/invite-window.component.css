@@ -1,4 +1,5 @@
 .no-invites{
     text-align: center;
-    font: roboto;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
 }

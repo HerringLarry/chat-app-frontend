@@ -34,3 +34,26 @@
     margin-top: 10px;
 }
   
+.load-msg-button{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    width: 10%;
+    height: 40px;
+    border: 1px solid black;
+    color: white;
+    background-color: black;
+    text-align: center;
+    margin-left: 45%;
+    margin-right: 45%;
+    border-radius: 10%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.load-msg-button:hover{
+    background-color: grey;
+}
+
+.load-msg-button:focus{
+    outline: none;
+}

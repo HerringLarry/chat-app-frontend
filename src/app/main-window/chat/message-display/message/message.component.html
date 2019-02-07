@@ -18,6 +18,9 @@
 <div *ngIf="!message.isTimeDivider" class="wrapper">
     <!-- <h3 mat-line class="cursor-pointer"> {{message.username}} </h3> -->
     <p>
+      <span *ngIf="!isSameAsPreviousUsername" class="img-holder">
+        <img  src="http://localhost:3000/profilephoto/pic/{{message.photoPath}}">
+      </span>
       <span *ngIf="!isSameAsPreviousUsername" class="username">
           <!-- {{getCorrectLabel()}}  -->
           {{label}}

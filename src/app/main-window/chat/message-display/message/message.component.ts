@@ -21,6 +21,7 @@ export class MessageComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.message);
     this.setLabel();
     this.setIsSameAsPreviousUsername();
     this.currentUsername.emit( this.message.username );

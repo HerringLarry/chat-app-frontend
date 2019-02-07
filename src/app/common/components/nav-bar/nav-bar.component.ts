@@ -28,7 +28,7 @@ export class NavBarComponent implements OnInit {
   }
 
   goToProfile() {
-    return 0;
+    this._router.navigate(['profile-editor']);
   }
 
   goToListOfGroups() {

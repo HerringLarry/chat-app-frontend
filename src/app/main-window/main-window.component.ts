@@ -65,6 +65,7 @@ export class MainWindowComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit() {
+    console.log('init');
     this.initializeThreads();
       this._messagesService.loadInitialData();
       if ( this.noGroupSelected() ) {
@@ -93,7 +94,6 @@ export class MainWindowComponent implements OnInit, OnDestroy {
   }
 
   initializeSubscriptions() {
-
     this.onMessagesSubscription = this._messagesService.onMessage().subscribe( responseObject => {
       this.processSingleMessage( responseObject, !this.isDirectMessage );
       this.chat.scrollToBottom();
@@ -108,15 +108,22 @@ export class MainWindowComponent implements OnInit, OnDestroy {
     this.subscriptions.push( this.onDirectMessagesSubscription );
 
     this.onMessagesJoinSubscription = this._messagesService.onJoin().subscribe( responseObject => {
+      this.resetMessagesAndDirectMessages();
+      this._messagesService.resetSkipValue();
+      this.processForPagination( responseObject );
       this.processMessagesOnJoin( responseObject, !this.isDirectMessage );
+      this._loadingService.isLoading = false;
       this.chat.scrollToBottom();
 
     });
     this.subscriptions.push(this.onMessagesJoinSubscription);
 
     this.onDirectMessagesJoinSubscription = this._directMessagesService.onJoin().subscribe( responseObject => {
-      this._loadingService.isLoading = false;
+      this.resetMessagesAndDirectMessages();
+      this._directMessagesService.resetSkipValue();
+      this.processForPagination( responseObject );
       this.processMessagesOnJoin( responseObject, this.isDirectMessage);
+      this._loadingService.isLoading = false;
       this.chat.scrollToBottom();
     });
     this.subscriptions.push(this.onDirectMessagesJoinSubscription);
@@ -134,18 +141,33 @@ export class MainWindowComponent implements OnInit, OnDestroy {
     this._notificationsService.joinRoom( GroupService.id, UsernameService.id );
   }
 
+  resetMessagesAndDirectMessages() {
+    this.messages = [];
+    this.directMessages = [];
+  }
+
+  processForPagination( responseObject: any ) {
+    if ( !responseObject.isDirect ) {
+      this._messagesService.count = responseObject.count;
+      this._messagesService.addToSkipValue(30);
+    } else {
+      this._directMessagesService.count = responseObject.count;
+      this._directMessagesService.addToSkipValue(30);
+    }
+  }
+
   processSingleMessage( responseObject: any, isDirect: boolean ) {
     this.users = responseObject.users;
     if ( this.messages.length > 0 || this.directMessages.length > 0 ) {
-      if ( isDirect && this.directMessages.length > 0 ) { // if direct msg and direct mes
+      if ( isDirect && this.directMessages.length > 0 ) {
         const lastMsg = this.directMessages[this.directMessages.length - 1];
-        const newWithLast =  [lastMsg, responseObject.message];
-        const newMsg = this._messageProcessingService.processMessages(newWithLast, this.users); // Process new message with last message
+        const newMessagesWithLast =  [lastMsg, responseObject.message];
+        const newMsg = this._messageProcessingService.processMessages(newMessagesWithLast, this.users);
         this.directMessages = this.directMessages.concat( newMsg.slice(2) ); // Remove last Message
       } else if ( !isDirect && this.messages.length > 0 ) {
         const lastMsg = this.messages[this.messages.length - 1]; // Get Last Message so can see if time divider is needed
-        const newWithLast =  [lastMsg, responseObject.message];
-        const newMsg = this._messageProcessingService.processMessages( newWithLast, this.users ); // Process new message with last message
+        const newMessagesWithLast =  [lastMsg, responseObject.message];
+        const newMsg = this._messageProcessingService.processMessages( newMessagesWithLast, this.users );
         this.messages = this.messages.concat( newMsg.slice(2) ); // Remove last Message
       }
     } else {
@@ -181,6 +203,32 @@ export class MainWindowComponent implements OnInit, OnDestroy {
     return GroupService.group === '';
   }
 
+  getNextMessages() {
+    let request: string;
+    if ( this._threadService.selected ) {
+        // tslint:disable-next-line:max-line-length
+      request =  'message/getMessages/' + GroupService.group + '/' + this._threadService.threadId + '/' + this._messagesService.getSkipValue();
+    } else {
+      // tslint:disable-next-line:max-line-length
+      request =  'directmessage/getMessages/' + GroupService.group + '/' + this._directThreadService.threadId + '/' + this._directMessagesService.getSkipValue();
+    }
+    this._dataRequestor.getRequest(request).subscribe( res => {
+      this.processLoadedMessages( res );
+    });
+  }
+
+  processLoadedMessages( responseObject: any ) {
+    this.users = responseObject.users;
+    const firstMessage = this._messageProcessingService.getRelevantFirstMessage(responseObject, this.messages, this.directMessages);
+    const prevMsgs = this._messageProcessingService.processLoadedMessages(responseObject.messages, firstMessage, this.users);
+    if ( !responseObject.isDirect ) {
+      this._messagesService.addToSkipValue(30);
+      this.messages = this._messageProcessingService.pushLoadedMessagesToTheFront( prevMsgs, this.messages);
+    } else {
+      this._directMessagesService.addToSkipValue(30);
+      this.directMessages = this._messageProcessingService.pushLoadedMessagesToTheFront( prevMsgs, this.directMessages );
+    }
+  }
 
   leaveAllRooms() {
     if ( this._threadService.threadId ) {
@@ -196,6 +244,7 @@ export class MainWindowComponent implements OnInit, OnDestroy {
     this.leaveAllRooms();
     this.subscriptions.forEach( sub => sub.unsubscribe());
     this.initializeSubscriptions();
+    this._messagesService.joinRoom( this._threadService.threadId, GroupService.id, UsernameService.id);
     this._loadingService.isLoading = false;
   }
 

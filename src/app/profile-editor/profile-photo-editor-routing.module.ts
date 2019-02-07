@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProfileComponent } from './profile.component';
+import { ProfileEditorComponent } from './profile-editor.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: ProfileComponent,
+        component: ProfileEditorComponent,
     }
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ProfileRoutingModule { }
+export class ProfileEditorRoutingModule { }

@@ -12,6 +12,6 @@
 <mat-drawer-container class="example-container">
     <button class='refresh-button' (click)="refresh()"><mat-icon>refresh</mat-icon></button>
     <app-sidebar [threads]="threads" [notifications]="notifications" [directNotifications]="directNotifications"></app-sidebar>
-    <app-chat  #chat class="chat" [messages]="getMessages()" (messageSubmitted)="onMessageSubmitted($event)" #container></app-chat>
+    <app-chat  #chat class="chat" [messages]="getMessages()" (messageSubmitted)="onMessageSubmitted($event)" (nextMessages)="getNextMessages($event)" #container></app-chat>
   </mat-drawer-container>
 

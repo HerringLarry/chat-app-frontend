@@ -27,14 +27,11 @@ import { GroupSelectionService } from './common/services/group-selection.service
 import { HeaderInterceptor } from 'src/assets/header-interceptor.service';
 import { NotificationsSocketService } from './common/services/web-socket-notifications.service';
 import { NotificationsService } from './common/services/notifications-service.service';
-
-
-
+import { ProfileEditorComponent } from './profile-editor/profile-editor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, SharedModule, AppRoutingModule,

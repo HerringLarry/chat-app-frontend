@@ -1,6 +1,6 @@
 <mat-drawer-content>
-  <div #msgDisplay class="msg-display">
-    <app-message-display  [messages]="messages"></app-message-display>
+  <div #msgDisplay class="msg-display" >
+    <app-message-display  (nextMessages)="getNextMessages($event)" [messages]="messages"></app-message-display>
   </div>
   <div class="msg-writer">
     <app-message-writer (messageSubmitted)="onMessageSubmitted($event)"></app-message-writer>

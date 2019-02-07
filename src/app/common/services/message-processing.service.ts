@@ -35,7 +35,8 @@ export class MessageProcessingService {
       if ( previousTime === undefined || this.isPastNextDay( previousTime, message.createdAt.getTime()  ) ) {
         processedMessages.push( this.createTimeDivider( message ) );
       }
-      const processedMessage = new ProcessedMessage(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+      // tslint:disable-next-line:max-line-length
+      const processedMessage = new ProcessedMessage(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined);
       processedMessage.setValues( message, user );
       processedMessages.push( processedMessage );
       previousTime = message.createdAt.getTime();
@@ -47,7 +48,7 @@ export class MessageProcessingService {
   private createTimeDivider( message ) {
     const date: Date = new Date(message.createdAt);
     date.setHours( 0, 0, 0, 0);
-    return new ProcessedMessage(undefined, undefined, undefined, undefined, undefined, undefined, date, true );
+    return new ProcessedMessage(undefined, undefined, undefined, undefined, undefined, undefined, date, true, undefined );
 
   }
 

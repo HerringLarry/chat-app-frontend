@@ -12,9 +12,10 @@ export class ProcessedMessage {
     text: string;
     createdAt: Date;
     isTimeDivider: boolean;
+    photoPath: string;
 
     // tslint:disable-next-line:max-line-length
-    constructor( id: number, groupId: number, threadId: number, username: string, userId: number, text: string, createdAt: Date, isTimeDivider: boolean ) {
+    constructor( id: number, groupId: number, threadId: number, username: string, userId: number, text: string, createdAt: Date, isTimeDivider: boolean, photoPath: string ) {
         this.id = id;
         this.groupId = groupId;
         this.threadId = threadId;
@@ -23,6 +24,7 @@ export class ProcessedMessage {
         this.text = text;
         this.createdAt = createdAt;
         this.isTimeDivider = isTimeDivider;
+        this.photoPath = photoPath;
     }
 
     setValues( m: Message, user: User ) {
@@ -36,5 +38,6 @@ export class ProcessedMessage {
         this.text = m.text;
         this.createdAt = m.createdAt;
         this.isTimeDivider = false;
+        this.photoPath = user.photoPath;
     }
 }

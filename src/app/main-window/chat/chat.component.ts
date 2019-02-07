@@ -7,18 +7,16 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
   styleUrls: ['./chat.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ChatComponent implements OnInit, AfterViewChecked {
+export class ChatComponent implements OnInit {
 
   @Input() messages: any;
   @Output() messageSubmitted: EventEmitter<void> = new EventEmitter();
+  @Output() nextMessages: EventEmitter<void> = new EventEmitter();
   @ViewChild('msgDisplay') private myScrollContainer: ElementRef;
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-  ngAfterViewChecked() {
     this.scrollToBottom();
   }
 
@@ -30,6 +28,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     try {
         this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
     } catch (err) {}
-}
+  }
 
+  getNextMessages() {
+    this.nextMessages.emit();
+  }
 }

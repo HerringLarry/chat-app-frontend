@@ -1,0 +1,39 @@
+<app-panel
+  [displaySmall]="false"
+  [title]="'Profile'"
+  class="panel"
+>
+<input
+  class="image-input"
+  type="file" (change)="fileChangeEvent($event)"
+  #fileInput>
+  <div *ngIf="!croppedImage">
+    <div class="placeholder"></div>
+    <div class="placeholder-text">Select an Image to Crop!</div>
+    <div class="placeholder-two"></div>
+  </div>
+  <div class="image-cropper-container">
+  <image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="3 / 3"
+    [resizeToWidth]="128"
+    format="png"
+    (imageCropped)="imageCropped($event)"
+    (imageLoaded)="imageLoaded()"
+    (loadImageFailed)="loadImageFailed()"
+></image-cropper>
+</div>
+<div *ngIf="croppedImage" class="cropped-image-container">
+  <img [src]="croppedImage" />
+</div>
+<div class="cropped-image-container">
+</div>
+<div class="button-container">
+  <span class="button-wrapper">
+    <button class="select-btn" (click)="fileInput.click()">Select File</button>
+    <button class="upload-btn" (click)="onUpload()">Upload!</button>
+  </span>
+</div>
+
+</app-panel>

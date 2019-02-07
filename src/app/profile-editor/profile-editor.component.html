@@ -1,0 +1,36 @@
+<app-panel
+  [displaySmall]="false"
+  [title]="'Profile'"
+  class="panel"
+>
+<div *ngIf="user">
+  <div class="profile-photo-container">
+    <span class="image-holder">
+      <img src="http://localhost:3000/profilephoto/pic/{{user.photoPath}}" (click)="goToProfilePhotoEditor()">
+    </span>
+  </div>
+  <div class="profile-form-container">
+    <div class="form-line">
+      <label class="input-label" for="user.username">Username:</label>
+      <input type="text" class="search input-text" placeholder="Username" [value]="user.username" (input)="user.username = $event.target.value" autocomplete="off" >
+      <span class="placeholder-input"></span>
+    </div>
+    <div class="form-line">
+        <label class="input-label" for="user.firstName">First Name:</label>
+        <input type="text" class="search input-text" placeholder="First Name" [value]="user.firstName" (input)="user.firstName = $event.target.value" autocomplete="off" >
+        <label class="input-label" for="user.lastName">Last Name:</label>
+        <input type="text" class="search input-text" placeholder="Last Name" [value]="user.lastName" (input)="user.lastName = $event.target.value" autocomplete="off" >
+    </div>
+    <div class="form-line">
+        <label class="input-label" for="user.email">Email:</label>
+        <input type="text" class="search input-text" placeholder="Email" [value]="user.email" (input)="user.email = $event.target.value" autocomplete="off" >
+        <label class="input-label" for="user.mobile">Mobile:</label>
+        <input type="text" class="search input-text" placeholder="Mobile" [value]="user.mobile" (input)="user.mobile = $event.target.value" autocomplete="off" >
+    </div>
+
+  </div>
+  <div class="button-container">
+    <button class="save-button">Save</button>
+  </div>
+</div>
+</app-panel>
