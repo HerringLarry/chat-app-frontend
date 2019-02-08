@@ -24,12 +24,5 @@
             <app-modified-button [text]="'No'" [emitValue]="false" [isSelected]="!settings.showTime" (alterIsSelected)="modifyShowTime($event)"></app-modified-button>
         </div>
       </div>
-      <div *ngIf="settings" class="setting">
-            <p class="prompt"> Highlight Username?</p>
-            <div class="options">
-                <app-modified-button [text]="'Yes'" [emitValue]="true" [isSelected]="settings.highlightUsername" (alterIsSelected)="modifyHighlightUsername($event)"></app-modified-button>
-                <app-modified-button [text]="'No'" [emitValue]="false" [isSelected]="!settings.highlightUsername" (alterIsSelected)="modifyHighlightUsername($event)"></app-modified-button>
-            </div>
-      </div>
     <button class="save-btn" (click)="save()" mat-button><mat-icon>save</mat-icon> Save</button>
 </app-panel>

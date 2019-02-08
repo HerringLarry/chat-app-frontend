@@ -89,9 +89,29 @@ img:hover{
     font-weight: 700;
     border-radius: 5%;
     float: right;
+    text-align: center;
+    /* box-shadow: 10px 9px #999; */
 }
 
 .save-button:hover{
     background-color: lightgrey;
     cursor: pointer;
 }
+
+mat-icon{
+    position: relative;
+    vertical-align: middle;
+    margin: 5px;
+}
+
+.save-button:focus{
+    outline: none;
+}
+/* 
+.save-button:active {
+    background-color: white;
+    box-shadow: 0px 5px #666;
+    transform: translateY(4px);
+    transform: translateX(10px);
+  } */
+

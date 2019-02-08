@@ -45,17 +45,12 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.settings.showTime = event;
   }
 
-  modifyHighlighUsername( event: any ) {
-    this.settings.highlightUsername = event;
-  }
-
   save() {
     const request = 'settings';
     this._dataRequestorService.putRequest( request, this.settings ).subscribe( res => {
       SettingsService.showUsername = this.settings.showUsername;
       SettingsService.showNotifications = this.settings.showNotifications;
       SettingsService.showTime = this.settings.showTime;
-      SettingsService.highlightUsername = this.settings.highlightUsername
       this.snackbar.open('Settings Saved', 'Notification', {
         duration: 500,
       });

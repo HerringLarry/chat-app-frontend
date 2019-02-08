@@ -13,11 +13,11 @@
     </div>
   </div>
   <div class="profile-form-container">
-    <div class="form-line">
+    <!-- <div class="form-line">
       <label class="input-label" for="user.username">Username:</label>
       <input type="text" class="search input-text" placeholder="Username" [value]="user.username" (input)="user.username = $event.target.value" autocomplete="off" >
       <span class="placeholder-input"></span>
-    </div>
+    </div> -->
     <div class="form-line">
         <label class="input-label" for="user.firstName">First Name:</label>
         <input type="text" class="search input-text" placeholder="First Name" [value]="user.firstName" (input)="user.firstName = $event.target.value" autocomplete="off" >
@@ -33,7 +33,12 @@
 
   </div>
   <div class="button-container">
-    <button class="save-button">Save</button>
+    <button class="save-button" (click)='save()'>
+      <mat-icon>
+        save
+      </mat-icon>
+      Save
+    </button>
   </div>
 </div>
 </app-panel>

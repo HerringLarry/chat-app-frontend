@@ -29,4 +29,11 @@ export class ProfileEditorComponent implements OnInit {
     this._router.navigate(['profile-photo-editor']);
   }
 
+  save() {
+    const request = 'users/' + String(UsernameService.id);
+    this._dataRequestor.putRequest(request, this.user ).subscribe( res => {
+      // snackbar
+    });
+  }
+
 }

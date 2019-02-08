@@ -72,6 +72,10 @@ image-cropper{
     background-color: grey;
 }
 
+.select-button:focus{
+    outline: none;
+}
+
 .upload-btn{
     width: 200px;
     height: 50px;
@@ -87,6 +91,10 @@ image-cropper{
 
 .upload-btn:hover{
     background-color: grey;
+}
+
+.upload-button:focus{
+    outline: none;
 }
 
 .cropped-image-container{
