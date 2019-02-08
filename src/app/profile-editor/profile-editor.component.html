@@ -1,6 +1,6 @@
 <app-panel
   [displaySmall]="false"
-  [title]="'Profile'"
+  [title]="'Edit Profile'"
   class="panel"
 >
 <div *ngIf="user">
@@ -8,6 +8,9 @@
     <span class="image-holder">
       <img src="http://localhost:3000/profilephoto/pic/{{user.photoPath}}" (click)="goToProfilePhotoEditor()">
     </span>
+    <div>
+      <span class="img-label">Click to Change</span>
+    </div>
   </div>
   <div class="profile-form-container">
     <div class="form-line">

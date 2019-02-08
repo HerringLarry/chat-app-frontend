@@ -17,21 +17,24 @@
 
 <div *ngIf="!message.isTimeDivider" class="wrapper">
     <!-- <h3 mat-line class="cursor-pointer"> {{message.username}} </h3> -->
-    <p>
-      <span *ngIf="!isSameAsPreviousUsername" class="img-holder">
+    <div *ngIf="!isSameAsPreviousUsername" class="label-container">
+      <span  class="img-holder">
         <img  src="http://localhost:3000/profilephoto/pic/{{message.photoPath}}">
       </span>
-      <span *ngIf="!isSameAsPreviousUsername" class="username">
+        <span class="username">
           <!-- {{getCorrectLabel()}}  -->
           {{label}}
-      </span>
+        </span>
+      </div>
+    <div class="text-container">
       <span class="msg-text">
         {{message.text}}
       </span>
       <span class="time">
-        {{outputTime()}}
+          {{outputTime()}}
       </span>
-    </p>
+    </div >
+
   </div>
 
 <div *ngIf="message.isTimeDivider" class="time-wrapper">

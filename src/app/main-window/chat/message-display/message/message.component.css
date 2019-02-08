@@ -76,8 +76,10 @@
 	height: 100%;	
 	padding-left: 2.5%;
 	padding-right: 2.5%;
+	margin-bottom: 20px;
 	margin-right: auto;
 	align-content: center;
+	font-family: 'Roboto', sans-serif;
 
 }
 
@@ -127,9 +129,9 @@ img{
 
 .time{
 	float: right;
-	margin-top: 15px;
 	font-size: 10px;
 	color: black;
+	margin-top: 5px;
 }
 /* 
 .msg-text{
@@ -137,5 +139,11 @@ img{
 
 .date-text{
 	text-align: center;
+}
+
+.text-container{
+	word-wrap: break-word;
+	font-size: 13pt;
+	margin-left: 60px;
 }
 

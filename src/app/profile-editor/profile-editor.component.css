@@ -1,17 +1,25 @@
 img{
     width: 200px;
     height: 200px;
+    border-radius: 10%;
 }
 
 img:hover{
-    filter: grayscale(100%);
+    cursor: pointer;
+    filter: contrast(200%);
+}
+.img-label{
+    margin-left: 10%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 9pt;
+    font-weight: 800;
+
 }
 
 .image-holder{
     width: 200px;
     height: 201px;
     margin-left: 5%;
-    border: 1px solid white;
     overflow: hidden;
     display: inline-block;
     align-content: center;
@@ -38,10 +46,11 @@ img:hover{
 .input-label{
     display: inline-block;
     text-align: right;
-    width: 13%;
+    width: 14%;
     font-size: 17pt;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
+    margin-left: 1%;
 }
 
 .search{
@@ -54,8 +63,14 @@ img:hover{
     background-color: black;
 }
 
+.search:focus{
+    outline: none;
+    font-weight: 800;
+}
+
 .profile-form-container{
-    margin-left: 10%;
+    margin-top: -25%;
+    margin-left: 25%;
 }
 
 .button-container{
@@ -69,10 +84,14 @@ img:hover{
     color: black;
     border: 1px solid black;
     font-family: 'Roboto', sans-serif;
-    margin-right: 5%;
+    margin-right: 4%;
     font-size: 12pt;
     font-weight: 700;
     border-radius: 5%;
     float: right;
+}
 
+.save-button:hover{
+    background-color: lightgrey;
+    cursor: pointer;
 }

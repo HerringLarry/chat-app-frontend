@@ -11,6 +11,12 @@
     margin-right: -19px;
 }
 
+.profile-pic{
+    width: 30px;
+    height: 30px;
+    border-radius: 10%;
+}
+
 .mat-save-button:hover{
     background-color: lightgray;
 }
@@ -86,6 +92,8 @@
 .username{
     font-weight: 500;
     width: 25%;
+    margin-left: 5%;
+    margin-right: 5%;
     text-overflow: ellipsis;
     overflow: hidden;
     word-wrap: none;
@@ -154,6 +162,7 @@
 
 .selected-username{ 
     font-weight: 500;
+    margin-left: 5%;
     width: 20%;
     text-overflow: ellipsis;
     overflow: hidden;

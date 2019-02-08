@@ -2,6 +2,13 @@
     background-color: black;
 }
 
+.profile-pic{
+    width: 30px;
+    height: 30px;
+    border-radius: 10%;
+    background-color: white;
+}
+
 .mat-save-button{
     background-color: white;
     border: 1px solid black;
@@ -105,15 +112,18 @@
 
 .username{
     font-weight: 500;
+    margin-left: 5%;
     width: 25%;
     text-overflow: ellipsis;
     overflow: hidden;
     word-wrap: none;
+    margin-right: 5%;
 }
 
 .name{
     font-weight: 700;
     width: 75%;
+    margin-right: 5%;
     text-overflow: ellipsis;
     overflow: hidden;
     word-wrap: none;
@@ -188,6 +198,7 @@
 .selected-name{
     font-weight: 700;
     width: 65%;
+    margin-right: 5%;
     text-overflow: ellipsis;
     overflow: hidden;
     word-wrap: none;

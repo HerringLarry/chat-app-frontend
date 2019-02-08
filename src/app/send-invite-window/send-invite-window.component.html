@@ -11,6 +11,7 @@
             <mat-list>
                 <mat-list-item class="selected-user" *ngFor="let user of selectedUsers">
                     <mat-icon class="selected-user-icon">done</mat-icon>
+                    <img class="profile-pic" src="http://localhost:3000/profilephoto/pic/{{user.photoPath}}">
                     <span class="selected-username">
                       {{user.username}}
                     </span>
@@ -25,6 +26,7 @@
         <div class="user-selection-container">
           <mat-list *ngIf="options.length!==0">
             <mat-list-item class="user-selection" *ngFor="let user of options">
+              <img class="profile-pic" src="http://localhost:3000/profilephoto/pic/{{user.photoPath}}">
               <span class="username">
                 {{user.username}}
               </span>
